@@ -1,3 +1,4 @@
+import 'package:dsc/ui/dashboard.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:dsc/constants/constants.dart';
@@ -22,6 +23,7 @@ class MyApp extends StatelessWidget {
         SPLASH_SCREEN: (BuildContext context) => SplashScreen(),
         SIGN_IN: (BuildContext context) => SignInPage(),
         SIGN_UP: (BuildContext context) => SignUpScreen(),
+        DASHBOARD: (BuildContext context) => Dashboard(),
       },
       initialRoute: SPLASH_SCREEN,
     );
