@@ -3,7 +3,6 @@ import 'package:dsc/constants/constants.dart';
 import 'package:dsc/ui/widgets/custom_shape.dart';
 import 'package:dsc/ui/widgets/responsive_ui.dart';
 import 'package:dsc/ui/widgets/textformfield.dart';
-import 'package:dsc/ui/dashboard.dart';
 
 class SignInPage extends StatelessWidget {
   @override

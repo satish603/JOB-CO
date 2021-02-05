@@ -1,6 +1,6 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:dsc/constants/constants.dart';
 
 class Dashboard extends StatefulWidget {
   @override
@@ -9,10 +9,10 @@ class Dashboard extends StatefulWidget {
 
 class _DashboardState extends State<Dashboard> {
   @override
-  Widget build(BuildContext context ) {
+  Widget build(BuildContext context) {
     // to get size
-    
-        var size =  MediaQuery.maybeOf(context).size;
+
+    var size = MediaQuery.maybeOf(context).size;
 
     // style
     var cardTextStyle = TextStyle(
@@ -81,9 +81,8 @@ class _DashboardState extends State<Dashboard> {
                       crossAxisCount: 2,
                       children: <Widget>[
                         Card(
-                          shape:RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8)
-                          ),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8)),
                           elevation: 4,
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -99,11 +98,9 @@ class _DashboardState extends State<Dashboard> {
                             ],
                           ),
                         ),
-
                         Card(
-                          shape:RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8)
-                          ),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8)),
                           elevation: 4,
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -119,11 +116,27 @@ class _DashboardState extends State<Dashboard> {
                             ],
                           ),
                         ),
-
                         Card(
-                          shape:RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8)
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8)),
+                          elevation: 4,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              Image.network(
+                                'https://image.flaticon.com/icons/png/512/17/17004.png',
+                                height: 128,
+                              ),
+                              Text(
+                                'About Us',
+                                style: cardTextStyle,
+                              )
+                            ],
                           ),
+                        ),
+                        Card(
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8)),
                           elevation: 4,
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -139,11 +152,9 @@ class _DashboardState extends State<Dashboard> {
                             ],
                           ),
                         ),
-
                         Card(
-                          shape:RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8)
-                          ),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8)),
                           elevation: 4,
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -159,31 +170,21 @@ class _DashboardState extends State<Dashboard> {
                             ],
                           ),
                         ),
-
                         Card(
-                          shape:RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8)
-                          ),
-                          elevation: 4,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              Image.network(
-                                'https://image.flaticon.com/icons/png/512/17/17004.png',
-                                height: 128,
-                              ),
-                              Text(
-                                'Random',
-                                style: cardTextStyle,
-                              )
-                            ],
+                          child: new InkWell(
+                            onTap: () {
+                              Navigator.of(context).pushNamed(ABOUT);
+                              print("Routing to Sign up screen");
+                            },
+                            child: Container(
+                              width: 100.0,
+                              height: 100.0,
+                            ),
                           ),
                         ),
-
                         Card(
-                          shape:RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8)
-                          ),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8)),
                           elevation: 4,
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
