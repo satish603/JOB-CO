@@ -171,18 +171,6 @@ class _DashboardState extends State<Dashboard> {
                           ),
                         ),
                         Card(
-                          child: new InkWell(
-                            onTap: () {
-                              Navigator.of(context).pushNamed(ABOUT);
-                              print("Routing to Sign up screen");
-                            },
-                            child: Container(
-                              width: 100.0,
-                              height: 100.0,
-                            ),
-                          ),
-                        ),
-                        Card(
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(8)),
                           elevation: 4,
