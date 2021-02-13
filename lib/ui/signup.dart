@@ -4,7 +4,7 @@ import 'package:dsc/constants/constants.dart';
 import 'package:dsc/ui/widgets/custom_shape.dart';
 import 'package:dsc/ui/widgets/customappbar.dart';
 import 'package:dsc/ui/widgets/responsive_ui.dart';
-//import 'package:dsc/ui/widgets/textformfield.dart';
+import 'package:dsc/ui/widgets/textformfield.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -12,7 +12,7 @@ class SignUpScreen extends StatefulWidget {
   _SignUpScreenState createState() => _SignUpScreenState();
 }
 
-class CustomTextField extends StatelessWidget {
+/*class CustomTextField extends StatelessWidget {
   final String hint;
   final TextEditingController textEditingController;
   final TextInputType keyboardType;
@@ -55,7 +55,7 @@ class CustomTextField extends StatelessWidget {
       ),
     );
   }
-}
+}*/
 
 class _SignUpScreenState extends State<SignUpScreen> {
   bool checkBoxValue = false;
@@ -207,7 +207,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   }
 
   Widget firstNameTextFormField() {
-    return TextField(
+    return /*TextField(
       keyboardType: TextInputType.text,
       decoration: InputDecoration(hintText: 'First Name'),
       onChanged: (value) {
@@ -215,16 +215,18 @@ class _SignUpScreenState extends State<SignUpScreen> {
           _fname = value.trim();
         });
       },
-    );
-    /*CustomTextField(
-      keyboardType: TextInputType.text,
-      icon: Icons.person,
-      hint: "First Name",
     );*/
+        CustomTextField(
+            keyboardType: TextInputType.text,
+            icon: Icons.person,
+            hint: "First Name",
+            userTyped: (val) {
+              _fname = val;
+            });
   }
 
   Widget lastNameTextFormField() {
-    return TextField(
+    return /*TextField(
       keyboardType: TextInputType.text,
       decoration: InputDecoration(hintText: 'Last Name'),
       onChanged: (value) {
@@ -232,16 +234,18 @@ class _SignUpScreenState extends State<SignUpScreen> {
           _lname = value.trim();
         });
       },
-    );
-    /*CustomTextField(
-      keyboardType: TextInputType.text,
-      icon: Icons.person,
-      hint: "Last Name",
     );*/
+        CustomTextField(
+            keyboardType: TextInputType.text,
+            icon: Icons.person,
+            hint: "Last Name",
+            userTyped: (val) {
+              _lname = val;
+            });
   }
 
   Widget emailTextFormField() {
-    return TextField(
+    return /*TextField(
       keyboardType: TextInputType.emailAddress,
       decoration: InputDecoration(hintText: 'Email'),
       onChanged: (value) {
@@ -249,21 +253,18 @@ class _SignUpScreenState extends State<SignUpScreen> {
           _email = value.trim();
         });
       },
-    );
-    /*CustomTextField(
-      keyboardType: TextInputType.emailAddress,
-      icon: Icons.email,
-      hint: "Email ID",
-      onChanged: (value) {
-        setState(() {
-          _email = value.trim();
-        });
-      },
     );*/
+        CustomTextField(
+            keyboardType: TextInputType.emailAddress,
+            icon: Icons.email,
+            hint: "Email ID",
+            userTyped: (val) {
+              _email = val;
+            });
   }
 
   Widget phoneTextFormField() {
-    return TextField(
+    return /*TextField(
       keyboardType: TextInputType.number,
       decoration: InputDecoration(hintText: 'Phone Number'),
       onChanged: (value) {
@@ -271,16 +272,18 @@ class _SignUpScreenState extends State<SignUpScreen> {
           _phnum = value.trim();
         });
       },
-    );
-    /*CustomTextField(
-      keyboardType: TextInputType.number,
-      icon: Icons.phone,
-      hint: "Mobile Number",
     );*/
+        CustomTextField(
+            keyboardType: TextInputType.number,
+            icon: Icons.phone,
+            hint: "Mobile Number",
+            userTyped: (val) {
+              _phnum = val;
+            });
   }
 
   Widget passwordTextFormField() {
-    return TextField(
+    return /*TextField(
       obscureText: true,
       decoration: InputDecoration(hintText: 'Password'),
       onChanged: (value) {
@@ -288,18 +291,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
           _password = value.trim();
         });
       },
-    );
-    /*CustomTextField(
-      keyboardType: TextInputType.text,
-      obscureText: true,
-      icon: Icons.lock,
-      hint: "Password",
-      onChanged: (value) {
-        setState(() {
-          _password = value.trim();
-        });
-      },
     );*/
+        CustomTextField(
+            keyboardType: TextInputType.text,
+            obscureText: true,
+            icon: Icons.lock,
+            hint: "Password",
+            userTyped: (val) {
+              _password = val;
+            });
   }
 
   Widget acceptTermsTextRow() {

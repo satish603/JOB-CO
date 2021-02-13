@@ -169,7 +169,7 @@ class _SignInScreenState extends State<SignInScreen> {
   }
 
   Widget emailTextFormField() {
-    return TextField(
+    return /*TextField(
       keyboardType: TextInputType.emailAddress,
       decoration: InputDecoration(hintText: 'Email'),
       onChanged: (value) {
@@ -177,22 +177,19 @@ class _SignInScreenState extends State<SignInScreen> {
           _email = value.trim();
         });
       },
-    );
-    /* CustomTextField(
-      keyboardType: TextInputType.emailAddress,
-      textEditingController: emailController,
-      icon: Icons.email,
-      hint: "Email ID",
-      onChanged: (value) {
-        setState(() {
-          _email = value.trim();
-        });
-      },
-    ); */
+    );*/
+        CustomTextField(
+            keyboardType: TextInputType.emailAddress,
+            textEditingController: emailController,
+            icon: Icons.email,
+            hint: "Email ID",
+            userTyped: (val) {
+              _email = val;
+            });
   }
 
   Widget passwordTextFormField() {
-    return TextField(
+    return /*TextField(
       obscureText: true,
       decoration: InputDecoration(hintText: 'Password'),
       onChanged: (value) {
@@ -200,20 +197,17 @@ class _SignInScreenState extends State<SignInScreen> {
           _password = value.trim();
         });
       },
-    );
-    /*CustomTextField(
-      keyboardType: TextInputType.emailAddress,
-      textEditingController: passwordController,
-      icon: Icons.lock,
-      obscureText: true,
-      hint: "Password",
-      // decoration: InputDecoration(hintText: 'Password'),
-      onChanged: (value) {
-        setState(() {
-          _password = value.trim();
-        });
-      },
     );*/
+        CustomTextField(
+            keyboardType: TextInputType.emailAddress,
+            textEditingController: passwordController,
+            icon: Icons.lock,
+            obscureText: true,
+            hint: "Password",
+            // decoration: InputDecoration(hintText: 'Password'),
+            userTyped: (val) {
+              _password = val;
+            });
   }
 
   Widget forgetPassTextRow() {

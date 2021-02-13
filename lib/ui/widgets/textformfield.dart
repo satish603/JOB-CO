@@ -11,9 +11,12 @@ class CustomTextField extends StatelessWidget {
   double _pixelRatio;
   bool large;
   bool medium;
+  final Function userTyped;
+  //CustomTextInput({this.hintText, this.leading,this.userTyped,this.obscure,this.keyboard=TextInputType.text});
 
   CustomTextField({
     this.hint,
+    this.userTyped,
     this.textEditingController,
     this.keyboardType,
     this.icon,
@@ -33,7 +36,9 @@ class CustomTextField extends StatelessWidget {
     return Material(
       borderRadius: BorderRadius.circular(30.0),
       elevation: large ? 12 : (medium ? 10 : 8),
-      child: TextFormField(
+      child: TextField(
+        onChanged: userTyped,
+        onSubmitted: (value) {},
         controller: textEditingController,
         keyboardType: keyboardType,
         cursorColor: Colors.orange[200],
