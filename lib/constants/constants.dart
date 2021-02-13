@@ -3,4 +3,3 @@ final String SIGN_UP = 'signup';
 final String SPLASH_SCREEN = 'splashscreen';
 final String DASHBOARD = 'dashboard';
 final String ABOUT = 'about';
-final String LOGIN = 'login';

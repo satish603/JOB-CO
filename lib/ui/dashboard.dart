@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:dsc/ui/signin.dart';
 import 'package:dsc/constants/constants.dart';
 
 class Dashboard extends StatefulWidget {
@@ -10,6 +9,7 @@ class Dashboard extends StatefulWidget {
 }
 
 class _DashboardState extends State<Dashboard> {
+  final auth = FirebaseAuth.instance;
   @override
   Widget build(BuildContext context) {
     // to get size
@@ -190,6 +190,7 @@ class _DashboardState extends State<Dashboard> {
                             ],
                           ),
                         ),
+                        button(),
                       ],
                     ),
                   ),
@@ -201,4 +202,8 @@ class _DashboardState extends State<Dashboard> {
       ),
     );
   }
+}
+
+button() {
+  return RaisedButton(onPressed: () {});
 }

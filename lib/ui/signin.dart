@@ -233,6 +233,11 @@ class _SignInScreenState extends State<SignInScreen> {
           ),
           GestureDetector(
             onTap: () {
+              auth.sendPasswordResetEmail(email: _email).then((_) {
+                Scaffold.of(context).showSnackBar(SnackBar(
+                    content:
+                        Text('PASSWORD Rest link has sent to your email.')));
+              });
               print("Routing");
             },
             child: Text(
