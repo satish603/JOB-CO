@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "174873325683",
+    "project_id": "dscsolution-80cbc",
+    "storage_bucket": "dscsolution-80cbc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:174873325683:android:6c338b19eb2a1681a87a06",
+        "android_client_info": {
+          "package_name": "com.dsc.dsc"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "174873325683-o0ab6qfg3m65a9q3u2k4b7ule8qnfmja.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBkFKV7k-8VxpHzFc56EfPZW2P73LqxiHA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "174873325683-o0ab6qfg3m65a9q3u2k4b7ule8qnfmja.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

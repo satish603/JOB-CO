@@ -12,24 +12,27 @@ class CustomTextField extends StatelessWidget {
   bool large;
   bool medium;
 
-
-  CustomTextField(
-    {this.hint,
-      this.textEditingController,
-      this.keyboardType,
-      this.icon,
-      this.obscureText= false,
-     });
+  CustomTextField({
+    this.hint,
+    this.textEditingController,
+    this.keyboardType,
+    this.icon,
+    this.obscureText = false,
+    TextEditingController controller,
+    InputDecoration decoration,
+    void Function(String) onChanged,
+    // Null Function(Null) onChanged,
+  });
 
   @override
   Widget build(BuildContext context) {
     _width = MediaQuery.of(context).size.width;
     _pixelRatio = MediaQuery.of(context).devicePixelRatio;
-    large =  ResponsiveWidget.isScreenLarge(_width, _pixelRatio);
-    medium=  ResponsiveWidget.isScreenMedium(_width, _pixelRatio);
+    large = ResponsiveWidget.isScreenLarge(_width, _pixelRatio);
+    medium = ResponsiveWidget.isScreenMedium(_width, _pixelRatio);
     return Material(
       borderRadius: BorderRadius.circular(30.0),
-      elevation: large? 12 : (medium? 10 : 8),
+      elevation: large ? 12 : (medium ? 10 : 8),
       child: TextFormField(
         controller: textEditingController,
         keyboardType: keyboardType,

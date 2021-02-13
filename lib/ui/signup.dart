@@ -1,13 +1,60 @@
+import 'package:dsc/ui/dashboard.dart';
 import 'package:flutter/material.dart';
 import 'package:dsc/constants/constants.dart';
 import 'package:dsc/ui/widgets/custom_shape.dart';
 import 'package:dsc/ui/widgets/customappbar.dart';
 import 'package:dsc/ui/widgets/responsive_ui.dart';
-import 'package:dsc/ui/widgets/textformfield.dart';
+//import 'package:dsc/ui/widgets/textformfield.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class SignUpScreen extends StatefulWidget {
   @override
   _SignUpScreenState createState() => _SignUpScreenState();
+}
+
+class CustomTextField extends StatelessWidget {
+  final String hint;
+  final TextEditingController textEditingController;
+  final TextInputType keyboardType;
+  final bool obscureText;
+  final IconData icon;
+  double _width;
+  double _pixelRatio;
+  bool large;
+  bool medium;
+
+  CustomTextField({
+    this.hint,
+    this.textEditingController,
+    this.keyboardType,
+    this.icon,
+    this.obscureText = false,
+    void Function(String) onChanged,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    _width = MediaQuery.of(context).size.width;
+    _pixelRatio = MediaQuery.of(context).devicePixelRatio;
+    large = ResponsiveWidget.isScreenLarge(_width, _pixelRatio);
+    medium = ResponsiveWidget.isScreenMedium(_width, _pixelRatio);
+    return Material(
+      borderRadius: BorderRadius.circular(30.0),
+      elevation: large ? 12 : (medium ? 10 : 8),
+      child: TextFormField(
+        controller: textEditingController,
+        keyboardType: keyboardType,
+        cursorColor: Colors.orange[200],
+        decoration: InputDecoration(
+          prefixIcon: Icon(icon, color: Colors.orange[200], size: 20),
+          hintText: hint,
+          border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(30.0),
+              borderSide: BorderSide.none),
+        ),
+      ),
+    );
+  }
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
@@ -17,6 +64,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
   double _pixelRatio;
   bool _large;
   bool _medium;
+  String _email, _password, _fname, _lname, _phnum;
+  final auth = FirebaseAuth.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -158,44 +207,99 @@ class _SignUpScreenState extends State<SignUpScreen> {
   }
 
   Widget firstNameTextFormField() {
-    return CustomTextField(
+    return TextField(
+      keyboardType: TextInputType.text,
+      decoration: InputDecoration(hintText: 'First Name'),
+      onChanged: (value) {
+        setState(() {
+          _fname = value.trim();
+        });
+      },
+    );
+    /*CustomTextField(
       keyboardType: TextInputType.text,
       icon: Icons.person,
       hint: "First Name",
-    );
+    );*/
   }
 
   Widget lastNameTextFormField() {
-    return CustomTextField(
+    return TextField(
+      keyboardType: TextInputType.text,
+      decoration: InputDecoration(hintText: 'Last Name'),
+      onChanged: (value) {
+        setState(() {
+          _lname = value.trim();
+        });
+      },
+    );
+    /*CustomTextField(
       keyboardType: TextInputType.text,
       icon: Icons.person,
       hint: "Last Name",
-    );
+    );*/
   }
 
   Widget emailTextFormField() {
-    return CustomTextField(
+    return TextField(
+      keyboardType: TextInputType.emailAddress,
+      decoration: InputDecoration(hintText: 'Email'),
+      onChanged: (value) {
+        setState(() {
+          _email = value.trim();
+        });
+      },
+    );
+    /*CustomTextField(
       keyboardType: TextInputType.emailAddress,
       icon: Icons.email,
       hint: "Email ID",
-    );
+      onChanged: (value) {
+        setState(() {
+          _email = value.trim();
+        });
+      },
+    );*/
   }
 
   Widget phoneTextFormField() {
-    return CustomTextField(
+    return TextField(
+      keyboardType: TextInputType.number,
+      decoration: InputDecoration(hintText: 'Phone Number'),
+      onChanged: (value) {
+        setState(() {
+          _phnum = value.trim();
+        });
+      },
+    );
+    /*CustomTextField(
       keyboardType: TextInputType.number,
       icon: Icons.phone,
       hint: "Mobile Number",
-    );
+    );*/
   }
 
   Widget passwordTextFormField() {
-    return CustomTextField(
+    return TextField(
+      obscureText: true,
+      decoration: InputDecoration(hintText: 'Password'),
+      onChanged: (value) {
+        setState(() {
+          _password = value.trim();
+        });
+      },
+    );
+    /*CustomTextField(
       keyboardType: TextInputType.text,
       obscureText: true,
       icon: Icons.lock,
       hint: "Password",
-    );
+      onChanged: (value) {
+        setState(() {
+          _password = value.trim();
+        });
+      },
+    );*/
   }
 
   Widget acceptTermsTextRow() {
@@ -228,8 +332,22 @@ class _SignUpScreenState extends State<SignUpScreen> {
       elevation: 0,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
       onPressed: () {
-        print("Routing to your account");
+        auth.createUserWithEmailAndPassword(email: _email, password: _password)
+            //fname,lname,phnum baki hai for firebase connection
+            .then((_) {
+          Navigator.of(context).pushReplacement(
+              MaterialPageRoute(builder: (context) => Dashboard()));
+        });
       },
+      /*onPressed: () {
+        auth
+            .createUserWithEmailAndPassword(email: _email, password: _password)
+            .then((_) {
+          Navigator.of(context).pushReplacement(
+              MaterialPageRoute(builder: (context) => Dashboard()));
+        });
+        print("Routing to your account");
+      },*/
       textColor: Colors.white,
       padding: EdgeInsets.all(0.0),
       child: Container(

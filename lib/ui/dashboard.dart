@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:dsc/ui/signin.dart';
 import 'package:dsc/constants/constants.dart';
 
 class Dashboard extends StatefulWidget {

@@ -3,6 +3,9 @@ import 'package:dsc/constants/constants.dart';
 import 'package:dsc/ui/widgets/custom_shape.dart';
 import 'package:dsc/ui/widgets/responsive_ui.dart';
 import 'package:dsc/ui/widgets/textformfield.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
+import 'dashboard.dart';
 
 class SignInPage extends StatelessWidget {
   @override
@@ -24,9 +27,13 @@ class _SignInScreenState extends State<SignInScreen> {
   double _pixelRatio;
   bool _large;
   bool _medium;
+  String _email;
+  String _password;
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   GlobalKey<FormState> _key = GlobalKey();
+  // String _email, _password;
+  final auth = FirebaseAuth.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -162,22 +169,51 @@ class _SignInScreenState extends State<SignInScreen> {
   }
 
   Widget emailTextFormField() {
-    return CustomTextField(
+    return TextField(
+      keyboardType: TextInputType.emailAddress,
+      decoration: InputDecoration(hintText: 'Email'),
+      onChanged: (value) {
+        setState(() {
+          _email = value.trim();
+        });
+      },
+    );
+    /* CustomTextField(
       keyboardType: TextInputType.emailAddress,
       textEditingController: emailController,
       icon: Icons.email,
       hint: "Email ID",
-    );
+      onChanged: (value) {
+        setState(() {
+          _email = value.trim();
+        });
+      },
+    ); */
   }
 
   Widget passwordTextFormField() {
-    return CustomTextField(
+    return TextField(
+      obscureText: true,
+      decoration: InputDecoration(hintText: 'Password'),
+      onChanged: (value) {
+        setState(() {
+          _password = value.trim();
+        });
+      },
+    );
+    /*CustomTextField(
       keyboardType: TextInputType.emailAddress,
       textEditingController: passwordController,
       icon: Icons.lock,
       obscureText: true,
       hint: "Password",
-    );
+      // decoration: InputDecoration(hintText: 'Password'),
+      onChanged: (value) {
+        setState(() {
+          _password = value.trim();
+        });
+      },
+    );*/
   }
 
   Widget forgetPassTextRow() {
@@ -215,7 +251,13 @@ class _SignInScreenState extends State<SignInScreen> {
       elevation: 0,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
       onPressed: () {
-        Navigator.of(context).pushNamed(DASHBOARD); //new line
+        auth
+            .signInWithEmailAndPassword(email: _email, password: _password)
+            .then((_) {
+          Navigator.of(context).pushReplacement(
+              MaterialPageRoute(builder: (context) => Dashboard()));
+        });
+        //  Navigator.of(context).pushNamed(LOGIN); //new line
         print("Routing to your account");
         Scaffold.of(context)
             .showSnackBar(SnackBar(content: Text('Login Successful')));

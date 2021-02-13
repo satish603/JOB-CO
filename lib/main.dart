@@ -5,10 +5,17 @@ import 'package:dsc/constants/constants.dart';
 import 'package:dsc/ui/signin.dart';
 import 'package:dsc/ui/signup.dart';
 import 'package:dsc/ui/splashscreen.dart';
+import 'package:dsc/ui/login.dart';
+import 'package:firebase_core/firebase_core.dart';
 
-void main() => runApp(MyApp());
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
+  //final Future<FirebaseApp> _fbApp = Firebase.initializeApp();
   @override
   Widget build(BuildContext context) {
     SystemChrome.setPreferredOrientations([
@@ -24,6 +31,7 @@ class MyApp extends StatelessWidget {
         SIGN_IN: (BuildContext context) => SignInPage(),
         SIGN_UP: (BuildContext context) => SignUpScreen(),
         DASHBOARD: (BuildContext context) => Dashboard(),
+        LOGIN: (BuildContext context) => LoginScreen(),
       },
       initialRoute: SPLASH_SCREEN,
     );
