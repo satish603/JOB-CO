@@ -5,7 +5,6 @@ import 'package:dsc/constants/constants.dart';
 import 'package:dsc/ui/signin.dart';
 import 'package:dsc/ui/signup.dart';
 import 'package:dsc/ui/splashscreen.dart';
-import 'package:dsc/ui/login.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 Future<void> main() async {
@@ -31,7 +30,6 @@ class MyApp extends StatelessWidget {
         SIGN_IN: (BuildContext context) => SignInPage(),
         SIGN_UP: (BuildContext context) => SignUpScreen(),
         DASHBOARD: (BuildContext context) => Dashboard(),
-        LOGIN: (BuildContext context) => LoginScreen(),
       },
       initialRoute: SPLASH_SCREEN,
     );
