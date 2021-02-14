@@ -1,7 +1,6 @@
+import 'package:dsc/ui/signup.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:dsc/constants/constants.dart';
 
 class Dashboard extends StatefulWidget {
   @override
@@ -9,7 +8,6 @@ class Dashboard extends StatefulWidget {
 }
 
 class _DashboardState extends State<Dashboard> {
-  final auth = FirebaseAuth.instance;
   @override
   Widget build(BuildContext context) {
     // to get size
@@ -83,21 +81,30 @@ class _DashboardState extends State<Dashboard> {
                       crossAxisCount: 2,
                       children: <Widget>[
                         Card(
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8)),
                           elevation: 4,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              Image.network(
-                                'https://image.flaticon.com/icons/png/512/17/17004.png',
-                                height: 128,
-                              ),
-                              Text(
-                                'Application form',
-                                style: cardTextStyle,
-                              )
-                            ],
+                          child: FlatButton(
+                            onPressed: () {
+                              Navigator.of(context).pushAndRemoveUntil(
+                                  MaterialPageRoute(
+                                      builder: (BuildContext context) =>
+                                          SignUpScreen()),
+                                  (Route<dynamic> route) => false);
+                            },
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8)),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                Image.network(
+                                  'https://image.flaticon.com/icons/png/512/17/17004.png',
+                                  height: 128,
+                                ),
+                                Text(
+                                  'Application form',
+                                  style: cardTextStyle,
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                         Card(
@@ -190,7 +197,6 @@ class _DashboardState extends State<Dashboard> {
                             ],
                           ),
                         ),
-                        button(),
                       ],
                     ),
                   ),
@@ -202,8 +208,4 @@ class _DashboardState extends State<Dashboard> {
       ),
     );
   }
-}
-
-button() {
-  return RaisedButton(onPressed: () {});
 }

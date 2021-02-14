@@ -4,7 +4,6 @@ import 'package:dsc/ui/widgets/custom_shape.dart';
 import 'package:dsc/ui/widgets/responsive_ui.dart';
 import 'package:dsc/ui/widgets/textformfield.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-
 import 'dashboard.dart';
 
 class SignInPage extends StatelessWidget {
@@ -259,7 +258,7 @@ class _SignInScreenState extends State<SignInScreen> {
         //  Navigator.of(context).pushNamed(LOGIN); //new line
         print("Routing to your account");
         Scaffold.of(context)
-            .showSnackBar(SnackBar(content: Text('Login Successful')));
+            .showSnackBar(SnackBar(content: Text('Wrong ID OR Password')));
       },
       textColor: Colors.white,
       padding: EdgeInsets.all(0.0),

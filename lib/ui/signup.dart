@@ -1,3 +1,5 @@
+//import 'dart:html';
+
 import 'package:dsc/ui/dashboard.dart';
 import 'package:flutter/material.dart';
 import 'package:dsc/constants/constants.dart';
@@ -6,6 +8,8 @@ import 'package:dsc/ui/widgets/customappbar.dart';
 import 'package:dsc/ui/widgets/responsive_ui.dart';
 import 'package:dsc/ui/widgets/textformfield.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:edge_alert/edge_alert.dart';
+import 'package:modal_progress_hud/modal_progress_hud.dart';
 
 class SignUpScreen extends StatefulWidget {
   @override
@@ -64,7 +68,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
   double _pixelRatio;
   bool _large;
   bool _medium;
-  String _email, _password, _fname, _lname, _phnum;
+  bool signingup = false;
+  var name, email, photoUrl, uid, emailVerified, phnum;
+  String _email, _password, url;
   final auth = FirebaseAuth.instance;
 
   @override
@@ -193,8 +199,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
           children: <Widget>[
             firstNameTextFormField(),
             SizedBox(height: _height / 60.0),
-            lastNameTextFormField(),
-            SizedBox(height: _height / 60.0),
+            //   lastNameTextFormField(),
+            //    SizedBox(height: _height / 60.0),
             emailTextFormField(),
             SizedBox(height: _height / 60.0),
             phoneTextFormField(),
@@ -212,7 +218,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       decoration: InputDecoration(hintText: 'First Name'),
       onChanged: (value) {
         setState(() {
-          _fname = value.trim();
+          name = value.trim();
         });
       },
     );*/
@@ -221,11 +227,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
             icon: Icons.person,
             hint: "First Name",
             userTyped: (val) {
-              _fname = val;
+              name = val;
             });
   }
 
-  Widget lastNameTextFormField() {
+  /* Widget lastNameTextFormField() {
     return /*TextField(
       keyboardType: TextInputType.text,
       decoration: InputDecoration(hintText: 'Last Name'),
@@ -240,9 +246,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
             icon: Icons.person,
             hint: "Last Name",
             userTyped: (val) {
-              _lname = val;
+              name = val;
             });
-  }
+  }*/
 
   Widget emailTextFormField() {
     return /*TextField(
@@ -269,7 +275,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       decoration: InputDecoration(hintText: 'Phone Number'),
       onChanged: (value) {
         setState(() {
-          _phnum = value.trim();
+          phnum = value.trim();
         });
       },
     );*/
@@ -278,7 +284,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
             icon: Icons.phone,
             hint: "Mobile Number",
             userTyped: (val) {
-              _phnum = val;
+              phnum = val;
             });
   }
 
@@ -323,48 +329,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 fontSize: _large ? 12 : (_medium ? 11 : 10)),
           ),
         ],
-      ),
-    );
-  }
-
-  Widget button() {
-    return RaisedButton(
-      elevation: 0,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
-      onPressed: () {
-        auth.createUserWithEmailAndPassword(email: _email, password: _password)
-            //fname,lname,phnum baki hai for firebase connection
-            .then((_) {
-          Navigator.of(context).pushReplacement(
-              MaterialPageRoute(builder: (context) => Dashboard()));
-        });
-      },
-      /*onPressed: () {
-        auth
-            .createUserWithEmailAndPassword(email: _email, password: _password)
-            .then((_) {
-          Navigator.of(context).pushReplacement(
-              MaterialPageRoute(builder: (context) => Dashboard()));
-        });
-        print("Routing to your account");
-      },*/
-      textColor: Colors.white,
-      padding: EdgeInsets.all(0.0),
-      child: Container(
-        alignment: Alignment.center,
-//        height: _height / 20,
-        width: _large ? _width / 4 : (_medium ? _width / 3.75 : _width / 3.5),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(20.0)),
-          gradient: LinearGradient(
-            colors: <Color>[Colors.orange[200], Colors.pinkAccent],
-          ),
-        ),
-        padding: const EdgeInsets.all(12.0),
-        child: Text(
-          'SIGN UP',
-          style: TextStyle(fontSize: _large ? 14 : (_medium ? 12 : 10)),
-        ),
       ),
     );
   }
@@ -445,4 +409,69 @@ class _SignUpScreenState extends State<SignUpScreen> {
       ),
     );
   }
-}
+
+  Widget button() {
+    return RaisedButton(
+      elevation: 0,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
+      onPressed: () async {
+        if (name != null && _password != null && _email != null) {
+          setState(() {
+            signingup = true;
+          });
+          try {
+            final newUser = await auth.createUserWithEmailAndPassword(
+                email: _email, password: _password);
+            if (newUser != null) {
+              User updateUser = FirebaseAuth.instance.currentUser;
+              updateUser.updateProfile(displayName: name);
+              updateUser.updateProfile(photoURL: url);
+              updateUser.uid;
+              updateUser.displayName;
+              updateUser.phoneNumber;
+              //await newUser.user.updateProfile(info);
+
+              Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(builder: (context) => Dashboard()));
+            }
+          } catch (e) {
+            setState(() {
+              signingup = false;
+            });
+            EdgeAlert.show(context,
+                title: 'Signup Failed',
+                description: e.toString(),
+                gravity: EdgeAlert.BOTTOM,
+                icon: Icons.error,
+                backgroundColor: Colors.orange[200]);
+          }
+        } else {
+          EdgeAlert.show(context,
+              title: 'Signup Failed',
+              description: 'All fields are required.',
+              gravity: EdgeAlert.BOTTOM,
+              icon: Icons.error,
+              backgroundColor: Colors.orange[200]);
+        }
+      },
+      textColor: Colors.white,
+      padding: EdgeInsets.all(0.0),
+      child: Container(
+        alignment: Alignment.center,
+//        height: _height / 20,
+        width: _large ? _width / 4 : (_medium ? _width / 3.75 : _width / 3.5),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(20.0)),
+          gradient: LinearGradient(
+            colors: <Color>[Colors.orange[200], Colors.pinkAccent],
+          ),
+        ),
+        padding: const EdgeInsets.all(12.0),
+        child: Text(
+          'SIGN UP',
+          style: TextStyle(fontSize: _large ? 14 : (_medium ? 12 : 10)),
+        ),
+      ),
+    );
+  }
+} //end of signup
