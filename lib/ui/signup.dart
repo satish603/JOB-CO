@@ -225,7 +225,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
         CustomTextField(
             keyboardType: TextInputType.text,
             icon: Icons.person,
-            hint: "First Name",
+            hint: "Full Name",
             userTyped: (val) {
               name = val;
             });
@@ -365,14 +365,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
           ),
           CircleAvatar(
             radius: 15,
-            backgroundImage: AssetImage("assets/images/fblogo.jpg"),
+            backgroundImage: AssetImage("assets/images/fbdevimg.jpeg"),
           ),
           SizedBox(
             width: 20,
           ),
           CircleAvatar(
             radius: 15,
-            backgroundImage: AssetImage("assets/images/twitterlogo.jpg"),
+            backgroundImage: AssetImage("assets/images/twitterdevimg.jpeg"),
           ),
         ],
       ),

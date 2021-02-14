@@ -1,3 +1,4 @@
+import 'package:dsc/ui/contactus.dart';
 import 'package:dsc/ui/signup.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -129,18 +130,29 @@ class _DashboardState extends State<Dashboard> {
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(8)),
                           elevation: 4,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              Image.network(
-                                'https://image.flaticon.com/icons/png/512/17/17004.png',
-                                height: 128,
-                              ),
-                              Text(
-                                'About Us',
-                                style: cardTextStyle,
-                              )
-                            ],
+                          child: FlatButton(
+                            onPressed: () {
+                              Navigator.of(context).pushAndRemoveUntil(
+                                  MaterialPageRoute(
+                                      builder: (BuildContext context) =>
+                                          Contact()),
+                                  (Route<dynamic> route) => false);
+                            },
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8)),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                Image.network(
+                                  'https://image.flaticon.com/icons/png/512/17/17004.png',
+                                  height: 128,
+                                ),
+                                Text(
+                                  'Contact US',
+                                  style: cardTextStyle,
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                         Card(
