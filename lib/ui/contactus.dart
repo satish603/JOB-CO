@@ -38,7 +38,7 @@ class _ContactusState extends State<Contact> {
                 child: ContactUs(
                   cardColor: Colors.teal[100],
                   textColor: Colors.teal.shade900,
-                  logo: AssetImage('images/googlelogo.png'),
+                  logo: AssetImage('assets/images/logo.jpeg'),
                   email: 'dscflutter@gmail.com',
                   companyName: 'Satish Chauhan',
                   companyColor: Colors.teal[300],
@@ -59,7 +59,7 @@ class _ContactusState extends State<Contact> {
                 child: ContactUs(
                   cardColor: Colors.teal[100],
                   textColor: Colors.teal.shade900,
-                  logo: AssetImage('images/googlelogo.png'),
+                  logo: AssetImage('assets/images/logo.jpeg'),
                   email: 'dscflutter@gmail.com',
                   companyName: 'Tejashri Mitbavkar',
                   companyColor: Colors.teal[300],
@@ -81,7 +81,7 @@ class _ContactusState extends State<Contact> {
                 child: ContactUs(
                   cardColor: Colors.teal[100],
                   textColor: Colors.teal.shade900,
-                  logo: AssetImage('images/googlelogo.png'),
+                  logo: AssetImage('assets/images/logo.jpeg'),
                   email: 'dscflutter@gmail.com',
                   companyName: 'Arijit Bera',
                   companyColor: Colors.teal[300],
