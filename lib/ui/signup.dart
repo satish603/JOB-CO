@@ -282,7 +282,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
         CustomTextField(
             keyboardType: TextInputType.number,
             icon: Icons.phone,
-            hint: "Mobile Number",
+            hint: "Mobile Number(OPTIONAL)",
             userTyped: (val) {
               phnum = val;
             });
@@ -356,23 +356,59 @@ class _SignUpScreenState extends State<SignUpScreen> {
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          CircleAvatar(
-            radius: 15,
-            backgroundImage: AssetImage("assets/images/googlelogo.png"),
+          GestureDetector(
+            onTap: () async {
+              EdgeAlert.show(context,
+                  title: 'Signup Failed',
+                  description: 'WE ADDING THIS FEATURE SOON',
+                  gravity: EdgeAlert.BOTTOM,
+                  icon: Icons.error,
+                  backgroundColor: Colors.orange[200]);
+              //  Navigator.of(context).pop(SIGN_IN);
+              //  print("Routing to Sign up screen");
+            },
+            child: CircleAvatar(
+              radius: 15,
+              backgroundImage: AssetImage("assets/images/googlelogo.png"),
+            ),
           ),
           SizedBox(
             width: 20,
           ),
-          CircleAvatar(
-            radius: 15,
-            backgroundImage: AssetImage("assets/images/fblogo.jpg"),
+          GestureDetector(
+            onTap: () async {
+              EdgeAlert.show(context,
+                  title: 'Signup Failed',
+                  description: 'WE ADDING THIS FEATURE SOON',
+                  gravity: EdgeAlert.BOTTOM,
+                  icon: Icons.error,
+                  backgroundColor: Colors.orange[200]);
+              //  Navigator.of(context).pop(SIGN_IN);
+              //  print("Routing to Sign up screen");
+            },
+            child: CircleAvatar(
+              radius: 15,
+              backgroundImage: AssetImage("assets/images/fblogo.jpg"),
+            ),
           ),
           SizedBox(
             width: 20,
           ),
-          CircleAvatar(
-            radius: 15,
-            backgroundImage: AssetImage("assets/images/twitterlogo.jpg"),
+          GestureDetector(
+            onTap: () async {
+              EdgeAlert.show(context,
+                  title: 'Signup Failed',
+                  description: 'WE ADDING THIS FEATURE SOON',
+                  gravity: EdgeAlert.BOTTOM,
+                  icon: Icons.error,
+                  backgroundColor: Colors.orange[200]);
+              // Navigator.of(context).pop(SIGN_IN);
+              //  print("Routing to Sign up screen");
+            },
+            child: CircleAvatar(
+              radius: 15,
+              backgroundImage: AssetImage("assets/images/twitterlogo.jpg"),
+            ),
           ),
         ],
       ),
@@ -415,7 +451,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
       elevation: 0,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
       onPressed: () async {
-        if (name != null && _password != null && _email != null) {
+        if (name != null &&
+            _password != null &&
+            _email != null &&
+            checkBoxValue == true) {
           setState(() {
             signingup = true;
           });
@@ -448,7 +487,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
         } else {
           EdgeAlert.show(context,
               title: 'Signup Failed',
-              description: 'All fields are required.',
+              description:
+                  'All fields are required. Accept all terms and conditions',
               gravity: EdgeAlert.BOTTOM,
               icon: Icons.error,
               backgroundColor: Colors.orange[200]);
