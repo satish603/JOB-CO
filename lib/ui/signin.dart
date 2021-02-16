@@ -1,3 +1,4 @@
+import 'package:edge_alert/edge_alert.dart';
 import 'package:flutter/material.dart';
 import 'package:dsc/constants/constants.dart';
 import 'package:dsc/ui/widgets/custom_shape.dart';
@@ -225,13 +226,29 @@ class _SignInScreenState extends State<SignInScreen> {
             width: 5,
           ),
           GestureDetector(
-            onTap: () {
-              auth.sendPasswordResetEmail(email: _email).then((_) {
-                Scaffold.of(context).showSnackBar(SnackBar(
-                    content:
-                        Text('PASSWORD Rest link has sent to your email.')));
-              });
-              print("Routing");
+            onTap: () async {
+              if (_email != null) {
+                auth.sendPasswordResetEmail(email: _email).then((_) {
+                  EdgeAlert.show(context,
+                      title: 'Password Rest Link Sent!!!',
+                      description: 'Please find the restlink in your mail.',
+                      gravity: EdgeAlert.BOTTOM,
+                      icon: Icons.error,
+                      backgroundColor: Colors.orange[200]);
+                  // Scaffold.of(context).showSnackBar(SnackBar(
+                  //     content:
+                  //         Text('PASSWORD Rest link has sent to your email.')));
+                });
+                print("Routing");
+              } else {
+                EdgeAlert.show(context,
+                    title: 'Email required.',
+                    description:
+                        'Password reset link will be sent to Your email please provide correct email',
+                    gravity: EdgeAlert.BOTTOM,
+                    icon: Icons.error,
+                    backgroundColor: Colors.orange[200]);
+              }
             },
             child: Text(
               "Recover",
@@ -248,17 +265,26 @@ class _SignInScreenState extends State<SignInScreen> {
     return RaisedButton(
       elevation: 0,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
-      onPressed: () {
-        auth
-            .signInWithEmailAndPassword(email: _email, password: _password)
-            .then((_) {
-          Navigator.of(context).pushReplacement(
-              MaterialPageRoute(builder: (context) => Dashboard()));
-        });
-        //  Navigator.of(context).pushNamed(LOGIN); //new line
-        print("Routing to your account");
-        Scaffold.of(context)
-            .showSnackBar(SnackBar(content: Text('Wrong ID OR Password')));
+      onPressed: () async {
+        if (_password != null && _email != null) {
+          auth
+              .signInWithEmailAndPassword(email: _email, password: _password)
+              .then((_) {
+            Navigator.of(context).pushReplacement(
+                MaterialPageRoute(builder: (context) => Dashboard()));
+          });
+          //  Navigator.of(context).pushNamed(LOGIN); //new line
+          print("Routing to your account");
+          Scaffold.of(context)
+              .showSnackBar(SnackBar(content: Text('Wrong ID OR Password')));
+        } else {
+          EdgeAlert.show(context,
+              title: 'Sigin Failed',
+              description: 'All fields are required.',
+              gravity: EdgeAlert.BOTTOM,
+              icon: Icons.error,
+              backgroundColor: Colors.orange[200]);
+        }
       },
       textColor: Colors.white,
       padding: EdgeInsets.all(0.0),
