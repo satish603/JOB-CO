@@ -70,7 +70,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   bool _large;
   bool _medium;
   bool signingup = false;
- // var name, email, photoUrl, uid, emailVerified, phnum;
+  // var name, email, photoUrl, uid, emailVerified, phnum;
   String _email, _password, url;
   final auth = FirebaseAuth.instance;
   TextEditingController name = new TextEditingController();
@@ -227,15 +227,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
       },
     );*/
         CustomTextField(
-            keyboardType: TextInputType.text,
-            
-            icon: Icons.person,
-            hint: "Full Name",
-            userTyped: (val) {
-              name = val;
-            },
-            controller: name,
-            );
+      keyboardType: TextInputType.text,
+      icon: Icons.person,
+      hint: "Full Name",
+      userTyped: (val) {
+        name = val;
+      },
+      controller: name,
+    );
   }
 
   /* Widget lastNameTextFormField() {
@@ -268,15 +267,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
       },
     );*/
         CustomTextField(
-            keyboardType: TextInputType.emailAddress,
-           
-            icon: Icons.email,
-            hint: "Email ID",
-            userTyped: (val) {
-              _email = val;
-            },
-            controller: email,
-            );
+      keyboardType: TextInputType.emailAddress,
+      icon: Icons.email,
+      hint: "Email ID",
+      userTyped: (val) {
+        _email = val;
+      },
+      controller: email,
+    );
   }
 
   Widget phoneTextFormField() {
@@ -290,15 +288,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
       },
     );*/
         CustomTextField(
-            keyboardType: TextInputType.number,
-            
-            icon: Icons.phone,
-            hint: "Mobile Number(OPTIONAL)",
-            userTyped: (val) {
-              phnum = val;
-            },
-            controller: phnum,
-            );
+      keyboardType: TextInputType.number,
+      icon: Icons.phone,
+      hint: "Mobile Number(OPTIONAL)",
+      userTyped: (val) {
+        phnum = val;
+      },
+      controller: phnum,
+    );
   }
 
   Widget passwordTextFormField() {
@@ -474,12 +471,19 @@ class _SignUpScreenState extends State<SignUpScreen> {
           try {
             final newUser = await auth.createUserWithEmailAndPassword(
                 email: _email, password: _password);
-            Map <String,dynamic> data= {"name":name.text,"email":email.text,"contact":phnum.text};
-              FirebaseFirestore.instance.collection("users").doc("collection").set(data);
-            
+            // Map <String,dynamic> data= {"name":name.text,"email":email.text,"contact":phnum.text};
+            //   FirebaseFirestore.instance.collection("users").doc("collection").set(data);
+
             if (newUser != null) {
-              Map <String,dynamic> data= {"name":name.text,"email":email.text,"contact":phnum.text};
-              FirebaseFirestore.instance.collection("users").doc("collection").set(data);
+              Map<String, dynamic> data = {
+                "name": name.text,
+                "email": email.text,
+                "contact": phnum.text
+              };
+              FirebaseFirestore.instance
+                  .collection("users")
+                  .doc("collection")
+                  .set(data);
               // User updateUser = FirebaseAuth.instance.currentUser;
               // updateUser.updateProfile(displayName: name);
               // updateUser.updateProfile(photoURL: url);
