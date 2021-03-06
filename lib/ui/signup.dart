@@ -474,8 +474,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
           try {
             final newUser = await auth.createUserWithEmailAndPassword(
                 email: _email, password: _password);
-            Map <String,dynamic> data= {"name":name.text,"email":email.text,"contact":phnum.text};
-              FirebaseFirestore.instance.collection("users").doc("collection").set(data);
+            // Map <String,dynamic> data= {"name":name.text,"email":email.text,"contact":phnum.text};
+            //   FirebaseFirestore.instance.collection("users").doc("collection").set(data);
             
             if (newUser != null) {
               Map <String,dynamic> data= {"name":name.text,"email":email.text,"contact":phnum.text};

@@ -63,6 +63,7 @@ flutter:
     - assets/images/ulogo.jpg
     - assets/images/login.png
     - assets/images/logo.png
+    - assets/images/job.png
     - assets/images/powered_by.png
     - assets/images/top_header.jpg
     - assets/images/logo.jpeg

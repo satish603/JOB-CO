@@ -79,7 +79,7 @@ class _SignInScreenState extends State<SignInScreen> {
                   : (_medium ? _height / 3.75 : _height / 3.5),
               decoration: BoxDecoration(
                 gradient: LinearGradient(
-                  colors: [Colors.orange[200], Colors.pinkAccent],
+                  colors: [Colors.blue[200], Colors.yellowAccent],
                 ),
               ),
             ),
@@ -95,7 +95,7 @@ class _SignInScreenState extends State<SignInScreen> {
                   : (_medium ? _height / 4.25 : _height / 4),
               decoration: BoxDecoration(
                 gradient: LinearGradient(
-                  colors: [Colors.orange[200], Colors.pinkAccent],
+                  colors: [Colors.blue[700], Colors.yellowAccent],
                 ),
               ),
             ),
@@ -108,7 +108,7 @@ class _SignInScreenState extends State<SignInScreen> {
                   ? _height / 30
                   : (_medium ? _height / 25 : _height / 20)),
           child: Image.asset(
-            'assets/images/login.png',
+            'assets/images/job.png',
             height: _height / 3.5,
             width: _width / 3.5,
           ),
@@ -294,7 +294,7 @@ class _SignInScreenState extends State<SignInScreen> {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(20.0)),
           gradient: LinearGradient(
-            colors: <Color>[Colors.orange[200], Colors.pinkAccent],
+            colors: <Color>[Colors.blue[900], Colors.blueAccent[100]],
           ),
         ),
         padding: const EdgeInsets.all(12.0),
