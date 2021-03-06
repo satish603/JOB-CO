@@ -1,7 +1,9 @@
 import 'package:dsc/ui/contactus.dart';
+import 'package:dsc/ui/signin.dart';
 import 'package:dsc/ui/signup.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
 
 class Dashboard extends StatefulWidget {
   @override
@@ -12,8 +14,9 @@ class _DashboardState extends State<Dashboard> {
   @override
   Widget build(BuildContext context) {
     // to get size
+    
 
-    var size = MediaQuery.maybeOf(context).size;
+    //var size = MediaQuery.maybeOf(context).size;
 
     // style
     var cardTextStyle = TextStyle(
@@ -22,14 +25,17 @@ class _DashboardState extends State<Dashboard> {
         color: Color.fromRGBO(63, 63, 63, 1));
 
     return Scaffold(
+      
       body: Stack(
         children: <Widget>[
           Container(
-            height: size.height * .3,
+            
             decoration: BoxDecoration(
               image: DecorationImage(
-                  alignment: Alignment.topCenter,
-                  image: AssetImage('assets/images/top_header.png')),
+                  
+                  image: AssetImage('assets/images/top_header.jpg'),
+                  fit: BoxFit.fill),
+                  
             ),
           ),
           SafeArea(
@@ -45,8 +51,8 @@ class _DashboardState extends State<Dashboard> {
                       children: <Widget>[
                         CircleAvatar(
                           radius: 32,
-                          backgroundImage: NetworkImage(
-                              'https://image.flaticon.com/icons/png/512/17/17004.png'),
+                          backgroundImage:
+                              AssetImage('assets/images/download.jpg'),
                         ),
                         SizedBox(
                           width: 16,
@@ -74,7 +80,22 @@ class _DashboardState extends State<Dashboard> {
                       ],
                     ),
                   ),
+                                Align(
+        alignment: Alignment.bottomRight,
+        // ignore: deprecated_member_use
+        child: RaisedButton(
+          onPressed: () {
+            Navigator.of(context).pushAndRemoveUntil(
+                MaterialPageRoute(builder: (BuildContext context) => SignInPage()),
+                (Route<dynamic> route) => false);
+          },
+          child: const Text('Signout', style: TextStyle(fontSize: 20)),
+          color: Colors.blueAccent,
+          textColor: Colors.white,
+          elevation: 5,
+        )),
                   Expanded(
+                    
                     child: GridView.count(
                       mainAxisSpacing: 10,
                       crossAxisSpacing: 10,
@@ -96,10 +117,8 @@ class _DashboardState extends State<Dashboard> {
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: <Widget>[
-                                Image.network(
-                                  'https://image.flaticon.com/icons/png/512/17/17004.png',
-                                  height: 128,
-                                ),
+                                Image.asset('assets/images/download.jpg',
+                                    height: 128),
                                 Text(
                                   'Application form',
                                   style: cardTextStyle,
@@ -108,15 +127,23 @@ class _DashboardState extends State<Dashboard> {
                             ),
                           ),
                         ),
-                        Card(
+                        Card( 
+                          child:FlatButton(
+                            onPressed: () {
+                              Navigator.of(context).pushAndRemoveUntil(
+                                  MaterialPageRoute(
+                                      builder: (BuildContext context) =>
+                                          SignUpScreen()),
+                                  (Route<dynamic> route) => false);
+                            },
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(8)),
-                          elevation: 4,
+                          
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
-                              Image.network(
-                                'https://image.flaticon.com/icons/png/512/17/17004.png',
+                              Image.asset(
+                                'assets/images/download.jpg',
                                 height: 128,
                               ),
                               Text(
@@ -126,11 +153,9 @@ class _DashboardState extends State<Dashboard> {
                             ],
                           ),
                         ),
-                        Card(
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8)),
-                          elevation: 4,
-                          child: FlatButton(
+                        ),
+                        Card( 
+                          child:FlatButton(
                             onPressed: () {
                               Navigator.of(context).pushAndRemoveUntil(
                                   MaterialPageRoute(
@@ -138,13 +163,13 @@ class _DashboardState extends State<Dashboard> {
                                           Contact()),
                                   (Route<dynamic> route) => false);
                             },
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(8)),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8)),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: <Widget>[
-                                Image.network(
-                                  'https://image.flaticon.com/icons/png/512/17/17004.png',
+                                Image.asset(
+                                  'assets/images/download.jpg',
                                   height: 128,
                                 ),
                                 Text(
@@ -156,14 +181,47 @@ class _DashboardState extends State<Dashboard> {
                           ),
                         ),
                         Card(
+                          child:FlatButton(
+                            onPressed: () {
+                              Navigator.of(context).pushAndRemoveUntil(
+                                  MaterialPageRoute(
+                                      builder: (BuildContext context) =>
+                                          SignUpScreen()),
+                                  (Route<dynamic> route) => false);
+                            },
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(8)),
-                          elevation: 4,
-                          child: Column(
+                        child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
-                              Image.network(
-                                'https://image.flaticon.com/icons/png/512/17/17004.png',
+                              Image.asset(
+                                'assets/images/download.jpg',
+                                height: 128,
+                              ),
+                              Text(
+                                'Random',
+                                style: cardTextStyle,
+                              )
+                            ],
+                          ),
+                          ),
+                        ),
+                       Card( 
+                          child:FlatButton(
+                            onPressed: () {
+                              Navigator.of(context).pushAndRemoveUntil(
+                                  MaterialPageRoute(
+                                      builder: (BuildContext context) =>
+                                          SignUpScreen()),
+                                  (Route<dynamic> route) => false);
+                            },
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8)),
+                           child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              Image.asset(
+                                'assets/images/download.jpg',
                                 height: 128,
                               ),
                               Text(
@@ -173,15 +231,23 @@ class _DashboardState extends State<Dashboard> {
                             ],
                           ),
                         ),
-                        Card(
+                       ),
+                        Card( 
+                          child:FlatButton(
+                            onPressed: () {
+                              Navigator.of(context).pushAndRemoveUntil(
+                                  MaterialPageRoute(
+                                      builder: (BuildContext context) =>
+                                          SignUpScreen()),
+                                  (Route<dynamic> route) => false);
+                            },
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(8)),
-                          elevation: 4,
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
-                              Image.network(
-                                'https://image.flaticon.com/icons/png/512/17/17004.png',
+                              Image.asset(
+                                'assets/images/download.jpg',
                                 height: 128,
                               ),
                               Text(
@@ -191,23 +257,6 @@ class _DashboardState extends State<Dashboard> {
                             ],
                           ),
                         ),
-                        Card(
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8)),
-                          elevation: 4,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              Image.network(
-                                'https://image.flaticon.com/icons/png/512/17/17004.png',
-                                height: 128,
-                              ),
-                              Text(
-                                'Random',
-                                style: cardTextStyle,
-                              )
-                            ],
-                          ),
                         ),
                       ],
                     ),
@@ -218,6 +267,9 @@ class _DashboardState extends State<Dashboard> {
           ),
         ],
       ),
+      // ignore: dead_code
     );
+    
+  
   }
 }
