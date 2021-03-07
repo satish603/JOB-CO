@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:dsc/constants/constants.dart';
@@ -21,8 +22,17 @@ class SplashScreenState extends State<SplashScreen>
     return new Timer(_duration, navigationPage);
   }
 
-  void navigationPage() {
-    Navigator.of(context).pushReplacementNamed(SIGN_IN);
+  void navigationPage() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var status = prefs.getBool('isLoggedIn') ?? false;
+    print(status);
+    if (status) {
+      Navigator.of(context).pushReplacementNamed(DASHBOARD);
+    } else {
+      Navigator.of(context).pushReplacementNamed(SIGN_IN);
+    }
+
+    //Navigator.of(context).pushReplacementNamed(SIGN_IN);
   }
 
   @override
