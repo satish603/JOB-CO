@@ -473,7 +473,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 email: _email, password: _password);
             // Map <String,dynamic> data= {"name":name.text,"email":email.text,"contact":phnum.text};
             //   FirebaseFirestore.instance.collection("users").doc("collection").set(data);
+<<<<<<< HEAD
+            
+=======
 
+>>>>>>> 418bef716cc154869c708189a800372f23632e25
             if (newUser != null) {
               Map<String, dynamic> data = {
                 "name": name.text,
