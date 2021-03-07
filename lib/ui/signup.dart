@@ -9,7 +9,7 @@ import 'package:dsc/ui/widgets/responsive_ui.dart';
 import 'package:dsc/ui/widgets/textformfield.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:edge_alert/edge_alert.dart';
-import 'package:modal_progress_hud/modal_progress_hud.dart';
+//import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -473,11 +473,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 email: _email, password: _password);
             // Map <String,dynamic> data= {"name":name.text,"email":email.text,"contact":phnum.text};
             //   FirebaseFirestore.instance.collection("users").doc("collection").set(data);
-<<<<<<< HEAD
-            
-=======
 
->>>>>>> 418bef716cc154869c708189a800372f23632e25
             if (newUser != null) {
               Map<String, dynamic> data = {
                 "name": name.text,
