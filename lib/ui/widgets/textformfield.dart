@@ -23,7 +23,7 @@ class CustomTextField extends StatelessWidget {
     this.obscureText = false,
     TextEditingController controller,
     InputDecoration decoration,
-    void Function(String) onChanged,
+    void Function(String) onChanged, Color color,
     // Null Function(Null) onChanged,
   });
 
@@ -41,9 +41,9 @@ class CustomTextField extends StatelessWidget {
         onSubmitted: (value) {},
         controller: textEditingController,
         keyboardType: keyboardType,
-        cursorColor: Colors.orange[200],
+        cursorColor: Colors.blue[800],
         decoration: InputDecoration(
-          prefixIcon: Icon(icon, color: Colors.orange[200], size: 20),
+          prefixIcon: Icon(icon, color: Colors.blue[900], size: 20),
           hintText: hint,
           border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(30.0),

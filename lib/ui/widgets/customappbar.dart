@@ -12,7 +12,7 @@ class CustomAppBar extends StatelessWidget {
         padding: EdgeInsets.only(left: 15, top: 25),
         decoration: BoxDecoration(
           gradient: LinearGradient(
-              colors:[Colors.orange[200], Colors.pinkAccent]
+              colors:[Colors.blue[200], Colors.yellowAccent]
           ),
         ),
         child: Row(

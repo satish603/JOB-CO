@@ -123,7 +123,7 @@ class _SignInScreenState extends State<SignInScreen> {
       child: Row(
         children: <Widget>[
           Text(
-            "Welcome",
+            "Job&Co.",
             style: TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: _large ? 60 : (_medium ? 50 : 40),
@@ -140,7 +140,7 @@ class _SignInScreenState extends State<SignInScreen> {
       child: Row(
         children: <Widget>[
           Text(
-            "Sign in to your account",
+            "Login to your account",
             style: TextStyle(
               fontWeight: FontWeight.w200,
               fontSize: _large ? 20 : (_medium ? 17.5 : 15),
@@ -182,6 +182,7 @@ class _SignInScreenState extends State<SignInScreen> {
             keyboardType: TextInputType.emailAddress,
             textEditingController: emailController,
             icon: Icons.email,
+            color: Colors.blue.shade400,
             hint: "Email ID",
             userTyped: (val) {
               _email = val;
@@ -234,7 +235,7 @@ class _SignInScreenState extends State<SignInScreen> {
                       description: 'Please find the restlink in your mail.',
                       gravity: EdgeAlert.BOTTOM,
                       icon: Icons.error,
-                      backgroundColor: Colors.orange[200]);
+                      backgroundColor: Colors.blue[400]);
                   // Scaffold.of(context).showSnackBar(SnackBar(
                   //     content:
                   //         Text('PASSWORD Rest link has sent to your email.')));
@@ -247,13 +248,13 @@ class _SignInScreenState extends State<SignInScreen> {
                         'Password reset link will be sent to Your email please provide correct email',
                     gravity: EdgeAlert.BOTTOM,
                     icon: Icons.error,
-                    backgroundColor: Colors.orange[200]);
+                    backgroundColor: Colors.blue[400]);
               }
             },
             child: Text(
               "Recover",
               style: TextStyle(
-                  fontWeight: FontWeight.w600, color: Colors.orange[200]),
+                  fontWeight: FontWeight.w600, color: Colors.blue[900]),
             ),
           )
         ],
@@ -280,18 +281,18 @@ class _SignInScreenState extends State<SignInScreen> {
               .showSnackBar(SnackBar(content: Text('Wrong ID OR Password')));
         } else {
           EdgeAlert.show(context,
-              title: 'Sigin Failed',
+              title: 'Login Failed',
               description: 'All fields are required.',
               gravity: EdgeAlert.BOTTOM,
               icon: Icons.error,
-              backgroundColor: Colors.orange[200]);
+              backgroundColor: Colors.blue[400]);
         }
       },
       textColor: Colors.white,
       padding: EdgeInsets.all(0.0),
       child: Container(
         alignment: Alignment.center,
-        width: _large ? _width / 4 : (_medium ? _width / 3.75 : _width / 3.5),
+        width: _large ? _width / 5 : (_medium ? _width / 2.75 : _width / 1.5),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(20.0)),
           gradient: LinearGradient(
@@ -299,10 +300,13 @@ class _SignInScreenState extends State<SignInScreen> {
           ),
         ),
         padding: const EdgeInsets.all(12.0),
-        child: Text('SIGN IN',
-            style: TextStyle(fontSize: _large ? 14 : (_medium ? 12 : 10))),
+        child: Text('LOGIN',
+            style: TextStyle(
+              fontWeight: FontWeight.w900,
+              fontSize: _large ? 14 : (_medium ? 14 : 10)),
+              
       ),
-    );
+    ));
   }
 
   Widget signUpTextRow() {
@@ -314,7 +318,7 @@ class _SignInScreenState extends State<SignInScreen> {
           Text(
             "Don't have an account?",
             style: TextStyle(
-                fontWeight: FontWeight.w400,
+                fontWeight: FontWeight.w600,
                 fontSize: _large ? 14 : (_medium ? 12 : 10)),
           ),
           SizedBox(
@@ -328,8 +332,8 @@ class _SignInScreenState extends State<SignInScreen> {
             child: Text(
               "Sign up",
               style: TextStyle(
-                  fontWeight: FontWeight.w800,
-                  color: Colors.orange[200],
+                  fontWeight: FontWeight.w900,
+                  color: Colors.blue[900],
                   fontSize: _large ? 19 : (_medium ? 17 : 15)),
             ),
           )

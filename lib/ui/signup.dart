@@ -126,7 +126,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   : (_medium ? _height / 7 : _height / 6.5),
               decoration: BoxDecoration(
                 gradient: LinearGradient(
-                  colors: [Colors.orange[200], Colors.pinkAccent],
+                  colors: [Colors.blue[200], Colors.yellowAccent],
                 ),
               ),
             ),
@@ -142,7 +142,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   : (_medium ? _height / 11 : _height / 10),
               decoration: BoxDecoration(
                 gradient: LinearGradient(
-                  colors: [Colors.orange[200], Colors.pinkAccent],
+                  colors: [Colors.blue[200], Colors.yellowAccent],
                 ),
               ),
             ),
@@ -169,7 +169,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               child: Icon(
                 Icons.add_a_photo,
                 size: _large ? 40 : (_medium ? 33 : 31),
-                color: Colors.orange[200],
+                color: Colors.blue[900],
               )),
         ),
 //        Positioned(
@@ -325,7 +325,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Checkbox(
-              activeColor: Colors.orange[200],
+              activeColor: Colors.blue[400],
               value: checkBoxValue,
               onChanged: (bool newValue) {
                 setState(() {
@@ -335,8 +335,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
           Text(
             "I accept all terms and conditions",
             style: TextStyle(
-                fontWeight: FontWeight.w400,
-                fontSize: _large ? 12 : (_medium ? 11 : 10)),
+                fontWeight: FontWeight.w600,
+                fontSize: _large ? 12 : (_medium ? 13 : 10)),
           ),
         ],
       ),
@@ -352,7 +352,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
           Text(
             "Or create using social media",
             style: TextStyle(
-                fontWeight: FontWeight.w400,
+                fontWeight: FontWeight.w500,
                 fontSize: _large ? 12 : (_medium ? 11 : 10)),
           ),
         ],
@@ -373,7 +373,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   description: 'WE ADDING THIS FEATURE SOON',
                   gravity: EdgeAlert.BOTTOM,
                   icon: Icons.error,
-                  backgroundColor: Colors.orange[200]);
+                  backgroundColor: Colors.blue[400]);
               //  Navigator.of(context).pop(SIGN_IN);
               //  print("Routing to Sign up screen");
             },
@@ -392,7 +392,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   description: 'WE ADDING THIS FEATURE SOON',
                   gravity: EdgeAlert.BOTTOM,
                   icon: Icons.error,
-                  backgroundColor: Colors.orange[200]);
+                  backgroundColor: Colors.blue[400]);
               //  Navigator.of(context).pop(SIGN_IN);
               //  print("Routing to Sign up screen");
             },
@@ -411,7 +411,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   description: 'WE ADDING THIS FEATURE SOON',
                   gravity: EdgeAlert.BOTTOM,
                   icon: Icons.error,
-                  backgroundColor: Colors.orange[200]);
+                  backgroundColor: Colors.blue[400]);
               // Navigator.of(context).pop(SIGN_IN);
               //  print("Routing to Sign up screen");
             },
@@ -447,7 +447,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               "Sign in",
               style: TextStyle(
                   fontWeight: FontWeight.w800,
-                  color: Colors.orange[200],
+                  color: Colors.blue[900],
                   fontSize: 19),
             ),
           )
@@ -504,7 +504,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 description: e.toString(),
                 gravity: EdgeAlert.BOTTOM,
                 icon: Icons.error,
-                backgroundColor: Colors.orange[200]);
+                backgroundColor: Colors.blue[400]);
           }
         } else {
           EdgeAlert.show(context,
@@ -513,7 +513,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   'All fields are required. Accept all terms and conditions',
               gravity: EdgeAlert.BOTTOM,
               icon: Icons.error,
-              backgroundColor: Colors.orange[200]);
+              backgroundColor: Colors.blue[400]);
         }
       },
       textColor: Colors.white,
@@ -521,17 +521,19 @@ class _SignUpScreenState extends State<SignUpScreen> {
       child: Container(
         alignment: Alignment.center,
 //        height: _height / 20,
-        width: _large ? _width / 4 : (_medium ? _width / 3.75 : _width / 3.5),
+        width: _large ? _width / 4 : (_medium ? _width / 2.75 : _width / 3.5),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(20.0)),
           gradient: LinearGradient(
-            colors: <Color>[Colors.orange[200], Colors.pinkAccent],
+            colors:  <Color>[Colors.blue[900], Colors.blueAccent[100]],
           ),
         ),
         padding: const EdgeInsets.all(12.0),
         child: Text(
           'SIGN UP',
-          style: TextStyle(fontSize: _large ? 14 : (_medium ? 12 : 10)),
+          style: TextStyle(
+             fontWeight: FontWeight.w900,
+             fontSize: _large ? 14 : (_medium ? 12 : 10)),
         ),
       ),
     );
