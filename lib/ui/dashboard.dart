@@ -1,9 +1,20 @@
 import 'package:dsc/ui/contactus.dart';
 import 'package:dsc/ui/signin.dart';
 import 'package:dsc/ui/signup.dart';
-// import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+class AuthenticationProvider {
+  final FirebaseAuth firebaseAuth;
+// FirebaseAuth instance
+  AuthenticationProvider(this.firebaseAuth);
+//Constructor to initialize the Firebase Auth instance.
+  Stream<User> get authStateChanges => firebaseAuth.idTokenChanges();
+  Future<void> signOut() async {
+    await firebaseAuth.signOut();
+  }
+}
 
 class Dashboard extends StatefulWidget {
   @override
@@ -82,7 +93,8 @@ class _DashboardState extends State<Dashboard> {
                   alignment: Alignment.bottomRight,
                   // ignore: deprecated_member_use
                   child: RaisedButton(
-                    onPressed: () {
+                    onPressed: () async {
+                      await FirebaseAuth.instance.signOut();
                       Navigator.of(context).pushAndRemoveUntil(
                           MaterialPageRoute(
                               builder: (BuildContext context) => SignInPage()),
@@ -121,10 +133,9 @@ class _DashboardState extends State<Dashboard> {
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: <Widget>[
                             // alignment: Alignment.topRight,
-                            
+
                             Image.asset('assets/images/jobs.jpg', height: 90),
-                            
-                            
+
                             Text(
                               'Jobs Vacancy',
                               style: cardTextStyle,
