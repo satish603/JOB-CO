@@ -1,9 +1,20 @@
 import 'package:dsc/ui/contactus.dart';
 import 'package:dsc/ui/signin.dart';
 import 'package:dsc/ui/signup.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+class AuthenticationProvider {
+  final FirebaseAuth firebaseAuth;
+// FirebaseAuth instance
+  AuthenticationProvider(this.firebaseAuth);
+//Constructor to initialize the Firebase Auth instance.
+  Stream<User> get authStateChanges => firebaseAuth.idTokenChanges();
+  Future<void> signOut() async {
+    await firebaseAuth.signOut();
+  }
+}
 
 class Dashboard extends StatefulWidget {
   @override
@@ -14,7 +25,6 @@ class _DashboardState extends State<Dashboard> {
   @override
   Widget build(BuildContext context) {
     // to get size
-    
 
     //var size = MediaQuery.maybeOf(context).size;
 
@@ -25,17 +35,13 @@ class _DashboardState extends State<Dashboard> {
         color: Color.fromRGBO(63, 63, 63, 1));
 
     return Scaffold(
-      
       body: Stack(
         children: <Widget>[
           Container(
-            
             decoration: BoxDecoration(
               image: DecorationImage(
-                  
                   image: AssetImage('assets/images/top_header.jpg'),
                   fit: BoxFit.fill),
-                  
             ),
           ),
           SafeArea(
@@ -80,22 +86,25 @@ class _DashboardState extends State<Dashboard> {
                       ],
                     ),
                   ),
-                                Align(
-        alignment: Alignment.bottomRight,
-        // ignore: deprecated_member_use
-        child: RaisedButton(
-          onPressed: () {
-            Navigator.of(context).pushAndRemoveUntil(
-                MaterialPageRoute(builder: (BuildContext context) => SignInPage()),
-                (Route<dynamic> route) => false);
-          },
-          child: const Text('Signout', style: TextStyle(fontSize: 20)),
-          color: Colors.blueAccent,
-          textColor: Colors.white,
-          elevation: 5,
-        )),
+                  Align(
+                      alignment: Alignment.bottomRight,
+                      // ignore: deprecated_member_use
+                      child: RaisedButton(
+                        onPressed: () async {
+                          await FirebaseAuth.instance.signOut();
+                          Navigator.of(context).pushAndRemoveUntil(
+                              MaterialPageRoute(
+                                  builder: (BuildContext context) =>
+                                      SignInPage()),
+                              (Route<dynamic> route) => false);
+                        },
+                        child: const Text('Signout',
+                            style: TextStyle(fontSize: 20)),
+                        color: Colors.blueAccent,
+                        textColor: Colors.white,
+                        elevation: 5,
+                      )),
                   Expanded(
-                    
                     child: GridView.count(
                       mainAxisSpacing: 10,
                       crossAxisSpacing: 10,
@@ -127,8 +136,8 @@ class _DashboardState extends State<Dashboard> {
                             ),
                           ),
                         ),
-                        Card( 
-                          child:FlatButton(
+                        Card(
+                          child: FlatButton(
                             onPressed: () {
                               Navigator.of(context).pushAndRemoveUntil(
                                   MaterialPageRoute(
@@ -136,26 +145,25 @@ class _DashboardState extends State<Dashboard> {
                                           SignUpScreen()),
                                   (Route<dynamic> route) => false);
                             },
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8)),
-                          
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              Image.asset(
-                                'assets/images/download.jpg',
-                                height: 128,
-                              ),
-                              Text(
-                                'Application Status',
-                                style: cardTextStyle,
-                              )
-                            ],
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8)),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                Image.asset(
+                                  'assets/images/download.jpg',
+                                  height: 128,
+                                ),
+                                Text(
+                                  'Application Status',
+                                  style: cardTextStyle,
+                                )
+                              ],
+                            ),
                           ),
                         ),
-                        ),
-                        Card( 
-                          child:FlatButton(
+                        Card(
+                          child: FlatButton(
                             onPressed: () {
                               Navigator.of(context).pushAndRemoveUntil(
                                   MaterialPageRoute(
@@ -163,8 +171,8 @@ class _DashboardState extends State<Dashboard> {
                                           Contact()),
                                   (Route<dynamic> route) => false);
                             },
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8)),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8)),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: <Widget>[
@@ -181,7 +189,7 @@ class _DashboardState extends State<Dashboard> {
                           ),
                         ),
                         Card(
-                          child:FlatButton(
+                          child: FlatButton(
                             onPressed: () {
                               Navigator.of(context).pushAndRemoveUntil(
                                   MaterialPageRoute(
@@ -189,25 +197,25 @@ class _DashboardState extends State<Dashboard> {
                                           SignUpScreen()),
                                   (Route<dynamic> route) => false);
                             },
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8)),
-                        child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              Image.asset(
-                                'assets/images/download.jpg',
-                                height: 128,
-                              ),
-                              Text(
-                                'Random',
-                                style: cardTextStyle,
-                              )
-                            ],
-                          ),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8)),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                Image.asset(
+                                  'assets/images/download.jpg',
+                                  height: 128,
+                                ),
+                                Text(
+                                  'Random',
+                                  style: cardTextStyle,
+                                )
+                              ],
+                            ),
                           ),
                         ),
-                       Card( 
-                          child:FlatButton(
+                        Card(
+                          child: FlatButton(
                             onPressed: () {
                               Navigator.of(context).pushAndRemoveUntil(
                                   MaterialPageRoute(
@@ -215,25 +223,25 @@ class _DashboardState extends State<Dashboard> {
                                           SignUpScreen()),
                                   (Route<dynamic> route) => false);
                             },
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8)),
-                           child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              Image.asset(
-                                'assets/images/download.jpg',
-                                height: 128,
-                              ),
-                              Text(
-                                'Random',
-                                style: cardTextStyle,
-                              )
-                            ],
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8)),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                Image.asset(
+                                  'assets/images/download.jpg',
+                                  height: 128,
+                                ),
+                                Text(
+                                  'Random',
+                                  style: cardTextStyle,
+                                )
+                              ],
+                            ),
                           ),
                         ),
-                       ),
-                        Card( 
-                          child:FlatButton(
+                        Card(
+                          child: FlatButton(
                             onPressed: () {
                               Navigator.of(context).pushAndRemoveUntil(
                                   MaterialPageRoute(
@@ -241,22 +249,22 @@ class _DashboardState extends State<Dashboard> {
                                           SignUpScreen()),
                                   (Route<dynamic> route) => false);
                             },
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8)),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              Image.asset(
-                                'assets/images/download.jpg',
-                                height: 128,
-                              ),
-                              Text(
-                                'Random',
-                                style: cardTextStyle,
-                              )
-                            ],
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8)),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                Image.asset(
+                                  'assets/images/download.jpg',
+                                  height: 128,
+                                ),
+                                Text(
+                                  'Random',
+                                  style: cardTextStyle,
+                                )
+                              ],
+                            ),
                           ),
-                        ),
                         ),
                       ],
                     ),
@@ -269,7 +277,5 @@ class _DashboardState extends State<Dashboard> {
       ),
       // ignore: dead_code
     );
-    
-  
   }
 }
