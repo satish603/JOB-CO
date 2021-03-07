@@ -267,12 +267,13 @@ class _SignInScreenState extends State<SignInScreen> {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
       onPressed: () async {
         if (_password != null && _email != null) {
-          auth
+          await auth
               .signInWithEmailAndPassword(email: _email, password: _password)
               .then((_) {
             Navigator.of(context).pushReplacement(
                 MaterialPageRoute(builder: (context) => Dashboard()));
           });
+
           //  Navigator.of(context).pushNamed(LOGIN); //new line
           print("Routing to your account");
           Scaffold.of(context)

@@ -1,9 +1,18 @@
 import 'dart:async';
 
-import 'package:shared_preferences/shared_preferences.dart';
+//import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:dsc/constants/constants.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
+class AuthenticationProvider {
+  final FirebaseAuth firebaseAuth;
+// FirebaseAuth instance
+  AuthenticationProvider(this.firebaseAuth);
+//Constructor to initialize the Firebase Auth instance.
+  Stream<User> get authStateChanges => firebaseAuth.idTokenChanges();
+}
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -22,16 +31,16 @@ class SplashScreenState extends State<SplashScreen>
     return new Timer(_duration, navigationPage);
   }
 
-  void navigationPage() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    var status = prefs.getBool('isLoggedIn') ?? false;
-    print(status);
-    if (status) {
-      Navigator.of(context).pushReplacementNamed(DASHBOARD);
-    } else {
-      Navigator.of(context).pushReplacementNamed(SIGN_IN);
-    }
-
+  void navigationPage() {
+    FirebaseAuth.instance.authStateChanges().listen((User user) {
+      if (user == null) {
+        print('User is currently signed out!');
+        Navigator.of(context).pushReplacementNamed(SIGN_IN);
+      } else {
+        print('User is signed in!');
+        Navigator.of(context).pushReplacementNamed(DASHBOARD);
+      }
+    });
     //Navigator.of(context).pushReplacementNamed(SIGN_IN);
   }
 
@@ -39,7 +48,7 @@ class SplashScreenState extends State<SplashScreen>
   void initState() {
     super.initState();
     animationController = new AnimationController(
-        vsync: this, duration: new Duration(seconds: 2));
+        vsync: this, duration: new Duration(seconds: 3));
     animation =
         new CurvedAnimation(parent: animationController, curve: Curves.easeOut);
 
@@ -61,15 +70,16 @@ class SplashScreenState extends State<SplashScreen>
           new Column(
             mainAxisAlignment: MainAxisAlignment.end,
             mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              Padding(
-                  padding: EdgeInsets.only(bottom: 30.0),
-                  child: new Image.asset(
-                    'assets/images/powered_by.png',
-                    height: 25.0,
-                    fit: BoxFit.scaleDown,
-                  ))
-            ],
+            // children: <Widget>[
+            //   Padding(
+            //       padding: EdgeInsets.only(bottom: 30.0),
+            //       child: new Image.asset(
+            //         'assets/images/powered_by.png',
+            //         height: 25.0,
+            //         fit: BoxFit.scaleDown,
+            //       )
+            //       )
+            // ],
           ),
           new Column(
             mainAxisAlignment: MainAxisAlignment.center,
