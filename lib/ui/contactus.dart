@@ -16,7 +16,7 @@ class _ContactusState extends State<Contact> {
       //   backgroundColor: Colors.teal.shade300,
       //   email: 'adoshi26.ad@gmail.com',
       // ),
-      backgroundColor: Colors.cyan[800],
+      backgroundColor: Colors.indigo[900],
 
       body: SafeArea(
         child: SingleChildScrollView(
@@ -28,14 +28,15 @@ class _ContactusState extends State<Contact> {
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 50,
-                  color: Colors.teal[100],
+                  color: Colors.white,
                   // fontSize: _large ? 60 : (_medium ? 50 : 40),
                 ),
               ),
               Card(
                 color: Colors.white,
-                margin: EdgeInsets.symmetric(vertical: 15.0, horizontal: 25.0),
+                margin: EdgeInsets.symmetric(vertical: 15.0, horizontal: 30.0),
                 child: ContactUs(
+                  // borderRadius: BorderRadius.circular(8),
                   cardColor: Colors.teal[100],
                   textColor: Colors.teal.shade900,
                   logo: AssetImage('assets/images/logo.jpeg'),
