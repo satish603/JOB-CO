@@ -71,11 +71,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
   bool _medium;
   bool signingup = false;
   // var name, email, photoUrl, uid, emailVerified, phnum;
-  String _email, _password, url;
+  String _email, _password, name, phnum;
   final auth = FirebaseAuth.instance;
-  TextEditingController name = new TextEditingController();
-  TextEditingController email = new TextEditingController();
-  TextEditingController phnum = new TextEditingController();
+  final firestore = FirebaseFirestore.instance;
+  // TextEditingController name1 = new TextEditingController();
+  // //TextEditingController email = new TextEditingController();
+  // TextEditingController phnum1 = new TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -233,7 +234,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       userTyped: (val) {
         name = val;
       },
-      controller: name,
+      // controller: name,
     );
   }
 
@@ -267,14 +268,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
       },
     );*/
         CustomTextField(
-      keyboardType: TextInputType.emailAddress,
-      icon: Icons.email,
-      hint: "Email ID",
-      userTyped: (val) {
-        _email = val;
-      },
-      controller: email,
-    );
+            keyboardType: TextInputType.emailAddress,
+            icon: Icons.email,
+            hint: "Email ID",
+            userTyped: (val) {
+              _email = val;
+            }
+            //controller: email,
+            );
   }
 
   Widget phoneTextFormField() {
@@ -294,7 +295,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       userTyped: (val) {
         phnum = val;
       },
-      controller: phnum,
+      // controller: phnum,
     );
   }
 
@@ -475,15 +476,22 @@ class _SignUpScreenState extends State<SignUpScreen> {
             //   FirebaseFirestore.instance.collection("users").doc("collection").set(data);
 
             if (newUser != null) {
-              Map<String, dynamic> data = {
-                "name": name.text,
-                "email": email.text,
-                "contact": phnum.text
+              firestore
+                  .collection("users")
+                  .add({"name": name, "email": _email, "contact": phnum}).then(
+                      (value) {
+                print(value.id);
+              });
+              /*   Map<String, dynamic> data = {
+                "name": name,
+                "email": _email,
+                "contact": phnum
               };
               FirebaseFirestore.instance
                   .collection("users")
                   .doc("collection")
-                  .set(data);
+                  .set(data); */
+
               // User updateUser = FirebaseAuth.instance.currentUser;
               // updateUser.updateProfile(displayName: name);
               // updateUser.updateProfile(photoURL: url);
@@ -525,15 +533,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(20.0)),
           gradient: LinearGradient(
-            colors:  <Color>[Colors.blue[900], Colors.blueAccent[100]],
+            colors: <Color>[Colors.blue[900], Colors.blueAccent[100]],
           ),
         ),
         padding: const EdgeInsets.all(12.0),
         child: Text(
           'SIGN UP',
           style: TextStyle(
-             fontWeight: FontWeight.w900,
-             fontSize: _large ? 14 : (_medium ? 12 : 10)),
+              fontWeight: FontWeight.w900,
+              fontSize: _large ? 14 : (_medium ? 12 : 10)),
         ),
       ),
     );
