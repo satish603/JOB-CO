@@ -1,5 +1,6 @@
 import 'package:dsc/ui/contactus.dart';
 import 'package:dsc/ui/job.dart';
+import 'package:dsc/ui/jobdetails.dart';
 import 'package:dsc/ui/signin.dart';
 import 'package:dsc/ui/signup.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -201,8 +202,8 @@ class _DashboardState extends State<Dashboard> {
                         onPressed: () {
                           Navigator.of(context).pushAndRemoveUntil(
                               MaterialPageRoute(
-                                  builder: (BuildContext context) =>
-                                      SignUpScreen()),
+                                  builder: (BuildContext context) => JobDetials()),
+                                      
                               (Route<dynamic> route) => false);
                         },
                         shape: RoundedRectangleBorder(
@@ -215,7 +216,7 @@ class _DashboardState extends State<Dashboard> {
                               height: 128,
                             ),
                             Text(
-                              'Random',
+                              'JOB Details',
                               style: cardTextStyle,
                             )
                           ],

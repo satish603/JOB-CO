@@ -1,6 +1,7 @@
 //import 'dart:html';
 
 import 'package:dsc/ui/dashboard.dart';
+import 'package:dsc/ui/job.dart';
 import 'package:flutter/material.dart';
 import 'package:dsc/constants/constants.dart';
 import 'package:dsc/ui/widgets/custom_shape.dart';
@@ -12,7 +13,7 @@ import 'package:edge_alert/edge_alert.dart';
 //import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class SignUpScreen extends StatefulWidget {
+class JobDetials extends StatefulWidget {
   @override
   _SignUpScreenState createState() => _SignUpScreenState();
 }
@@ -62,7 +63,7 @@ class SignUpScreen extends StatefulWidget {
   }
 }*/
 
-class _SignUpScreenState extends State<SignUpScreen> {
+class _SignUpScreenState extends State<JobDetials> {
   bool checkBoxValue = false;
   double _height;
   double _width;
@@ -71,8 +72,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   bool _medium;
   bool signingup = false;
   // var name, email, photoUrl, uid, emailVerified, phnum;
-  String _email, _password, name, phnum;
-  final auth = FirebaseAuth.instance;
+  String jobname, location, vacancy;
   final firestore =FirebaseFirestore.instance;
   // TextEditingController name1 = new TextEditingController();
   // //TextEditingController email = new TextEditingController();
@@ -209,8 +209,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
             emailTextFormField(),
             SizedBox(height: _height / 60.0),
             phoneTextFormField(),
-            SizedBox(height: _height / 60.0),
-            passwordTextFormField(),
+            // SizedBox(height: _height / 60.0),
+            // passwordTextFormField(),
           ],
         ),
       ),
@@ -230,9 +230,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
         CustomTextField(
       keyboardType: TextInputType.text,
       icon: Icons.person,
-      hint: "Full Name",
+      hint: "Job Name",
       userTyped: (val) {
-        name = val;
+        jobname = val;
       },
       // controller: name,
     );
@@ -268,11 +268,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
       },
     );*/
         CustomTextField(
-            keyboardType: TextInputType.emailAddress,
+            keyboardType: TextInputType.text,
             icon: Icons.email,
-            hint: "Email ID",
+            hint: "Location",
             userTyped: (val) {
-              _email = val;
+              location = val;
             }
             //controller: email,
             );
@@ -291,33 +291,33 @@ class _SignUpScreenState extends State<SignUpScreen> {
         CustomTextField(
       keyboardType: TextInputType.number,
       icon: Icons.phone,
-      hint: "Mobile Number(OPTIONAL)",
+      hint: "Vacancy",
       userTyped: (val) {
-        phnum = val;
+        vacancy= val;
       },
       // controller: phnum,
     );
   }
 
-  Widget passwordTextFormField() {
-    return /*TextField(
-      obscureText: true,
-      decoration: InputDecoration(hintText: 'Password'),
-      onChanged: (value) {
-        setState(() {
-          _password = value.trim();
-        });
-      },
-    );*/
-        CustomTextField(
-            keyboardType: TextInputType.text,
-            obscureText: true,
-            icon: Icons.lock,
-            hint: "Password",
-            userTyped: (val) {
-              _password = val;
-            });
-  }
+  // Widget passwordTextFormField() {
+  //   return /*TextField(
+  //     obscureText: true,
+  //     decoration: InputDecoration(hintText: 'Password'),
+  //     onChanged: (value) {
+  //       setState(() {
+  //         _password = value.trim();
+  //       });
+  //     },
+  //   );*/
+  //       CustomTextField(
+  //           keyboardType: TextInputType.text,
+  //           obscureText: true,
+  //           icon: Icons.lock,
+  //           hint: "Password",
+  //           userTyped: (val) {
+  //             _password = val;
+  //           });
+  // }
 
   Widget acceptTermsTextRow() {
     return Container(
@@ -462,23 +462,23 @@ class _SignUpScreenState extends State<SignUpScreen> {
       elevation: 0,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
       onPressed: () async {
-        if (name != null &&
-            _password != null &&
-            _email != null &&
+        if (jobname != null &&
+            // _password != null &&
+            location != null &&
             checkBoxValue == true) {
           setState(() {
             signingup = true;
           });
           try {
-            final newUser = await auth.createUserWithEmailAndPassword(
-                email: _email, password: _password);
+
+            
             // Map <String,dynamic> data= {"name":name.text,"email":email.text,"contact":phnum.text};
             //   FirebaseFirestore.instance.collection("users").doc("collection").set(data);
 
-            if (newUser != null) {
+            // if (newUser != null) {
               firestore
-                  .collection("users")
-                  .add({"name": name, "email": _email, "contact": phnum}).then(
+                  .collection("Job Details")
+                  .add({"Job": jobname, "Location": location, "Vacancy": vacancy}).then(
                       (value) {
                 print(value.id);
               });
@@ -495,7 +495,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
               Navigator.of(context).pushReplacement(
                   MaterialPageRoute(builder: (context) => Dashboard()));
-            }
+            // }
           } catch (e) {
             setState(() {
               signingup = false;
@@ -531,7 +531,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
         ),
         padding: const EdgeInsets.all(12.0),
         child: Text(
-          'SIGN UP',
+          'APPLY',
           style: TextStyle(
               fontWeight: FontWeight.w900,
               fontSize: _large ? 14 : (_medium ? 12 : 10)),
