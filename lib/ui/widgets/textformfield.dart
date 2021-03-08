@@ -23,7 +23,8 @@ class CustomTextField extends StatelessWidget {
     this.obscureText = false,
     TextEditingController controller,
     InputDecoration decoration,
-    void Function(String) onChanged, Color color,
+    void Function(String) onChanged,
+    Color color,
     // Null Function(Null) onChanged,
   });
 
