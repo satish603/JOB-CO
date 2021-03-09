@@ -1,6 +1,7 @@
 //import 'dart:html';
-
+import 'dart:io' as io;
 import 'package:dsc/ui/dashboard.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:dsc/constants/constants.dart';
 import 'package:dsc/ui/widgets/custom_shape.dart';
@@ -11,8 +12,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:edge_alert/edge_alert.dart';
 //import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:firebase_core/firebase_core.dart' as firebase_core;
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 
 class SignUpScreen extends StatefulWidget {
+  SignUpScreen({Key key}) : super(key: key);
   @override
   _SignUpScreenState createState() => _SignUpScreenState();
 }
@@ -62,7 +67,19 @@ class SignUpScreen extends StatefulWidget {
   }
 }*/
 
+enum UploadType {
+  /// Uploads a randomly generated string (as a file) to Storage.
+  string,
+
+  /// Uploads a file from the device.
+  file,
+
+  /// Clears any tasks from the list.
+  clear,
+}
+
 class _SignUpScreenState extends State<SignUpScreen> {
+  List<firebase_storage.UploadTask> _uploadTasks = [];
   bool checkBoxValue = false;
   double _height;
   double _width;
@@ -73,10 +90,56 @@ class _SignUpScreenState extends State<SignUpScreen> {
   // var name, email, photoUrl, uid, emailVerified, phnum;
   String _email, _password, name, phnum;
   final auth = FirebaseAuth.instance;
-  final firestore =FirebaseFirestore.instance;
+  final firestore = FirebaseFirestore.instance;
   // TextEditingController name1 = new TextEditingController();
   // //TextEditingController email = new TextEditingController();
   // TextEditingController phnum1 = new TextEditingController();
+  Future<firebase_storage.UploadTask> uploadFile(PickedFile file) async {
+    if (file == null) {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        content: Text('No file was selected'),
+      ));
+      return null;
+    }
+
+    firebase_storage.UploadTask uploadTask;
+
+    // Create a Reference to the file
+    firebase_storage.Reference ref = firebase_storage.FirebaseStorage.instance
+        .ref()
+        .child('User image')
+        .child('/user.jpg');
+
+    final metadata = firebase_storage.SettableMetadata(
+        contentType: 'image/jpeg',
+        customMetadata: {'picked-file-path': file.path});
+
+    if (kIsWeb) {
+      uploadTask = ref.putData(await file.readAsBytes(), metadata);
+    } else {
+      uploadTask = ref.putFile(io.File(file.path), metadata);
+    }
+
+    return Future.value(uploadTask);
+  }
+
+  /// Handles the user pressing the PopupMenuItem item.
+  /* Future<void> handleUploadType(UploadType type) async {
+        PickedFile file =
+            await ImagePicker().getImage(source: ImageSource.gallery);
+        firebase_storage.UploadTask task = await uploadFile(file);
+        if (task != null) {
+          setState(() {
+            _uploadTasks = [..._uploadTasks, task];
+          });
+        }
+  }*/ //////not in use right now
+
+  void _removeTaskAtIndex(int index) {
+    setState(() {
+      _uploadTasks = _uploadTasks..removeAt(index);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -164,7 +227,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
             shape: BoxShape.circle,
           ),
           child: GestureDetector(
-              onTap: () {
+              onTap: () async {
+                PickedFile file =
+                    await ImagePicker().getImage(source: ImageSource.gallery);
+                firebase_storage.UploadTask task = await uploadFile(file);
+                if (task != null) {
+                  setState(() {
+                    _uploadTasks = [..._uploadTasks, task];
+                  });
+                }
                 print('Adding photo');
               },
               child: Icon(
@@ -482,9 +553,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       (value) {
                 print(value.id);
               });
-                  // .collection("users")
-                  // .doc("collection")
-                  // .set(data);
+              // .collection("users")
+              // .doc("collection")
+              // .set(data);
               // User updateUser = FirebaseAuth.instance.currentUser;
               // updateUser.updateProfile(displayName: name);
               // updateUser.updateProfile(photoURL: url);
