@@ -10,7 +10,6 @@ import 'package:dsc/ui/signup.dart';
 import 'package:dsc/ui/splashscreen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:provider/provider.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
