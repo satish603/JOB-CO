@@ -73,3 +73,9 @@
 .flutter-plugins-dependencies
 .flutter-plugins-dependencies
 .flutter-plugins-dependencies
+.dart_tool/package_config.json
+.dart_tool/package_config_subset
+.dart_tool/version
+.flutter-plugins-dependencies
+.packages
+*.lock
