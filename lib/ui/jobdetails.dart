@@ -72,7 +72,7 @@ class _SignUpScreenState extends State<JobDetials> {
   bool _medium;
   bool signingup = false;
   // var name, email, photoUrl, uid, emailVerified, phnum;
-  String jobname, location, vacancy;
+  String jobname, location, vacancy,salary;
   final firestore =FirebaseFirestore.instance;
   // TextEditingController name1 = new TextEditingController();
   // //TextEditingController email = new TextEditingController();
@@ -98,13 +98,13 @@ class _SignUpScreenState extends State<JobDetials> {
                 Opacity(opacity: 0.88, child: CustomAppBar()),
                 clipShape(),
                 form(),
-                acceptTermsTextRow(),
-                SizedBox(
-                  height: _height / 35,
-                ),
+                // acceptTermsTextRow(),
+                // SizedBox(
+                //   height: _height / 35,
+                // ),
                 button(),
-                infoTextRow(),
-                socialIconsRow(),
+               // infoTextRow(),
+                //socialIconsRow(),
                 //signInTextRow(),
               ],
             ),
@@ -203,12 +203,14 @@ class _SignUpScreenState extends State<JobDetials> {
         child: Column(
           children: <Widget>[
             firstNameTextFormField(),
-            SizedBox(height: _height / 60.0),
+            SizedBox(height: _height /30.0),
             //   lastNameTextFormField(),
-            //    SizedBox(height: _height / 60.0),
+            SecondNameTextFormField(),
+            SizedBox(height: _height / 30.0),
             emailTextFormField(),
-            SizedBox(height: _height / 60.0),
+            SizedBox(height: _height / 30.0),
             phoneTextFormField(),
+            SizedBox(height: _height / 20.0),
             // SizedBox(height: _height / 60.0),
             // passwordTextFormField(),
           ],
@@ -229,10 +231,31 @@ class _SignUpScreenState extends State<JobDetials> {
     );*/
         CustomTextField(
       keyboardType: TextInputType.text,
-      icon: Icons.person,
+      icon: Icons.business_center_rounded,
       hint: "Job Name",
       userTyped: (val) {
         jobname = val;
+      },
+      // controller: name,
+    );
+  }
+   // ignore: non_constant_identifier_names
+   Widget SecondNameTextFormField() {
+    return /*TextField(
+      keyboardType: TextInputType.text,
+      decoration: InputDecoration(hintText: 'First Name'),
+      onChanged: (value) {
+        setState(() {
+          name = value.trim();
+        });
+      },
+    );*/
+        CustomTextField(
+      keyboardType: TextInputType.number,
+      icon: Icons.mobile_friendly,
+      hint: "Salary",
+      userTyped: (val) {
+        salary = val;
       },
       // controller: name,
     );
@@ -269,7 +292,7 @@ class _SignUpScreenState extends State<JobDetials> {
     );*/
         CustomTextField(
             keyboardType: TextInputType.text,
-            icon: Icons.email,
+            icon: Icons.location_on,
             hint: "Location",
             userTyped: (val) {
               location = val;
@@ -290,7 +313,7 @@ class _SignUpScreenState extends State<JobDetials> {
     );*/
         CustomTextField(
       keyboardType: TextInputType.number,
-      icon: Icons.phone,
+      icon: Icons.person,
       hint: "Vacancy",
       userTyped: (val) {
         vacancy= val;
@@ -319,143 +342,143 @@ class _SignUpScreenState extends State<JobDetials> {
   //           });
   // }
 
-  Widget acceptTermsTextRow() {
-    return Container(
-      margin: EdgeInsets.only(top: _height / 100.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Checkbox(
-              activeColor: Colors.blue[400],
-              value: checkBoxValue,
-              onChanged: (bool newValue) {
-                setState(() {
-                  checkBoxValue = newValue;
-                });
-              }),
-          Text(
-            "I accept all terms and conditions",
-            style: TextStyle(
-                fontWeight: FontWeight.w600,
-                fontSize: _large ? 12 : (_medium ? 13 : 10)),
-          ),
-        ],
-      ),
-    );
-  }
+  // Widget acceptTermsTextRow() {
+  //   return Container(
+  //     margin: EdgeInsets.only(top: _height / 100.0),
+  //     child: Row(
+  //       mainAxisAlignment: MainAxisAlignment.center,
+  //       children: <Widget>[
+  //         Checkbox(
+  //             activeColor: Colors.blue[400],
+  //             value: checkBoxValue,
+  //             onChanged: (bool newValue) {
+  //               setState(() {
+  //                 checkBoxValue = newValue;
+  //               });
+  //             }),
+  //         Text(
+  //           "I accept all terms and conditions",
+  //           style: TextStyle(
+  //               fontWeight: FontWeight.w600,
+  //               fontSize: _large ? 12 : (_medium ? 13 : 10)),
+  //         ),
+  //       ],
+  //     ),
+  //   );
+  // }
 
-  Widget infoTextRow() {
-    return Container(
-      margin: EdgeInsets.only(top: _height / 40.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Text(
-            "Or create using social media",
-            style: TextStyle(
-                fontWeight: FontWeight.w500,
-                fontSize: _large ? 12 : (_medium ? 11 : 10)),
-          ),
-        ],
-      ),
-    );
-  }
+  // Widget infoTextRow() {
+  //   return Container(
+  //     margin: EdgeInsets.only(top: _height / 40.0),
+  //     child: Row(
+  //       mainAxisAlignment: MainAxisAlignment.center,
+  //       children: <Widget>[
+  //         Text(
+  //           "Or create using social media",
+  //           style: TextStyle(
+  //               fontWeight: FontWeight.w500,
+  //               fontSize: _large ? 12 : (_medium ? 11 : 10)),
+  //         ),
+  //       ],
+  //     ),
+  //   );
+  // }
 
-  Widget socialIconsRow() {
-    return Container(
-      margin: EdgeInsets.only(top: _height / 80.0),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          GestureDetector(
-            onTap: () async {
-              EdgeAlert.show(context,
-                  title: 'Signup Failed',
-                  description: 'WE ADDING THIS FEATURE SOON',
-                  gravity: EdgeAlert.BOTTOM,
-                  icon: Icons.error,
-                  backgroundColor: Colors.blue[400]);
-              //  Navigator.of(context).pop(SIGN_IN);
-              //  print("Routing to Sign up screen");
-            },
-            child: CircleAvatar(
-              radius: 15,
-              backgroundImage: AssetImage("assets/images/googlelogo.png"),
-            ),
-          ),
-          SizedBox(
-            width: 20,
-          ),
-          GestureDetector(
-            onTap: () async {
-              EdgeAlert.show(context,
-                  title: 'Signup Failed',
-                  description: 'WE ADDING THIS FEATURE SOON',
-                  gravity: EdgeAlert.BOTTOM,
-                  icon: Icons.error,
-                  backgroundColor: Colors.blue[400]);
-              //  Navigator.of(context).pop(SIGN_IN);
-              //  print("Routing to Sign up screen");
-            },
-            child: CircleAvatar(
-              radius: 15,
-              backgroundImage: AssetImage("assets/images/fblogo.jpg"),
-            ),
-          ),
-          SizedBox(
-            width: 20,
-          ),
-          GestureDetector(
-            onTap: () async {
-              EdgeAlert.show(context,
-                  title: 'Signup Failed',
-                  description: 'WE ADDING THIS FEATURE SOON',
-                  gravity: EdgeAlert.BOTTOM,
-                  icon: Icons.error,
-                  backgroundColor: Colors.blue[400]);
-              // Navigator.of(context).pop(SIGN_IN);
-              //  print("Routing to Sign up screen");
-            },
-            child: CircleAvatar(
-              radius: 15,
-              backgroundImage: AssetImage("assets/images/twitterlogo.jpg"),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
+  // Widget socialIconsRow() {
+  //   return Container(
+  //     margin: EdgeInsets.only(top: _height / 80.0),
+  //     child: Row(
+  //       mainAxisSize: MainAxisSize.min,
+  //       children: <Widget>[
+  //         GestureDetector(
+  //           onTap: () async {
+  //             EdgeAlert.show(context,
+  //                 title: 'Signup Failed',
+  //                 description: 'WE ADDING THIS FEATURE SOON',
+  //                 gravity: EdgeAlert.BOTTOM,
+  //                 icon: Icons.error,
+  //                 backgroundColor: Colors.blue[400]);
+  //             //  Navigator.of(context).pop(SIGN_IN);
+  //             //  print("Routing to Sign up screen");
+  //           },
+  //           child: CircleAvatar(
+  //             radius: 15,
+  //             backgroundImage: AssetImage("assets/images/googlelogo.png"),
+  //           ),
+  //         ),
+  //         SizedBox(
+  //           width: 20,
+  //         ),
+  //         GestureDetector(
+  //           onTap: () async {
+  //             EdgeAlert.show(context,
+  //                 title: 'Signup Failed',
+  //                 description: 'WE ADDING THIS FEATURE SOON',
+  //                 gravity: EdgeAlert.BOTTOM,
+  //                 icon: Icons.error,
+  //                 backgroundColor: Colors.blue[400]);
+  //             //  Navigator.of(context).pop(SIGN_IN);
+  //             //  print("Routing to Sign up screen");
+  //           },
+  //           child: CircleAvatar(
+  //             radius: 15,
+  //             backgroundImage: AssetImage("assets/images/fblogo.jpg"),
+  //           ),
+  //         ),
+  //         SizedBox(
+  //           width: 20,
+  //         ),
+  //         GestureDetector(
+  //           onTap: () async {
+  //             EdgeAlert.show(context,
+  //                 title: 'Signup Failed',
+  //                 description: 'WE ADDING THIS FEATURE SOON',
+  //                 gravity: EdgeAlert.BOTTOM,
+  //                 icon: Icons.error,
+  //                 backgroundColor: Colors.blue[400]);
+  //             // Navigator.of(context).pop(SIGN_IN);
+  //             //  print("Routing to Sign up screen");
+  //           },
+  //           child: CircleAvatar(
+  //             radius: 15,
+  //             backgroundImage: AssetImage("assets/images/twitterlogo.jpg"),
+  //           ),
+  //         ),
+  //       ],
+  //     ),
+  //   );
+  // }
 
-  Widget signInTextRow() {
-    return Container(
-      margin: EdgeInsets.only(top: _height / 20.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Text(
-            "Already have an account?",
-            style: TextStyle(fontWeight: FontWeight.w400),
-          ),
-          SizedBox(
-            width: 5,
-          ),
-          GestureDetector(
-            onTap: () {
-              Navigator.of(context).pop(SIGN_IN);
-              print("Routing to Sign up screen");
-            },
-            child: Text(
-              "Sign in",
-              style: TextStyle(
-                  fontWeight: FontWeight.w800,
-                  color: Colors.blue[900],
-                  fontSize: 19),
-            ),
-          )
-        ],
-      ),
-    );
-  }
+  // Widget signInTextRow() {
+  //   return Container(
+  //     margin: EdgeInsets.only(top: _height / 20.0),
+  //     child: Row(
+  //       mainAxisAlignment: MainAxisAlignment.center,
+  //       children: <Widget>[
+  //         Text(
+  //           "Already have an account?",
+  //           style: TextStyle(fontWeight: FontWeight.w400),
+  //         ),
+  //         SizedBox(
+  //           width: 5,
+  //         ),
+  //         GestureDetector(
+  //           onTap: () {
+  //             Navigator.of(context).pop(SIGN_IN);
+  //             print("Routing to Sign up screen");
+  //           },
+  //           child: Text(
+  //             "Sign in",
+  //             style: TextStyle(
+  //                 fontWeight: FontWeight.w800,
+  //                 color: Colors.blue[900],
+  //                 fontSize: 19),
+  //           ),
+  //         )
+  //       ],
+  //     ),
+  //   );
+  // }
 
   Widget button() {
     return RaisedButton(
@@ -464,8 +487,10 @@ class _SignUpScreenState extends State<JobDetials> {
       onPressed: () async {
         if (jobname != null &&
             // _password != null &&
-            location != null &&
-            checkBoxValue == true) {
+            location != null)
+            //  &&
+            // checkBoxValue == true)
+             {
           setState(() {
             signingup = true;
           });
@@ -478,7 +503,7 @@ class _SignUpScreenState extends State<JobDetials> {
             // if (newUser != null) {
               firestore
                   .collection("Job Details")
-                  .add({"Job": jobname, "Location": location, "Vacancy": vacancy}).then(
+                  .add({"Job": jobname,"Salary": salary, "Location": location, "Vacancy": vacancy}).then(
                       (value) {
                 print(value.id);
               });
@@ -510,8 +535,8 @@ class _SignUpScreenState extends State<JobDetials> {
         } else {
           EdgeAlert.show(context,
               title: 'Signup Failed',
-              description:
-                  'All fields are required. Accept all terms and conditions',
+              // description:
+              //     'All fields are required. Accept all terms and conditions',
               gravity: EdgeAlert.BOTTOM,
               icon: Icons.error,
               backgroundColor: Colors.blue[400]);
