@@ -1,6 +1,7 @@
 import 'dart:ui' as ui;
+import 'package:dsc/ui/applynow.dart';
 import 'package:flutter/material.dart';
-import 'contactus.dart';
+
 
 class Job extends StatefulWidget {
   @override
@@ -11,19 +12,19 @@ class _JobState extends State<Job> {
   final double _borderRadius = 24;
   var items = [
     PlaceInfo("Amul Parlor", Color(0xff6DC8F3), Color(0xff73A1F9),
-        "Available 15", "600/week", "near sbi,vvn", Contact()),
+        "Available 15", "600/week", "near sbi,vvn", Apply()),
     PlaceInfo("Biryani", Color(0xff6DC8F3), Color(0xff73A1F9), "Available 25",
-        "550/week", "near icici atm,vdn", Contact()),
+        "550/week", "near icici atm,vdn", Apply()),
     PlaceInfo("Green chilly", Color(0xff6DC8F3), Color(0xff73A1F9),
-        "Available 15", "500/week", "near icici atm,vdn", Contact()),
+        "Available 15", "500/week", "near icici atm,vdn", Apply()),
     PlaceInfo("Sandwich", Color(0xff6DC8F3), Color(0xff73A1F9), "Available 15",
-        "450/week", "near icici atm,vdn", Contact()),
+        "450/week", "near icici atm,vdn", Apply()),
     PlaceInfo("Sandwich", Color(0xff6DC8F3), Color(0xff73A1F9), "Available 5",
-        "500/week", "near icici atm,vdn", Contact()),
+        "500/week", "near icici atm,vdn", Apply()),
     PlaceInfo("Pizza", Color(0xff6DC8F3), Color(0xff73A1F9), "Available 5",
-        "400/week", "near icici atm,vdn", Contact()),
+        "400/week", "near icici atm,vdn", Apply()),
     PlaceInfo("Pasta", Color(0xff6DC8F3), Color(0xff73A1F9), "Available 5",
-        "350/week", "near icici atm,vdn", Contact()),
+        "350/week", "near icici atm,vdn", Apply()),
   ];
   @override
   Widget build(BuildContext context) {

@@ -1,8 +1,11 @@
+import 'package:dsc/ui/applynow.dart';
 import 'package:dsc/ui/contactus.dart';
+
 import 'package:dsc/ui/job.dart';
 import 'package:dsc/ui/jobdetails.dart';
 import 'package:dsc/ui/signin.dart';
 import 'package:dsc/ui/signup.dart';
+import 'package:dsc/ui/widgets/profile.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -165,7 +168,7 @@ class _DashboardState extends State<Dashboard> {
                               height: 128,
                             ),
                             Text(
-                              'Application Status',
+                              'Shops',
                               style: cardTextStyle,
                             )
                           ],
@@ -177,7 +180,7 @@ class _DashboardState extends State<Dashboard> {
                         onPressed: () {
                           Navigator.of(context).pushAndRemoveUntil(
                               MaterialPageRoute(
-                                  builder: (BuildContext context) => Contact()),
+                                  builder: (BuildContext context) => Profile()),
                               (Route<dynamic> route) => false);
                         },
                         shape: RoundedRectangleBorder(
@@ -190,7 +193,7 @@ class _DashboardState extends State<Dashboard> {
                               height: 128,
                             ),
                             Text(
-                              'Contact US',
+                              'Profile',
                               style: cardTextStyle,
                             ),
                           ],
@@ -229,7 +232,7 @@ class _DashboardState extends State<Dashboard> {
                           Navigator.of(context).pushAndRemoveUntil(
                               MaterialPageRoute(
                                   builder: (BuildContext context) =>
-                                      SignUpScreen()),
+                                      Contact()),
                               (Route<dynamic> route) => false);
                         },
                         shape: RoundedRectangleBorder(
@@ -242,7 +245,7 @@ class _DashboardState extends State<Dashboard> {
                               height: 128,
                             ),
                             Text(
-                              'Random',
+                              'Contact',
                               style: cardTextStyle,
                             )
                           ],
