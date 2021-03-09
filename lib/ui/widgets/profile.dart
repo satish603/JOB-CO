@@ -12,6 +12,7 @@ class _ProfileState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      
         body:
             profile() // This trailing comma makes auto-formatting nicer for build methods.
         );

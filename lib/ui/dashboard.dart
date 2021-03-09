@@ -122,11 +122,10 @@ class _DashboardState extends State<Dashboard> {
                       elevation: 20,
                       child: FlatButton(
                         onPressed: () {
-                          Navigator.of(context).pushAndRemoveUntil(
-                              MaterialPageRoute(
-                                  builder: (BuildContext context) =>
-                                      SignUpScreen()),
-                              (Route<dynamic> route) => false);
+                          Navigator.push(
+                              context,
+                              new MaterialPageRoute(
+                                  builder: (context) => SignUpScreen()));
                         },
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8)),
@@ -152,12 +151,11 @@ class _DashboardState extends State<Dashboard> {
                     Card(
                       child: FlatButton(
                         onPressed: () {
-                          Navigator.of(context).pushAndRemoveUntil(
-                              MaterialPageRoute(
-                                  builder: (BuildContext context) =>
-                                      Job()),
-                              (Route<dynamic> route) => false);
-                        },
+                          Navigator.push(
+                              context,
+                              new MaterialPageRoute(
+                                  builder: (context) => Job()));
+                                               },
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8)),
                         child: Column(
@@ -178,11 +176,11 @@ class _DashboardState extends State<Dashboard> {
                     Card(
                       child: FlatButton(
                         onPressed: () {
-                          Navigator.of(context).pushAndRemoveUntil(
-                              MaterialPageRoute(
-                                  builder: (BuildContext context) => Profile()),
-                              (Route<dynamic> route) => false);
-                        },
+                          Navigator.push(
+                              context,
+                              new MaterialPageRoute(
+                                  builder: (context) => Profile()));
+                                               },
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8)),
                         child: Column(
@@ -203,12 +201,11 @@ class _DashboardState extends State<Dashboard> {
                     Card(
                       child: FlatButton(
                         onPressed: () {
-                          Navigator.of(context).pushAndRemoveUntil(
-                              MaterialPageRoute(
-                                  builder: (BuildContext context) => JobDetials()),
-                                      
-                              (Route<dynamic> route) => false);
-                        },
+                          Navigator.push(
+                              context,
+                              new MaterialPageRoute(
+                                  builder: (context) => JobDetials()));
+                                               },
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8)),
                         child: Column(
@@ -229,12 +226,11 @@ class _DashboardState extends State<Dashboard> {
                     Card(
                       child: FlatButton(
                         onPressed: () {
-                          Navigator.of(context).pushAndRemoveUntil(
-                              MaterialPageRoute(
-                                  builder: (BuildContext context) =>
-                                      Contact()),
-                              (Route<dynamic> route) => false);
-                        },
+                        Navigator.push(
+                              context,
+                              new MaterialPageRoute(
+                                  builder: (context) => Contact()));
+                           },
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8)),
                         child: Column(
@@ -255,12 +251,11 @@ class _DashboardState extends State<Dashboard> {
                     Card(
                       child: FlatButton(
                         onPressed: () {
-                          Navigator.of(context).pushAndRemoveUntil(
-                              MaterialPageRoute(
-                                  builder: (BuildContext context) =>
-                                      SignUpScreen()),
-                              (Route<dynamic> route) => false);
-                        },
+                          Navigator.push(
+                              context,
+                              new MaterialPageRoute(
+                                  builder: (context) => SignUpScreen()));
+                                    },
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8)),
                         child: Column(

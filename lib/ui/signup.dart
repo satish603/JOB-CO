@@ -564,8 +564,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
               // updateUser.phoneNumber;
               //await newUser.user.updateProfile(info);
 
-              Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(builder: (context) => Dashboard()));
+              Navigator.push(context,
+                  new MaterialPageRoute(builder: (context) => Dashboard()));
             }
           } catch (e) {
             setState(() {
