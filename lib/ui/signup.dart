@@ -159,7 +159,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
             child: Column(
               children: <Widget>[
                 Opacity(opacity: 0.88, child: CustomAppBar()),
-                //clipShape(),
+                clipShape(),
                 form(),
                 acceptTermsTextRow(),
                 SizedBox(
@@ -177,7 +177,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
     );
   }
 
- /* Widget clipShape() {
+  Widget clipShape() {
     return Stack(
       children: <Widget>[
         Opacity(
@@ -226,7 +226,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
             color: Colors.white,
             shape: BoxShape.circle,
           ),
-          /*child: GestureDetector(
+          child: GestureDetector(
               onTap: () async {
                 PickedFile file =
                     await ImagePicker().getImage(source: ImageSource.gallery);
@@ -264,7 +264,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
 //        ),
       ],
     );
-  }*/*/
+  }
 
   Widget form() {
     return Container(
@@ -547,12 +547,25 @@ class _SignUpScreenState extends State<SignUpScreen> {
             //   FirebaseFirestore.instance.collection("users").doc("collection").set(data);
 
             if (newUser != null) {
-              firestore
-                  .collection("users")
-                  .add({"name": name, "email": _email, "contact": phnum}).then(
-                      (value) {
+              final User user = auth.currentUser;
+              final uid = user.uid;
+              /* firestore.collection("users").add({
+                "name": name,
+                "email": _email,
+                "contact": phnum,
+                "uid": uid
+              }).then((value) {
                 print(value.id);
+                print(uid);
+              });*/
+              firestore.collection("users").doc('$uid').set({
+                "name": name,
+                "email": _email,
+                "contact": phnum,
+                "uid": uid
               });
+              // .doc("collection")
+              // .set(data);
               // .collection("users")
               // .doc("collection")
               // .set(data);
