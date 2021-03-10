@@ -1,6 +1,11 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:dsc/ui/widgets/textformfield.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:path/path.dart' as Path;
 
 class Profile extends StatefulWidget {
   Profile({Key key}) : super(key: key);
@@ -11,11 +16,14 @@ class Profile extends StatefulWidget {
 
 class _ProfileState extends State<Profile> {
   final _controller = TextEditingController();
+
   final _controller1 = TextEditingController();
   final _controller2 = TextEditingController();
   String name = '';
   String email = '';
   String number = '';
+  File _image;
+  String _uploadedFileURL;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,6 +31,22 @@ class _ProfileState extends State<Profile> {
             profile() // This trailing comma makes auto-formatting nicer for build methods.
         );
   }
+ /* Future chooseFile() async{
+                        await ImagePicker.pickImage(source: ImageSource.gallery).then((image){
+                          setState((){_image=image;});
+                        });
+                      }
+Future uploadFile() async{
+  StorageReference storageReference= FirebaseStorage.instance.ref()
+  .child('Path(_image.path)');
+StorageUploadTask uploadTask= storageRefence.putFile(_image);
+awaituploadTask.onComplete;
+print('File Uploaded');
+StorageReference.getDownloadURL().then((fileURL){
+
+                          setState((){_uploadedFileURL=fileURL;});
+                        });
+                      }*/
 
   Widget profile() {
     return Column(
@@ -42,6 +66,7 @@ class _ProfileState extends State<Profile> {
           padding: const EdgeInsets.fromLTRB(0, 0, 0, 50),
           child: Stack(
             children: <Widget>[
+              
               CircleAvatar(
                 radius: 70,
                 child: ClipOval(
@@ -50,23 +75,38 @@ class _ProfileState extends State<Profile> {
                   height: 140,
                   width: 140,
                   fit: BoxFit.cover,
+                  
                 )),
               ),
-              Positioned(
+              /*RaisedButton(onPressed: chooseFile,child:  Icon(
+                      Icons.add_a_photo,
+                      
+                      color: Colors.white,)),
+                      RaisedButton(onPressed: uploadFile,child: Icon(Icons.update, color: Colors.white,),),
+                      _uploadedFileURL!=null
+                      ? Image.network(_uploadedFileURL,height:140)*/
+                      
+             /* Positioned(
                   bottom: 1,
                   right: 1,
                   child: Container(
+                 
+
                     height: 35,
                     width: 35,
                     child: Icon(
                       Icons.add_a_photo,
+                      
                       color: Colors.white,
                     ),
+                   
                     decoration: BoxDecoration(
                         color: Colors.deepOrange,
                         borderRadius: BorderRadius.all(Radius.circular(20))),
-                  ))
+                  ))*/
+                  
             ],
+
           ),
         ),
         Expanded(
