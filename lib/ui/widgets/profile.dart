@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+
 class Profile extends StatefulWidget {
   Profile({Key key}) : super(key: key);
 
@@ -9,17 +10,26 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
+  final _controller = TextEditingController();
+  final _controller1 = TextEditingController();
+  final _controller2 = TextEditingController();
+  String name = '';
+  String email = '';
+  String number = '';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       
         body:
+        
             profile() // This trailing comma makes auto-formatting nicer for build methods.
         );
   }
 
   Widget profile() {
+    
     return Column(
+      
       children: <Widget>[
         Padding(
           padding: EdgeInsets.fromLTRB(30, 50, 30, 30),
@@ -71,26 +81,30 @@ class _ProfileState extends State<Profile> {
               gradient: LinearGradient(
                   begin: Alignment.topRight,
                   end: Alignment.bottomLeft,
-                  colors: [Colors.black54, Color.fromRGBO(0, 41, 102, 1)])),
+                  colors: [Colors.lightBlueAccent, Color.fromRGBO(0, 41, 102, 1)])),
           child: Column(
             children: <Widget>[
+             Theme(data: new ThemeData(hintColor:Colors.white),child: TextField(),),
               Padding(
+                
                 padding: const EdgeInsets.fromLTRB(20, 25, 20, 4),
                 child: Container(
                   height: 50,
                   child: Align(
                     alignment: Alignment.centerLeft,
                     child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child:
-                          Text('Name', style: TextStyle(color: Colors.white70)),
-                    ),
+                        padding: const EdgeInsets.all(8.0),
+                        child: TextField(
+                          style:TextStyle(color: Colors.white),
+                            controller: _controller,
+                            decoration: InputDecoration(hintText: "Name",hintStyle: TextStyle(color:Colors.white)))),
                   ),
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.all(Radius.circular(20)),
                       border: Border.all(width: 1.0, color: Colors.white70)),
                 ),
               ),
+              Text(email),
               Padding(
                 padding: const EdgeInsets.fromLTRB(20, 5, 20, 4),
                 child: Container(
@@ -99,8 +113,11 @@ class _ProfileState extends State<Profile> {
                     alignment: Alignment.centerLeft,
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Text('Email',
-                          style: TextStyle(color: Colors.white70)),
+                      child: TextField(
+                        readOnly: true,
+                        style:TextStyle(color: Colors.white),
+                          controller: _controller1,
+                          decoration: InputDecoration(hintText: "abc@gmail.com",hintStyle: TextStyle(color:Colors.redAccent))),
                     ),
                   ),
                   decoration: BoxDecoration(
@@ -108,6 +125,7 @@ class _ProfileState extends State<Profile> {
                       border: Border.all(width: 1.0, color: Colors.white70)),
                 ),
               ),
+              Text(number),
               Padding(
                 padding: const EdgeInsets.fromLTRB(20, 5, 20, 4),
                 child: Container(
@@ -115,10 +133,13 @@ class _ProfileState extends State<Profile> {
                   child: Align(
                     alignment: Alignment.centerLeft,
                     child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text('Phone number',
-                          style: TextStyle(color: Colors.white70)),
-                    ),
+                        padding: const EdgeInsets.all(8.0),
+                        
+                        child: TextField(
+                          style:TextStyle(color: Colors.white),
+                            controller: _controller2,
+                            decoration:
+                                InputDecoration(hintText: "Phone Number",hintStyle: TextStyle(color:Colors.white))))
                   ),
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.all(Radius.circular(18)),
