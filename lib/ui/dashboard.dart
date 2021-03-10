@@ -5,7 +5,7 @@ import 'package:dsc/ui/job.dart';
 import 'package:dsc/ui/jobdetails.dart';
 import 'package:dsc/ui/signin.dart';
 import 'package:dsc/ui/signup.dart';
-import 'package:dsc/ui/widgets/profile.dart';
+import 'package:dsc/ui/profile.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -155,7 +155,7 @@ class _DashboardState extends State<Dashboard> {
                               context,
                               new MaterialPageRoute(
                                   builder: (context) => Job()));
-                                               },
+                        },
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8)),
                         child: Column(
@@ -180,7 +180,7 @@ class _DashboardState extends State<Dashboard> {
                               context,
                               new MaterialPageRoute(
                                   builder: (context) => Profile()));
-                                               },
+                        },
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8)),
                         child: Column(
@@ -205,7 +205,7 @@ class _DashboardState extends State<Dashboard> {
                               context,
                               new MaterialPageRoute(
                                   builder: (context) => JobDetials()));
-                                               },
+                        },
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8)),
                         child: Column(
@@ -226,11 +226,11 @@ class _DashboardState extends State<Dashboard> {
                     Card(
                       child: FlatButton(
                         onPressed: () {
-                        Navigator.push(
+                          Navigator.push(
                               context,
                               new MaterialPageRoute(
                                   builder: (context) => Contact()));
-                           },
+                        },
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8)),
                         child: Column(
@@ -255,7 +255,7 @@ class _DashboardState extends State<Dashboard> {
                               context,
                               new MaterialPageRoute(
                                   builder: (context) => SignUpScreen()));
-                                    },
+                        },
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8)),
                         child: Column(

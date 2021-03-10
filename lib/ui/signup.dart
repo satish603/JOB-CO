@@ -547,12 +547,25 @@ class _SignUpScreenState extends State<SignUpScreen> {
             //   FirebaseFirestore.instance.collection("users").doc("collection").set(data);
 
             if (newUser != null) {
-              firestore
-                  .collection("users")
-                  .add({"name": name, "email": _email, "contact": phnum}).then(
-                      (value) {
+              final User user = auth.currentUser;
+              final uid = user.uid;
+              /* firestore.collection("users").add({
+                "name": name,
+                "email": _email,
+                "contact": phnum,
+                "uid": uid
+              }).then((value) {
                 print(value.id);
+                print(uid);
+              });*/
+              firestore.collection("users").doc('$uid').set({
+                "name": name,
+                "email": _email,
+                "contact": phnum,
+                "uid": uid
               });
+              // .doc("collection")
+              // .set(data);
               // .collection("users")
               // .doc("collection")
               // .set(data);

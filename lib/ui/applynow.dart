@@ -60,7 +60,7 @@ class _ApplyState extends State<Apply> {
             gradient: LinearGradient(
               begin: Alignment.topRight,
               end: Alignment.bottomLeft,
-              colors: [Colors.black54, Color.fromRGBO(0, 42, 103, 1)]
+              colors: [Colors.lightBlueAccent, Color.fromRGBO(0, 42, 103, 1)]
             )
           ),
           child: Column(

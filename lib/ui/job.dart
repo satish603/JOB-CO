@@ -2,7 +2,6 @@ import 'dart:ui' as ui;
 import 'package:dsc/ui/applynow.dart';
 import 'package:flutter/material.dart';
 
-
 class Job extends StatefulWidget {
   @override
   _JobState createState() => _JobState();
@@ -107,11 +106,12 @@ class _JobState extends State<Job> {
                                   ),
                                   FlatButton(
                                     onPressed: () {
-                                      Navigator.of(context).pushAndRemoveUntil(
-                                          MaterialPageRoute(
-                                              builder: (BuildContext context) =>
-                                                  items[index].but),
-                                          (Route<dynamic> route) => false);
+                                      Navigator.push(
+                                        context,
+                                        new MaterialPageRoute(
+                                            builder: (context) =>
+                                                items[index].but),
+                                      );
                                     },
                                   )
                                 ])

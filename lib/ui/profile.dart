@@ -1,5 +1,11 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:dsc/ui/widgets/textformfield.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:path/path.dart' as Path;
 
 class Profile extends StatefulWidget {
   Profile({Key key}) : super(key: key);
@@ -9,14 +15,38 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
+  final _controller = TextEditingController();
+
+  final _controller1 = TextEditingController();
+  final _controller2 = TextEditingController();
+  String name = '';
+  String email = '';
+  String number = '';
+  File _image;
+  String _uploadedFileURL;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
         body:
             profile() // This trailing comma makes auto-formatting nicer for build methods.
         );
   }
+ /* Future chooseFile() async{
+                        await ImagePicker.pickImage(source: ImageSource.gallery).then((image){
+                          setState((){_image=image;});
+                        });
+                      }
+Future uploadFile() async{
+  StorageReference storageReference= FirebaseStorage.instance.ref()
+  .child('Path(_image.path)');
+StorageUploadTask uploadTask= storageRefence.putFile(_image);
+awaituploadTask.onComplete;
+print('File Uploaded');
+StorageReference.getDownloadURL().then((fileURL){
+
+                          setState((){_uploadedFileURL=fileURL;});
+                        });
+                      }*/
 
   Widget profile() {
     return Column(
@@ -36,6 +66,7 @@ class _ProfileState extends State<Profile> {
           padding: const EdgeInsets.fromLTRB(0, 0, 0, 50),
           child: Stack(
             children: <Widget>[
+              
               CircleAvatar(
                 radius: 70,
                 child: ClipOval(
@@ -44,23 +75,38 @@ class _ProfileState extends State<Profile> {
                   height: 140,
                   width: 140,
                   fit: BoxFit.cover,
+                  
                 )),
               ),
-              Positioned(
+              /*RaisedButton(onPressed: chooseFile,child:  Icon(
+                      Icons.add_a_photo,
+                      
+                      color: Colors.white,)),
+                      RaisedButton(onPressed: uploadFile,child: Icon(Icons.update, color: Colors.white,),),
+                      _uploadedFileURL!=null
+                      ? Image.network(_uploadedFileURL,height:140)*/
+                      
+             /* Positioned(
                   bottom: 1,
                   right: 1,
                   child: Container(
+                 
+
                     height: 35,
                     width: 35,
                     child: Icon(
                       Icons.add_a_photo,
+                      
                       color: Colors.white,
                     ),
+                   
                     decoration: BoxDecoration(
                         color: Colors.deepOrange,
                         borderRadius: BorderRadius.all(Radius.circular(20))),
-                  ))
+                  ))*/
+                  
             ],
+
           ),
         ),
         Expanded(
@@ -71,58 +117,70 @@ class _ProfileState extends State<Profile> {
               gradient: LinearGradient(
                   begin: Alignment.topRight,
                   end: Alignment.bottomLeft,
-                  colors: [Colors.black54, Color.fromRGBO(0, 41, 102, 1)])),
+                  colors: [
+                    Colors.lightBlueAccent,
+                    Color.fromRGBO(0, 41, 102, 1)
+                  ])),
           child: Column(
             children: <Widget>[
+              Theme(
+                data: new ThemeData(hintColor: Colors.white),
+                child: TextField(),
+              ),
               Padding(
                 padding: const EdgeInsets.fromLTRB(20, 25, 20, 4),
                 child: Container(
                   height: 50,
                   child: Align(
                     alignment: Alignment.centerLeft,
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child:
-                          Text('Name', style: TextStyle(color: Colors.white70)),
-                    ),
+                    child: CustomTextField(
+                        keyboardType: TextInputType.emailAddress,
+                        icon: Icons.email,
+                        hint: "Email ID",
+                        userTyped: (val) {
+                          //  _email = val;
+                        }
+                        //controller: email,
+                        ),
                   ),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(20)),
-                      border: Border.all(width: 1.0, color: Colors.white70)),
                 ),
               ),
+              Text(email),
               Padding(
-                padding: const EdgeInsets.fromLTRB(20, 5, 20, 4),
+                padding: const EdgeInsets.fromLTRB(20, 25, 20, 4),
                 child: Container(
                   height: 50,
                   child: Align(
                     alignment: Alignment.centerLeft,
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text('Email',
-                          style: TextStyle(color: Colors.white70)),
+                    child: CustomTextField(
+                      keyboardType: TextInputType.text,
+                      icon: Icons.person,
+                      hint: "Full Name",
+                      userTyped: (val) {
+                        name = val;
+                      },
+                      // controller: name,
                     ),
                   ),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(20)),
-                      border: Border.all(width: 1.0, color: Colors.white70)),
                 ),
               ),
+              Text(number),
               Padding(
-                padding: const EdgeInsets.fromLTRB(20, 5, 20, 4),
+                padding: const EdgeInsets.fromLTRB(20, 25, 20, 4),
                 child: Container(
                   height: 50,
                   child: Align(
                     alignment: Alignment.centerLeft,
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text('Phone number',
-                          style: TextStyle(color: Colors.white70)),
+                    child: CustomTextField(
+                      keyboardType: TextInputType.number,
+                      icon: Icons.phone,
+                      hint: "Phone Number",
+                      userTyped: (val) {
+                        // phnum = val;
+                      },
+                      // controller: phnum,
                     ),
                   ),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(18)),
-                      border: Border.all(width: 1.0, color: Colors.white70)),
                 ),
               ),
               Expanded(
