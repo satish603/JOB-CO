@@ -307,7 +307,7 @@ class _ProfileState extends State<Profile> {
               // "email": _email,
               "contact": phnum,
               "uid": uid,
-              "photo": "gs://dscsolution-80cbc.appspot.com/User image/$uid.jpg"
+              "photo": "gs://dscsolution-80cbc.appspot.com/User_image/$uid.jpg"
             }, SetOptions(merge: true));
             // .doc("collection")
             // .set(data);
