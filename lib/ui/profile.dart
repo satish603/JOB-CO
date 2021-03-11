@@ -1,6 +1,11 @@
-import 'dart:io' as io;
+import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dsc/ui/dashboard.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:dsc/ui/widgets/custom_shape.dart';
+import 'package:dsc/ui/widgets/customappbar.dart';
+import 'package:dsc/ui/widgets/responsive_ui.dart';
+import 'package:edge_alert/edge_alert.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -8,7 +13,7 @@ import 'package:dsc/ui/widgets/textformfield.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path/path.dart' as Path;
-import 'package:firebase_core/firebase_core.dart' as firebase_core;
+import 'dart:io' as io;
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 
 class Profile extends StatefulWidget {
@@ -18,31 +23,40 @@ class Profile extends StatefulWidget {
   _ProfileState createState() => _ProfileState();
 }
 
-enum UploadType {
-  file,
-}
-
 class _ProfileState extends State<Profile> {
   List<firebase_storage.UploadTask> _uploadTasks = [];
-  String number = "", name = "", email = "";
+  bool checkBoxValue = false;
+  double _height;
+  double _width;
+  double _pixelRatio;
+  bool _large;
+  bool _medium;
+  bool signingup = false;
+  // var name, email, photoUrl, uid, emailVerified, phnum;
+  String _email, name, phnum;
+
   final auth = FirebaseAuth.instance;
   final firestore = FirebaseFirestore.instance;
   Future<firebase_storage.UploadTask> uploadFile(PickedFile file) async {
     if (file == null) {
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-        content: Text('No file was selected'),
-      ));
+      EdgeAlert.show(context,
+          title: 'No file was selected',
+          description: "Please select image to upload",
+          gravity: EdgeAlert.BOTTOM,
+          icon: Icons.error,
+          backgroundColor: Colors.blue[400]);
+
       return null;
     }
 
     firebase_storage.UploadTask uploadTask;
+    final User user = auth.currentUser;
+    final uid = user.uid;
 
     // Create a Reference to the file
-    final User user = auth.currentUser; //new
-    final uid = user.uid; //new
     firebase_storage.Reference ref = firebase_storage.FirebaseStorage.instance
         .ref()
-        .child('User image')
+        .child('User_image')
         .child('/$uid.jpg');
 
     final metadata = firebase_storage.SettableMetadata(
@@ -58,18 +72,6 @@ class _ProfileState extends State<Profile> {
     return Future.value(uploadTask);
   }
 
-  /// Handles the user pressing the PopupMenuItem item.
-  /* Future<void> handleUploadType(UploadType type) async {
-        PickedFile file =
-            await ImagePicker().getImage(source: ImageSource.gallery);
-        firebase_storage.UploadTask task = await uploadFile(file);
-        if (task != null) {
-          setState(() {
-            _uploadTasks = [..._uploadTasks, task];
-          });
-        }
-  }*/ //////not in use right now
-
   void _removeTaskAtIndex(int index) {
     setState(() {
       _uploadTasks = _uploadTasks..removeAt(index);
@@ -78,57 +80,87 @@ class _ProfileState extends State<Profile> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body:
-            profile() // This trailing comma makes auto-formatting nicer for build methods.
-        );
-  }
-  /* Future chooseFile() async{
-                        await ImagePicker.pickImage(source: ImageSource.gallery).then((image){
-                          setState((){_image=image;});
-                        });
-                      }
-Future uploadFile() async{
-  StorageReference storageReference= FirebaseStorage.instance.ref()
-  .child('Path(_image.path)');
-StorageUploadTask uploadTask= storageRefence.putFile(_image);
-awaituploadTask.onComplete;
-print('File Uploaded');
-StorageReference.getDownloadURL().then((fileURL){
+    _height = MediaQuery.of(context).size.height;
+    _width = MediaQuery.of(context).size.width;
+    _pixelRatio = MediaQuery.of(context).devicePixelRatio;
+    _large = ResponsiveWidget.isScreenLarge(_width, _pixelRatio);
+    _medium = ResponsiveWidget.isScreenMedium(_width, _pixelRatio);
 
-                          setState((){_uploadedFileURL=fileURL;});
-                        });
-                      }*/
-
-  Widget profile() {
-    return Column(
-      children: <Widget>[
-        Padding(
-          padding: EdgeInsets.fromLTRB(30, 50, 30, 30),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              Text('Profile ',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-              Container(height: 24, width: 24)
-            ],
+    return Material(
+      child: Scaffold(
+        body: Container(
+          height: _height,
+          width: _width,
+          margin: EdgeInsets.only(bottom: 5),
+          child: SingleChildScrollView(
+            child: Column(
+              children: <Widget>[
+                Opacity(opacity: 0.88, child: CustomAppBar()),
+                clipShape(),
+                form(),
+                SizedBox(
+                  height: _height / 35,
+                ),
+                button(),
+              ],
+            ),
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.fromLTRB(0, 0, 0, 50),
-          child: Stack(
-            children: <Widget>[
-              CircleAvatar(
-                radius: 70,
-                child: ClipOval(
-                    child: Image.asset(
-                  'assets/images/download.jpg',
-                  height: 140,
-                  width: 140,
-                  fit: BoxFit.cover,
-                )),
+      ),
+    );
+  }
+
+  Widget clipShape() {
+    return Stack(
+      children: <Widget>[
+        Opacity(
+          opacity: 0.75,
+          child: ClipPath(
+            clipper: CustomShapeClipper(),
+            child: Container(
+              height: _large
+                  ? _height / 8
+                  : (_medium ? _height / 7 : _height / 6.5),
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [Colors.blue[200], Colors.yellowAccent],
+                ),
               ),
-              GestureDetector(onTap: () async {
+            ),
+          ),
+        ),
+        Opacity(
+          opacity: 0.5,
+          child: ClipPath(
+            clipper: CustomShapeClipper2(),
+            child: Container(
+              height: _large
+                  ? _height / 12
+                  : (_medium ? _height / 11 : _height / 10),
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [Colors.blue[200], Colors.yellowAccent],
+                ),
+              ),
+            ),
+          ),
+        ),
+        Container(
+          height: _height / 5.5,
+          alignment: Alignment.center,
+          decoration: BoxDecoration(
+            boxShadow: [
+              BoxShadow(
+                  spreadRadius: 0.0,
+                  color: Colors.black26,
+                  offset: Offset(1.0, 10.0),
+                  blurRadius: 20.0),
+            ],
+            color: Colors.white,
+            shape: BoxShape.circle,
+          ),
+          child: GestureDetector(
+              onTap: () async {
                 PickedFile file =
                     await ImagePicker().getImage(source: ImageSource.gallery);
                 firebase_storage.UploadTask task = await uploadFile(file);
@@ -138,127 +170,201 @@ StorageReference.getDownloadURL().then((fileURL){
                   });
                 }
                 print('Adding photo');
-              })
-
-              /* Positioned(
-                  bottom: 1,
-                  right: 1,
-                  child: Container(
-                 
-
-                    height: 35,
-                    width: 35,
-                    child: Icon(
-                      Icons.add_a_photo,
-                      
-                      color: Colors.white,
-                    ),
-                   
-                    decoration: BoxDecoration(
-                        color: Colors.deepOrange,
-                        borderRadius: BorderRadius.all(Radius.circular(20))),
-                  ))*/
-            ],
-          ),
+              },
+              child: Icon(
+                Icons.add_a_photo,
+                size: _large ? 40 : (_medium ? 33 : 31),
+                color: Colors.blue[900],
+              )),
         ),
-        Expanded(
-            child: Container(
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(30), topRight: Radius.circular(30)),
-              gradient: LinearGradient(
-                  begin: Alignment.topRight,
-                  end: Alignment.bottomLeft,
-                  colors: [
-                    Colors.lightBlueAccent,
-                    Color.fromRGBO(0, 41, 102, 1)
-                  ])),
-          child: Column(
-            children: <Widget>[
-              Theme(
-                data: new ThemeData(hintColor: Colors.white),
-                child: TextField(),
-              ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(20, 25, 20, 4),
-                child: Container(
-                  height: 50,
-                  child: Align(
-                    alignment: Alignment.centerLeft,
-                    child: CustomTextField(
-                        keyboardType: TextInputType.emailAddress,
-                        icon: Icons.email,
-                        hint: "Email ID",
-                        userTyped: (val) {
-                          //  _email = val;
-                        }
-                        //controller: email,
-                        ),
-                  ),
-                ),
-              ),
-              Text(email),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(20, 25, 20, 4),
-                child: Container(
-                  height: 50,
-                  child: Align(
-                    alignment: Alignment.centerLeft,
-                    child: CustomTextField(
-                      keyboardType: TextInputType.text,
-                      icon: Icons.person,
-                      hint: "Full Name",
-                      userTyped: (val) {
-                        name = val;
-                      },
-                      // controller: name,
-                    ),
-                  ),
-                ),
-              ),
-              Text(number),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(20, 25, 20, 4),
-                child: Container(
-                  height: 50,
-                  child: Align(
-                    alignment: Alignment.centerLeft,
-                    child: CustomTextField(
-                      keyboardType: TextInputType.number,
-                      icon: Icons.phone,
-                      hint: "Phone Number",
-                      userTyped: (val) {
-                        // phnum = val;
-                      },
-                      // controller: phnum,
-                    ),
-                  ),
-                ),
-              ),
-              Expanded(
-                child: Align(
-                  alignment: Alignment.bottomCenter,
-                  child: Container(
-                    height: 50,
-                    width: 200,
-                    child: Align(
-                        child: Text('Save now',
-                            style: TextStyle(
-                                color: Colors.white70, fontSize: 20))),
-                    decoration: BoxDecoration(
-                        color: Colors.deepOrange,
-                        borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(30),
-                            bottomLeft: Radius.circular(30),
-                            bottomRight: Radius.circular(30),
-                            topRight: Radius.circular(30))),
-                  ),
-                ),
-              )
-            ],
-          ),
-        ))
       ],
     );
   }
-}
+
+  Widget form() {
+    return Container(
+      margin: EdgeInsets.only(
+          left: _width / 12.0, right: _width / 12.0, top: _height / 20.0),
+      child: Form(
+        child: Column(
+          children: <Widget>[
+            firstNameTextFormField(),
+            SizedBox(height: _height / 60.0),
+            emailTextFormField(),
+            SizedBox(height: _height / 60.0),
+            phoneTextFormField(),
+            SizedBox(height: _height / 60.0),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget firstNameTextFormField() {
+    return CustomTextField(
+      keyboardType: TextInputType.text,
+      icon: Icons.person,
+      hint: "Full Name",
+      userTyped: (val) {
+        name = val;
+      },
+    );
+  }
+
+  Widget emailTextFormField() {
+    return CustomTextField(
+        keyboardType: TextInputType.emailAddress,
+        icon: Icons.email,
+        hint: "Email ID",
+        userTyped: (val) {
+          _email = val;
+        });
+  }
+
+  Widget phoneTextFormField() {
+    return CustomTextField(
+      keyboardType: TextInputType.number,
+      icon: Icons.phone,
+      hint: "Contact No",
+      userTyped: (val) {
+        phnum = val;
+      },
+    );
+  }
+
+  Widget acceptTermsTextRow() {
+    return Container(
+      margin: EdgeInsets.only(top: _height / 100.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Checkbox(
+              activeColor: Colors.blue[400],
+              value: checkBoxValue,
+              onChanged: (bool newValue) {
+                setState(() {
+                  checkBoxValue = newValue;
+                });
+              }),
+          Text(
+            "I accept all terms and conditions",
+            style: TextStyle(
+                fontWeight: FontWeight.w600,
+                fontSize: _large ? 12 : (_medium ? 13 : 10)),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget infoTextRow() {
+    return Container(
+      margin: EdgeInsets.only(top: _height / 40.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Text(
+            "Or create using social media",
+            style: TextStyle(
+                fontWeight: FontWeight.w500,
+                fontSize: _large ? 12 : (_medium ? 11 : 10)),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget button() {
+    return RaisedButton(
+      elevation: 0,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
+      onPressed: () async {
+        if (name != null) {
+          setState(() {
+            signingup = true;
+          });
+          try {
+            // final newUser =
+            // await auth.createUserWithEmailAndPassword(email: _email);
+            // password: _password);
+            // Map <String,dynamic> data= {"name":name.text,"email":email.text,"contact":phnum.text};
+            //   FirebaseFirestore.instance.collection("users").doc("collection").set(data);
+
+            // if (newUser != null) {
+            final User user = auth.currentUser;
+            final uid = user.uid;
+            /* firestore.collection("users").add({
+                "name": name,
+                "email": _email,
+                "contact": phnum,
+                "uid": uid
+              }).then((value) {
+                print(value.id);
+                print(uid);
+              });*/
+            firestore.collection("users").doc('$uid').set({
+              "name": name,
+              // "email": _email,
+              "contact": phnum,
+              "uid": uid,
+              "photo": "gs://dscsolution-80cbc.appspot.com/User image/$uid.jpg"
+            }, SetOptions(merge: true));
+            // .doc("collection")
+            // .set(data);
+            // .collection("users")
+            // .doc("collection")
+            // .set(data);
+            // User updateUser = FirebaseAuth.instance.currentUser;
+            // updateUser.updateProfile(displayName: name);
+            // updateUser.updateProfile(photoURL: url);
+            // updateUser.uid;
+            // updateUser.displayName;
+            // updateUser.phoneNumber;
+            // await newUser.user.updateProfile(info);
+
+            Navigator.push(context,
+                new MaterialPageRoute(builder: (context) => Dashboard()));
+            // }
+          } catch (e) {
+            setState(() {
+              signingup = false;
+            });
+            EdgeAlert.show(context,
+                title: 'Signup Failed',
+                description: e.toString(),
+                gravity: EdgeAlert.BOTTOM,
+                icon: Icons.error,
+                backgroundColor: Colors.blue[400]);
+          }
+        } else {
+          EdgeAlert.show(context,
+              title: 'Update Failed',
+              description: 'All fields are required. ',
+              gravity: EdgeAlert.BOTTOM,
+              icon: Icons.error,
+              backgroundColor: Colors.blue[400]);
+        }
+      },
+      textColor: Colors.white,
+      padding: EdgeInsets.all(0.0),
+      child: Container(
+        alignment: Alignment.center,
+//        height: _height / 20,
+        width: _large ? _width / 4 : (_medium ? _width / 2.75 : _width / 3.5),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(20.0)),
+          gradient: LinearGradient(
+            colors: <Color>[Colors.blue[900], Colors.blueAccent[100]],
+          ),
+        ),
+        padding: const EdgeInsets.all(12.0),
+        child: Text(
+          'UPDATE PROFILE',
+          style: TextStyle(
+              fontWeight: FontWeight.w900,
+              fontSize: _large ? 14 : (_medium ? 12 : 10)),
+        ),
+      ),
+    );
+  }
+} //end of signup

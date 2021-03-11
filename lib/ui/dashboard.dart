@@ -76,7 +76,7 @@ class _DashboardState extends State<Dashboard> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Text(
-                          'User Name',
+                          'User name',
                           style: TextStyle(
                               fontFamily: "Montserrat Medium",
                               color: Colors.white,
