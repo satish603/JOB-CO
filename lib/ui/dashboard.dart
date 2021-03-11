@@ -10,9 +10,12 @@ import 'package:dsc/ui/profile.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class AuthenticationProvider {
   final FirebaseAuth firebaseAuth;
+
 // FirebaseAuth instance
   AuthenticationProvider(this.firebaseAuth);
 //Constructor to initialize the Firebase Auth instance.
@@ -28,6 +31,9 @@ class Dashboard extends StatefulWidget {
 }
 
 class _DashboardState extends State<Dashboard> {
+  var user = FirebaseAuth.instance.currentUser;
+
+
   @override
   Widget build(BuildContext context) {
     // to get size
@@ -76,20 +82,22 @@ class _DashboardState extends State<Dashboard> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
+                       
+                          Text(
+                            '${user.displayName}',
+                            style: TextStyle(
+                                fontFamily: "Montserrat Medium",
+                                color: Colors.white,
+                                fontSize: 20),
+                          ),
+                        
                         Text(
-                          'User name',
-                          style: TextStyle(
-                              fontFamily: "Montserrat Medium",
-                              color: Colors.white,
-                              fontSize: 20),
-                        ),
-                        Text(
-                          'User number',
-                          style: TextStyle(
-                              fontSize: 14,
-                              color: Colors.white,
-                              fontFamily: "Montserrat Regular"),
-                        )
+                            '${user.email}',
+                            style: TextStyle(
+                                fontSize: 14,
+                                color: Colors.white,
+                                fontFamily: "Montserrat Regular"),
+                          )
                       ],
                     )
                   ],
