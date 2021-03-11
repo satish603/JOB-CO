@@ -56,7 +56,7 @@ class _ProfileState extends State<Profile> {
     // Create a Reference to the file
     firebase_storage.Reference ref = firebase_storage.FirebaseStorage.instance
         .ref()
-        .child('User_image')
+        .child('User image')
         .child('/$uid.jpg');
 
     final metadata = firebase_storage.SettableMetadata(
@@ -77,6 +77,7 @@ class _ProfileState extends State<Profile> {
       _uploadTasks = _uploadTasks..removeAt(index);
     });
   }
+  
 
   @override
   Widget build(BuildContext context) {
@@ -89,6 +90,11 @@ class _ProfileState extends State<Profile> {
     return Material(
       child: Scaffold(
         body: Container(
+          decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [Colors.blue[300], Colors.yellowAccent],
+                ),
+              ),
           height: _height,
           width: _width,
           margin: EdgeInsets.only(bottom: 5),
@@ -123,7 +129,7 @@ class _ProfileState extends State<Profile> {
                   : (_medium ? _height / 7 : _height / 6.5),
               decoration: BoxDecoration(
                 gradient: LinearGradient(
-                  colors: [Colors.blue[200], Colors.yellowAccent],
+                  colors: [Colors.blue[300], Colors.yellowAccent],
                 ),
               ),
             ),
@@ -139,7 +145,7 @@ class _ProfileState extends State<Profile> {
                   : (_medium ? _height / 11 : _height / 10),
               decoration: BoxDecoration(
                 gradient: LinearGradient(
-                  colors: [Colors.blue[200], Colors.yellowAccent],
+                  colors: [Colors.blue[300], Colors.yellowAccent],
                 ),
               ),
             ),
@@ -239,7 +245,7 @@ class _ProfileState extends State<Profile> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Checkbox(
-              activeColor: Colors.blue[400],
+              activeColor: Colors.blue[300],
               value: checkBoxValue,
               onChanged: (bool newValue) {
                 setState(() {
@@ -306,8 +312,7 @@ class _ProfileState extends State<Profile> {
               "name": name,
               // "email": _email,
               "contact": phnum,
-              "uid": uid,
-              "photo": "gs://dscsolution-80cbc.appspot.com/User_image/$uid.jpg"
+              "uid": uid
             }, SetOptions(merge: true));
             // .doc("collection")
             // .set(data);

@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dsc/ui/applynow.dart';
 import 'package:dsc/ui/contactus.dart';
 
@@ -176,10 +177,19 @@ class _DashboardState extends State<Dashboard> {
                     Card(
                       child: FlatButton(
                         onPressed: () {
+                         
                           Navigator.push(
                               context,
                               new MaterialPageRoute(
                                   builder: (context) => Profile()));
+                              //      FirebaseFirestore.instance
+                              // .collection("users").doc('$uid')
+                              // .get();
+                          //     .then((querySnapshot) {
+                          //   querySnapshot.docs.forEach((result) {
+                          //     print(result.data());
+                          //   });
+                          // });
                         },
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8)),
