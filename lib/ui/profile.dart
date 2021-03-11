@@ -1,11 +1,15 @@
-import 'dart:io';
-
+import 'dart:io' as io;
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:dsc/ui/widgets/textformfield.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path/path.dart' as Path;
+import 'package:firebase_core/firebase_core.dart' as firebase_core;
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 
 class Profile extends StatefulWidget {
   Profile({Key key}) : super(key: key);
@@ -14,16 +18,64 @@ class Profile extends StatefulWidget {
   _ProfileState createState() => _ProfileState();
 }
 
-class _ProfileState extends State<Profile> {
-  final _controller = TextEditingController();
+enum UploadType {
+  file,
+}
 
-  final _controller1 = TextEditingController();
-  final _controller2 = TextEditingController();
-  String name = '';
-  String email = '';
-  String number = '';
-  File _image;
-  String _uploadedFileURL;
+class _ProfileState extends State<Profile> {
+  List<firebase_storage.UploadTask> _uploadTasks = [];
+  String number = "", name = "", email = "";
+  final auth = FirebaseAuth.instance;
+  final firestore = FirebaseFirestore.instance;
+  Future<firebase_storage.UploadTask> uploadFile(PickedFile file) async {
+    if (file == null) {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        content: Text('No file was selected'),
+      ));
+      return null;
+    }
+
+    firebase_storage.UploadTask uploadTask;
+
+    // Create a Reference to the file
+    final User user = auth.currentUser; //new
+    final uid = user.uid; //new
+    firebase_storage.Reference ref = firebase_storage.FirebaseStorage.instance
+        .ref()
+        .child('User image')
+        .child('/$uid.jpg');
+
+    final metadata = firebase_storage.SettableMetadata(
+        contentType: 'image/jpeg',
+        customMetadata: {'picked-file-path': file.path});
+
+    if (kIsWeb) {
+      uploadTask = ref.putData(await file.readAsBytes(), metadata);
+    } else {
+      uploadTask = ref.putFile(io.File(file.path), metadata);
+    }
+
+    return Future.value(uploadTask);
+  }
+
+  /// Handles the user pressing the PopupMenuItem item.
+  /* Future<void> handleUploadType(UploadType type) async {
+        PickedFile file =
+            await ImagePicker().getImage(source: ImageSource.gallery);
+        firebase_storage.UploadTask task = await uploadFile(file);
+        if (task != null) {
+          setState(() {
+            _uploadTasks = [..._uploadTasks, task];
+          });
+        }
+  }*/ //////not in use right now
+
+  void _removeTaskAtIndex(int index) {
+    setState(() {
+      _uploadTasks = _uploadTasks..removeAt(index);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,7 +83,7 @@ class _ProfileState extends State<Profile> {
             profile() // This trailing comma makes auto-formatting nicer for build methods.
         );
   }
- /* Future chooseFile() async{
+  /* Future chooseFile() async{
                         await ImagePicker.pickImage(source: ImageSource.gallery).then((image){
                           setState((){_image=image;});
                         });
@@ -66,7 +118,6 @@ StorageReference.getDownloadURL().then((fileURL){
           padding: const EdgeInsets.fromLTRB(0, 0, 0, 50),
           child: Stack(
             children: <Widget>[
-              
               CircleAvatar(
                 radius: 70,
                 child: ClipOval(
@@ -75,18 +126,21 @@ StorageReference.getDownloadURL().then((fileURL){
                   height: 140,
                   width: 140,
                   fit: BoxFit.cover,
-                  
                 )),
               ),
-              /*RaisedButton(onPressed: chooseFile,child:  Icon(
-                      Icons.add_a_photo,
-                      
-                      color: Colors.white,)),
-                      RaisedButton(onPressed: uploadFile,child: Icon(Icons.update, color: Colors.white,),),
-                      _uploadedFileURL!=null
-                      ? Image.network(_uploadedFileURL,height:140)*/
-                      
-             /* Positioned(
+              GestureDetector(onTap: () async {
+                PickedFile file =
+                    await ImagePicker().getImage(source: ImageSource.gallery);
+                firebase_storage.UploadTask task = await uploadFile(file);
+                if (task != null) {
+                  setState(() {
+                    _uploadTasks = [..._uploadTasks, task];
+                  });
+                }
+                print('Adding photo');
+              })
+
+              /* Positioned(
                   bottom: 1,
                   right: 1,
                   child: Container(
@@ -104,9 +158,7 @@ StorageReference.getDownloadURL().then((fileURL){
                         color: Colors.deepOrange,
                         borderRadius: BorderRadius.all(Radius.circular(20))),
                   ))*/
-                  
             ],
-
           ),
         ),
         Expanded(

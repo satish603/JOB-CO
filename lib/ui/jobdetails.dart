@@ -18,51 +18,6 @@ class JobDetials extends StatefulWidget {
   _SignUpScreenState createState() => _SignUpScreenState();
 }
 
-/*class CustomTextField extends StatelessWidget {
-  final String hint;
-  final TextEditingController textEditingController;
-  final TextInputType keyboardType;
-  final bool obscureText;
-  final IconData icon;
-  double _width;
-  double _pixelRatio;
-  bool large;
-  bool medium;
-
-  CustomTextField({
-    this.hint,
-    this.textEditingController,
-    this.keyboardType,
-    this.icon,
-    this.obscureText = false,
-    void Function(String) onChanged,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    _width = MediaQuery.of(context).size.width;
-    _pixelRatio = MediaQuery.of(context).devicePixelRatio;
-    large = ResponsiveWidget.isScreenLarge(_width, _pixelRatio);
-    medium = ResponsiveWidget.isScreenMedium(_width, _pixelRatio);
-    return Material(
-      borderRadius: BorderRadius.circular(30.0),
-      elevation: large ? 12 : (medium ? 10 : 8),
-      child: TextFormField(
-        controller: textEditingController,
-        keyboardType: keyboardType,
-        cursorColor: Colors.orange[200],
-        decoration: InputDecoration(
-          prefixIcon: Icon(icon, color: Colors.orange[200], size: 20),
-          hintText: hint,
-          border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(30.0),
-              borderSide: BorderSide.none),
-        ),
-      ),
-    );
-  }
-}*/
-
 class _SignUpScreenState extends State<JobDetials> {
   bool checkBoxValue = false;
   double _height;
@@ -71,12 +26,8 @@ class _SignUpScreenState extends State<JobDetials> {
   bool _large;
   bool _medium;
   bool signingup = false;
-  // var name, email, photoUrl, uid, emailVerified, phnum;
-  String jobname, location, vacancy,salary;
-  final firestore =FirebaseFirestore.instance;
-  // TextEditingController name1 = new TextEditingController();
-  // //TextEditingController email = new TextEditingController();
-  // TextEditingController phnum1 = new TextEditingController();
+  String jobname, location, vacancy, salary;
+  final firestore = FirebaseFirestore.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -103,7 +54,7 @@ class _SignUpScreenState extends State<JobDetials> {
                 //   height: _height / 35,
                 // ),
                 button(),
-               // infoTextRow(),
+                // infoTextRow(),
                 //socialIconsRow(),
                 //signInTextRow(),
               ],
@@ -173,24 +124,6 @@ class _SignUpScreenState extends State<JobDetials> {
                 color: Colors.blue[900],
               )),
         ),
-//        Positioned(
-//          top: _height/8,
-//          left: _width/1.75,
-//          child: Container(
-//            alignment: Alignment.center,
-//            height: _height/23,
-//            padding: EdgeInsets.all(5),
-//            decoration: BoxDecoration(
-//              shape: BoxShape.circle,
-//              color:  Colors.orange[100],
-//            ),
-//            child: GestureDetector(
-//                onTap: (){
-//                  print('Adding photo');
-//                },
-//                child: Icon(Icons.add_a_photo, size: _large? 22: (_medium? 15: 13),)),
-//          ),
-//        ),
       ],
     );
   }
@@ -203,7 +136,7 @@ class _SignUpScreenState extends State<JobDetials> {
         child: Column(
           children: <Widget>[
             firstNameTextFormField(),
-            SizedBox(height: _height /30.0),
+            SizedBox(height: _height / 30.0),
             //   lastNameTextFormField(),
             SecondNameTextFormField(),
             SizedBox(height: _height / 30.0),
@@ -239,8 +172,9 @@ class _SignUpScreenState extends State<JobDetials> {
       // controller: name,
     );
   }
-   // ignore: non_constant_identifier_names
-   Widget SecondNameTextFormField() {
+
+  // ignore: non_constant_identifier_names
+  Widget SecondNameTextFormField() {
     return /*TextField(
       keyboardType: TextInputType.text,
       decoration: InputDecoration(hintText: 'First Name'),
@@ -316,7 +250,7 @@ class _SignUpScreenState extends State<JobDetials> {
       icon: Icons.person,
       hint: "Vacancy",
       userTyped: (val) {
-        vacancy= val;
+        vacancy = val;
       },
       // controller: phnum,
     );
@@ -488,38 +422,38 @@ class _SignUpScreenState extends State<JobDetials> {
         if (jobname != null &&
             // _password != null &&
             location != null)
-            //  &&
-            // checkBoxValue == true)
-             {
+        //  &&
+        // checkBoxValue == true)
+        {
           setState(() {
             signingup = true;
           });
           try {
-
-            
             // Map <String,dynamic> data= {"name":name.text,"email":email.text,"contact":phnum.text};
             //   FirebaseFirestore.instance.collection("users").doc("collection").set(data);
 
             // if (newUser != null) {
-              firestore
-                  .collection("Job Details")
-                  .add({"Job": jobname,"Salary": salary, "Location": location, "Vacancy": vacancy}).then(
-                      (value) {
-                print(value.id);
-              });
-                  // .collection("users")
-                  // .doc("collection")
-                  // .set(data);
-              // User updateUser = FirebaseAuth.instance.currentUser;
-              // updateUser.updateProfile(displayName: name);
-              // updateUser.updateProfile(photoURL: url);
-              // updateUser.uid;
-              // updateUser.displayName;
-              // updateUser.phoneNumber;
-              //await newUser.user.updateProfile(info);
+            firestore.collection("Job Details").add({
+              "Job": jobname,
+              "Salary": salary,
+              "Location": location,
+              "Vacancy": vacancy
+            }).then((value) {
+              print(value.id);
+            });
+            // .collection("users")
+            // .doc("collection")
+            // .set(data);
+            // User updateUser = FirebaseAuth.instance.currentUser;
+            // updateUser.updateProfile(displayName: name);
+            // updateUser.updateProfile(photoURL: url);
+            // updateUser.uid;
+            // updateUser.displayName;
+            // updateUser.phoneNumber;
+            //await newUser.user.updateProfile(info);
 
-              Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(builder: (context) => Dashboard()));
+            Navigator.of(context).pushReplacement(
+                MaterialPageRoute(builder: (context) => Dashboard()));
             // }
           } catch (e) {
             setState(() {
