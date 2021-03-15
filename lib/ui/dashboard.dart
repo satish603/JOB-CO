@@ -3,18 +3,21 @@ import 'package:dsc/ui/contactus.dart';
 
 import 'package:dsc/ui/job.dart';
 import 'package:dsc/ui/jobdetails.dart';
+import 'package:dsc/ui/shops.dart';
 import 'package:dsc/ui/signin.dart';
 import 'package:dsc/ui/signup.dart';
 import 'package:dsc/ui/profile.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:provider/provider.dart';
 
 class AuthenticationProvider {
   final FirebaseAuth firebaseAuth;
-
+ 
 // FirebaseAuth instance
   AuthenticationProvider(this.firebaseAuth);
 //Constructor to initialize the Firebase Auth instance.
@@ -25,20 +28,22 @@ class AuthenticationProvider {
 }
 
 class Dashboard extends StatefulWidget {
+   
   @override
   _DashboardState createState() => _DashboardState();
 }
 
 class _DashboardState extends State<Dashboard> {
+  
   var user = FirebaseAuth.instance.currentUser;
-
+ 
+  
 
   @override
   Widget build(BuildContext context) {
     // to get size
 
     //var size = MediaQuery.maybeOf(context).size;
-
     // style
     var cardTextStyle = TextStyle(
         fontFamily: "Montserrat Regular",
@@ -81,22 +86,20 @@ class _DashboardState extends State<Dashboard> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                       
-                          Text(
-                            '${user.displayName}',
-                            style: TextStyle(
-                                fontFamily: "Montserrat Medium",
-                                color: Colors.white,
-                                fontSize: 20),
-                          ),
-                        
                         Text(
-                            '${user.email}',
-                            style: TextStyle(
-                                fontSize: 14,
-                                color: Colors.white,
-                                fontFamily: "Montserrat Regular"),
-                          )
+                         '${user.displayName}' ,
+                          style: TextStyle(
+                              fontFamily: "Montserrat Medium",
+                              color: Colors.white,
+                              fontSize: 20),
+                        ),
+                        Text(
+                          '${user.email}',
+                          style: TextStyle(
+                              fontSize: 14,
+                              color: Colors.white,
+                              fontFamily: "Montserrat Regular"),
+                        )
                       ],
                     )
                   ],
@@ -133,7 +136,7 @@ class _DashboardState extends State<Dashboard> {
                           Navigator.push(
                               context,
                               new MaterialPageRoute(
-                                  builder: (context) => SignUpScreen()));
+                                  builder: (context) => Job()));
                         },
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8)),
@@ -162,7 +165,7 @@ class _DashboardState extends State<Dashboard> {
                           Navigator.push(
                               context,
                               new MaterialPageRoute(
-                                  builder: (context) => Job()));
+                                  builder: (context) => Shop1()));
                         },
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8)),
