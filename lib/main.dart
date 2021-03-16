@@ -1,7 +1,9 @@
 import 'package:dsc/ui/contactus.dart';
 import 'package:dsc/ui/dashboard.dart';
 import 'package:dsc/ui/job.dart';
+
 import 'package:dsc/ui/jobdetails.dart';
+import 'package:dsc/ui/jobmain.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:dsc/constants/constants.dart';
