@@ -10,20 +10,33 @@ class Job extends StatefulWidget {
 class _JobState extends State<Job> {
   final double _borderRadius = 24;
   var items = [
-    PlaceInfo("Amul Parlor", Color(0xff6DC8F3), Color(0xff73A1F9),
-        "Available 15", "600/week", "near sbi,vvn", Apply()),
-    PlaceInfo("Biryani", Color(0xff6DC8F3), Color(0xff73A1F9), "Available 25",
-        "550/week", "near icici atm,vdn", Apply()),
-    PlaceInfo("Green chilly", Color(0xff6DC8F3), Color(0xff73A1F9),
-        "Available 15", "500/week", "near icici atm,vdn", Apply()),
-    PlaceInfo("Sandwich", Color(0xff6DC8F3), Color(0xff73A1F9), "Available 15",
-        "450/week", "near icici atm,vdn", Apply()),
-    PlaceInfo("Sandwich", Color(0xff6DC8F3), Color(0xff73A1F9), "Available 5",
-        "500/week", "near icici atm,vdn", Apply()),
-    PlaceInfo("Pizza", Color(0xff6DC8F3), Color(0xff73A1F9), "Available 5",
-        "400/week", "near icici atm,vdn", Apply()),
-    PlaceInfo("Pasta", Color(0xff6DC8F3), Color(0xff73A1F9), "Available 5",
-        "350/week", "near icici atm,vdn", Apply()),
+    PlaceInfo(
+      "Amul Parlor",
+      "Available 15",
+      "600/week",
+      "near sbi,vvn",
+    ),
+    PlaceInfo("Biryani", "Available 25", "550/week", "near icici atm,vdn"),
+    PlaceInfo("Green chilly", "Available 15", "500/week", "near icici atm,vdn"),
+    PlaceInfo("Sandwich", "Available 15", "450/week", "near icici atm,vdn"),
+    PlaceInfo(
+      "Sandwich",
+      "Available 5",
+      "500/week",
+      "near icici atm,vdn",
+    ),
+    PlaceInfo(
+      "Pizza",
+      "Available 5",
+      "400/week",
+      "near icici atm,vdn",
+    ),
+    PlaceInfo(
+      "Pasta",
+      "Available 5",
+      "350/week",
+      "near icici atm,vdn",
+    ),
   ];
   @override
   Widget build(BuildContext context) {
@@ -104,16 +117,6 @@ class _JobState extends State<Job> {
                                         color: Colors.white,
                                         fontFamily: "Montserrat Medium"),
                                   ),
-                                  FlatButton(
-                                    onPressed: () {
-                                      Navigator.push(
-                                        context,
-                                        new MaterialPageRoute(
-                                            builder: (context) =>
-                                                items[index].but),
-                                      );
-                                    },
-                                  )
                                 ])
                               ],
                             ),
@@ -147,12 +150,10 @@ class PlaceInfo {
   final String category;
   final String location;
   final String cla;
-  final Color startColor;
-  final Color endColor;
-  final but;
+  final Color startColor = Color(0xff6DC8F3);
+  final Color endColor = Color(0xff73A1F9);
 
-  PlaceInfo(this.name, this.startColor, this.endColor, this.cla, this.location,
-      this.category, this.but);
+  PlaceInfo(this.name, this.cla, this.location, this.category);
 }
 
 class CustomCardShapePainter extends CustomPainter {
