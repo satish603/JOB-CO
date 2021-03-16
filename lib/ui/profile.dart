@@ -183,54 +183,26 @@ class _ProfileState extends State<Profile> {
 
   Widget form() {
     return Container(
+    
       margin: EdgeInsets.only(
           left: _width / 12.0, right: _width / 12.0, top: _height / 20.0),
+          
       child: Form(
         child: Column(
           children: <Widget>[
-            firstNameTextFormField(),
-            SizedBox(height: _height / 60.0),
-            emailTextFormField(),
-            SizedBox(height: _height / 60.0),
-            phoneTextFormField(),
-            SizedBox(height: _height / 60.0),
+            Text('Name', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+            SizedBox(height: _height / 80.0),
+            Text('email', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+            SizedBox(height: _height / 80.0),
+            Text('Contact', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+            SizedBox(height: _height / 80.0),
           ],
         ),
       ),
     );
   }
 
-  Widget firstNameTextFormField() {
-    return CustomTextField(
-      keyboardType: TextInputType.text,
-      icon: Icons.person,
-      hint: "Full Name",
-      userTyped: (val) {
-        name = val;
-      },
-    );
-  }
-
-  Widget emailTextFormField() {
-    return CustomTextField(
-        keyboardType: TextInputType.emailAddress,
-        icon: Icons.email,
-        hint: "Email ID",
-        userTyped: (val) {
-          _email = val;
-        });
-  }
-
-  Widget phoneTextFormField() {
-    return CustomTextField(
-      keyboardType: TextInputType.number,
-      icon: Icons.phone,
-      hint: "Contact No",
-      userTyped: (val) {
-        phnum = val;
-      },
-    );
-  }
+  
 
   Widget acceptTermsTextRow() {
     return Container(
