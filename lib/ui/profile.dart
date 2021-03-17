@@ -35,6 +35,19 @@ class _ProfileState extends State<Profile> {
   // var name, email, photoUrl, uid, emailVerified, phnum;
   String _email, name, phnum;
 
+  Future<String> getdata() async {
+    FirebaseFirestore.instance
+        .collection('channels')
+        .doc('1fyyIIbwKiRhBm84JMYXZla7mmA3')
+        .get()
+        .then((docSnap) {
+      var fname = ['name']; //var channelName = snapshot['name'];
+      assert(fname is String);
+      print("Write print hello fire base is connected");
+      return fname;
+    });
+  }
+
   final auth = FirebaseAuth.instance;
   final firestore = FirebaseFirestore.instance;
   Future<firebase_storage.UploadTask> uploadFile(PickedFile file) async {
@@ -56,8 +69,13 @@ class _ProfileState extends State<Profile> {
     // Create a Reference to the file
     firebase_storage.Reference ref = firebase_storage.FirebaseStorage.instance
         .ref()
-        .child('User image')
+        .child('User_image')
         .child('/$uid.jpg');
+
+  
+// no need of the file extension, the name will do fine.
+    var url = await ref.getDownloadURL();
+    print(url);
 
     final metadata = firebase_storage.SettableMetadata(
         contentType: 'image/jpeg',
@@ -77,7 +95,6 @@ class _ProfileState extends State<Profile> {
       _uploadTasks = _uploadTasks..removeAt(index);
     });
   }
-  
 
   @override
   Widget build(BuildContext context) {
@@ -90,11 +107,14 @@ class _ProfileState extends State<Profile> {
     return Material(
       child: Scaffold(
         body: Container(
+<<<<<<< Updated upstream
           decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [Colors.blue[300], Colors.yellowAccent],
-                ),
-              ),
+            gradient: LinearGradient(
+              colors: [Colors.blue[300], Colors.yellowAccent],
+            ),
+          ),
+=======
+>>>>>>> Stashed changes
           height: _height,
           width: _width,
           margin: EdgeInsets.only(bottom: 5),
@@ -129,7 +149,7 @@ class _ProfileState extends State<Profile> {
                   : (_medium ? _height / 7 : _height / 6.5),
               decoration: BoxDecoration(
                 gradient: LinearGradient(
-                  colors: [Colors.blue[300], Colors.yellowAccent],
+                  colors: [Colors.blue[200], Colors.yellowAccent],
                 ),
               ),
             ),
@@ -145,7 +165,7 @@ class _ProfileState extends State<Profile> {
                   : (_medium ? _height / 11 : _height / 10),
               decoration: BoxDecoration(
                 gradient: LinearGradient(
-                  colors: [Colors.blue[300], Colors.yellowAccent],
+                  colors: [Colors.blue[200], Colors.yellowAccent],
                 ),
               ),
             ),
@@ -198,8 +218,8 @@ class _ProfileState extends State<Profile> {
             SizedBox(height: _height / 60.0),
             emailTextFormField(),
             SizedBox(height: _height / 60.0),
-            phoneTextFormField(),
-            SizedBox(height: _height / 60.0),
+            // phoneTextFormField(),
+            // SizedBox(height: _height / 60.0),
           ],
         ),
       ),
@@ -207,13 +227,8 @@ class _ProfileState extends State<Profile> {
   }
 
   Widget firstNameTextFormField() {
-    return CustomTextField(
-      keyboardType: TextInputType.text,
-      icon: Icons.person,
-      hint: "Full Name",
-      userTyped: (val) {
-        name = val;
-      },
+    return Text(
+      "$phnum"
     );
   }
 
@@ -227,7 +242,7 @@ class _ProfileState extends State<Profile> {
         });
   }
 
-  Widget phoneTextFormField() {
+  Widget TextFormField() {
     return CustomTextField(
       keyboardType: TextInputType.number,
       icon: Icons.phone,
@@ -245,7 +260,7 @@ class _ProfileState extends State<Profile> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Checkbox(
-              activeColor: Colors.blue[300],
+              activeColor: Colors.blue[400],
               value: checkBoxValue,
               onChanged: (bool newValue) {
                 setState(() {
@@ -312,7 +327,8 @@ class _ProfileState extends State<Profile> {
               "name": name,
               // "email": _email,
               "contact": phnum,
-              "uid": uid
+              "uid": uid,
+              "photo": "gs://dscsolution-80cbc.appspot.com/User_image/$uid.jpg"
             }, SetOptions(merge: true));
             // .doc("collection")
             // .set(data);
