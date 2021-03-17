@@ -35,19 +35,6 @@ class _ProfileState extends State<Profile> {
   // var name, email, photoUrl, uid, emailVerified, phnum;
   String _email, name, phnum;
 
-  Future<String> getdata() async {
-    FirebaseFirestore.instance
-        .collection('channels')
-        .doc('1fyyIIbwKiRhBm84JMYXZla7mmA3')
-        .get()
-        .then((docSnap) {
-      var fname = ['name']; //var channelName = snapshot['name'];
-      assert(fname is String);
-      print("Write print hello fire base is connected");
-      return fname;
-    });
-  }
-
   final auth = FirebaseAuth.instance;
   final firestore = FirebaseFirestore.instance;
   Future<firebase_storage.UploadTask> uploadFile(PickedFile file) async {
@@ -71,11 +58,6 @@ class _ProfileState extends State<Profile> {
         .ref()
         .child('User_image')
         .child('/$uid.jpg');
-
-  
-// no need of the file extension, the name will do fine.
-    var url = await ref.getDownloadURL();
-    print(url);
 
     final metadata = firebase_storage.SettableMetadata(
         contentType: 'image/jpeg',
@@ -107,14 +89,6 @@ class _ProfileState extends State<Profile> {
     return Material(
       child: Scaffold(
         body: Container(
-<<<<<<< Updated upstream
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: [Colors.blue[300], Colors.yellowAccent],
-            ),
-          ),
-=======
->>>>>>> Stashed changes
           height: _height,
           width: _width,
           margin: EdgeInsets.only(bottom: 5),
@@ -209,49 +183,26 @@ class _ProfileState extends State<Profile> {
 
   Widget form() {
     return Container(
+    
       margin: EdgeInsets.only(
           left: _width / 12.0, right: _width / 12.0, top: _height / 20.0),
+          
       child: Form(
         child: Column(
           children: <Widget>[
-            firstNameTextFormField(),
-            SizedBox(height: _height / 60.0),
-            emailTextFormField(),
-            SizedBox(height: _height / 60.0),
-            // phoneTextFormField(),
-            // SizedBox(height: _height / 60.0),
+            Text('Name', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+            SizedBox(height: _height / 80.0),
+            Text('email', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+            SizedBox(height: _height / 80.0),
+            Text('Contact', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+            SizedBox(height: _height / 80.0),
           ],
         ),
       ),
     );
   }
 
-  Widget firstNameTextFormField() {
-    return Text(
-      "$phnum"
-    );
-  }
-
-  Widget emailTextFormField() {
-    return CustomTextField(
-        keyboardType: TextInputType.emailAddress,
-        icon: Icons.email,
-        hint: "Email ID",
-        userTyped: (val) {
-          _email = val;
-        });
-  }
-
-  Widget TextFormField() {
-    return CustomTextField(
-      keyboardType: TextInputType.number,
-      icon: Icons.phone,
-      hint: "Contact No",
-      userTyped: (val) {
-        phnum = val;
-      },
-    );
-  }
+  
 
   Widget acceptTermsTextRow() {
     return Container(
