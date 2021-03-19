@@ -1,41 +1,238 @@
+import 'dart:io';
 import 'dart:ui' as ui;
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dsc/ui/applynow.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class Job extends StatefulWidget {
+  Job({Key key}) : super(key: key);
+
   @override
   _JobState createState() => _JobState();
 }
 
 class _JobState extends State<Job> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        body:
+            firedata() // This trailing comma makes auto-formatting nicer for build methods.
+        );
+  }
+
+  Widget firedata() {
+    final auth = FirebaseAuth.instance;
+    final User user = auth.currentUser;
+    final uid = user.uid;
+    //BuildContext context
+    return new StreamBuilder(
+        stream: FirebaseFirestore.instance
+            .collection('users')
+            .doc('$uid')
+            .snapshots(),
+        builder: (context, snapshot) {
+          if (!snapshot.hasData) {
+            return new Text("Loading");
+          }
+          var userDocument = snapshot.data;
+          return new Text(
+            userDocument["name"],
+          );
+        });
+  }
+
   final double _borderRadius = 24;
   var items = [
-    PlaceInfo(
-      "Amul Parlor",
-      "Available 15",
-      "600/week",
-      "near sbi,vvn",
+    StreamBuilder<QuerySnapshot>(
+      stream: FirebaseFirestore.instance.collection("Job Details").snapshots(),
+      builder: (context, snapshot) {
+        return !snapshot.hasData
+            ? Center(child: CircularProgressIndicator())
+            : ListView.builder(
+                itemCount: snapshot.data.docs.length,
+                itemBuilder: (context, index) {
+                  DocumentSnapshot data = snapshot.data.docs[index];
+                  return PlaceInfo(
+                    name: data['jobName'],
+                    cla: data['salary'],
+                    location: data['xx'],
+                    category: data['gg'],
+                    startColor:Color(0xff6DC8F3),
+                    endColor: Color(0xff73A1F9),
+                  );
+                },
+              );
+      },
     ),
-    PlaceInfo("Biryani", "Available 25", "550/week", "near icici atm,vdn"),
-    PlaceInfo("Green chilly", "Available 15", "500/week", "near icici atm,vdn"),
-    PlaceInfo("Sandwich", "Available 15", "450/week", "near icici atm,vdn"),
-    PlaceInfo(
-      "Sandwich",
-      "Available 5",
-      "500/week",
-      "near icici atm,vdn",
-    ),
-    PlaceInfo(
-      "Pizza",
-      "Available 5",
-      "400/week",
-      "near icici atm,vdn",
-    ),
-    PlaceInfo(
-      "Pasta",
-      "Available 5",
-      "350/week",
-      "near icici atm,vdn",
+
+    // PlaceInfo({
+    //   "firedata()",
+    //   "Available 15",
+    //   "600/week",
+    //   "near sbi,vvn",
+    // }),
+    // PlaceInfo("Biryani", "Available 25", "550/week", "near icici atm,vdn"),
+    // PlaceInfo("Green chilly", "Available 15", "500/week", "near icici atm,vdn"),
+    // PlaceInfo("Sandwich", "Available 15", "450/week", "near icici atm,vdn"),
+    // PlaceInfo(
+    //   "Sandwich",
+    //   "Available 5",
+    //   "500/week",
+    //   "near icici atm,vdn",
+    // ),
+    // PlaceInfo(
+    //   "Pizza",
+    //   "Available 5",
+    //   "400/week",
+    //   "near icici atm,vdn",
+    // ),
+    // PlaceInfo(
+    //   "Pasta",
+    //   "Available 5",
+    //   "350/week",
+    //   "near icici atm,vdn",
+    // ),
+  ];
+
+  // @override
+  // Widget build(BuildContext context) {
+  //   return Scaffold(
+  //       appBar: AppBar(
+  //         title: Text("Job"),
+  //       ),
+  //       body: ListView.builder(
+  //           itemCount: items.length,
+  //           itemBuilder: (context, index) {
+  //             return Center(
+  //               child: Padding(
+  //                 padding: const EdgeInsets.all(16.0),
+  //                 child: Stack(
+  //                   children: <Widget>[
+  //                     Container(
+  //                       height: 130,
+  //                       decoration: BoxDecoration(
+  //                           borderRadius: BorderRadius.circular(_borderRadius),
+  //                           gradient: LinearGradient(
+  //                               begin: Alignment.topLeft,
+  //                               colors: [
+  //                                 items[index].startColor,
+  //                                 items[index].endColor
+  //                               ],
+  //                               end: Alignment.bottomRight),
+  //                           boxShadow: [
+  //                             BoxShadow(
+  //                               color: items[index].endColor,
+  //                               blurRadius: 13,
+  //                               offset: Offset(0, 6),
+  //                             )
+  //                           ]),
+  //                     ),
+  //                     Positioned(
+  //                       right: 0,
+  //                       bottom: 0,
+  //                       top: 0,
+  //                       child: CustomPaint(
+  //                         size: Size(100, 150),
+  //                         painter: CustomCardShapePainter(
+  //                             _borderRadius, Colors.pink, Colors.red),
+  //                       ),
+  //                     ),
+  //                     Positioned.fill(
+  //                         child: Row(
+  //                       children: <Widget>[
+  //                         Expanded(
+  //                           child: Image.asset("assets/images/download.jpg",
+  //                               height: 64, width: 64),
+  //                           flex: 2,
+  //                         ),
+  //                         Expanded(
+  //                           flex: 4,
+  //                           child: Column(
+  //                             mainAxisSize: MainAxisSize.min,
+  //                             crossAxisAlignment: CrossAxisAlignment.start,
+  //                             children: <Widget>[
+  //                               Text(
+  //                                 items[index].name,
+  //                                 style: TextStyle(
+  //                                     color: Colors.white,
+  //                                     fontFamily: "Montserrat Medium",
+  //                                     fontWeight: FontWeight.w700),
+  //                               ),
+  //                               Text(
+  //                                 items[index].category,
+  //                                 style: TextStyle(
+  //                                     color: Colors.white,
+  //                                     fontFamily: "Montserrat Medium"),
+  //                               ),
+  //                               SizedBox(height: 16),
+  //                               Row(children: <Widget>[
+  //                                 SizedBox(width: 8),
+  //                                 Text(
+  //                                   items[index].location,
+  //                                   style: TextStyle(
+  //                                       color: Colors.white,
+  //                                       fontFamily: "Montserrat Medium"),
+  //                                 ),
+  //                               ])
+  //                             ],
+  //                           ),
+  //                         ),
+  //                         Expanded(
+  //                             flex: 2,
+  //                             child: Column(
+  //                               mainAxisSize: MainAxisSize.min,
+  //                               children: <Widget>[
+  //                                 Text(
+  //                                   items[index].cla,
+  //                                   style: TextStyle(
+  //                                       color: Colors.white,
+  //                                       fontFamily: "Montserrat Medium",
+  //                                       fontWeight: FontWeight.w400),
+  //                                 ),
+  //                               ],
+  //                             ))
+  //                       ],
+  //                     ))
+  //                   ],
+  //                 ),
+  //               ),
+  //             );
+  //           })
+  //           );
+
+  // }
+}
+
+class PlaceInfo extends StatelessWidget {
+  final String name;
+  final String category;
+  final String location;
+  final String cla;
+ Color startColor = Color(0xff6DC8F3);
+  Color endColor = Color(0xff73A1F9);
+
+  PlaceInfo({this.name, this.cla, this.location, this.category,this.startColor,this.endColor});
+  final double _borderRadius = 24;
+  var items = [
+    StreamBuilder<QuerySnapshot>(
+      stream: FirebaseFirestore.instance.collection("Job Details").snapshots(),
+      builder: (context, snapshot) {
+        return !snapshot.hasData
+            ? Center(child: CircularProgressIndicator())
+            : ListView.builder(
+                itemCount: snapshot.data.docs.length,
+                itemBuilder: (context, index) {
+                  DocumentSnapshot data = snapshot.data.docs[index];
+                  return PlaceInfo(
+                    name: data['name'],
+                    cla: data['salary'],
+                    location: data['xx'],
+                    category: data['gg'],
+                  );
+                },
+              );
+      },
     ),
   ];
   @override
@@ -54,18 +251,21 @@ class _JobState extends State<Job> {
                     children: <Widget>[
                       Container(
                         height: 130,
+                        
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(_borderRadius),
                             gradient: LinearGradient(
                                 begin: Alignment.topLeft,
-                                colors: [
-                                  items[index].startColor,
-                                  items[index].endColor
+                                colors: [ 
+                                  startColor,
+                    endColor
+                                  
                                 ],
                                 end: Alignment.bottomRight),
                             boxShadow: [
                               BoxShadow(
-                                color: items[index].endColor,
+                                color: 
+                    endColor,
                                 blurRadius: 13,
                                 offset: Offset(0, 6),
                               )
@@ -96,14 +296,14 @@ class _JobState extends State<Job> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
                                 Text(
-                                  items[index].name,
+                                  name,
                                   style: TextStyle(
                                       color: Colors.white,
                                       fontFamily: "Montserrat Medium",
                                       fontWeight: FontWeight.w700),
                                 ),
                                 Text(
-                                  items[index].category,
+                                  category,
                                   style: TextStyle(
                                       color: Colors.white,
                                       fontFamily: "Montserrat Medium"),
@@ -112,7 +312,7 @@ class _JobState extends State<Job> {
                                 Row(children: <Widget>[
                                   SizedBox(width: 8),
                                   Text(
-                                    items[index].location,
+                                    location,
                                     style: TextStyle(
                                         color: Colors.white,
                                         fontFamily: "Montserrat Medium"),
@@ -127,7 +327,7 @@ class _JobState extends State<Job> {
                                 mainAxisSize: MainAxisSize.min,
                                 children: <Widget>[
                                   Text(
-                                    items[index].cla,
+                                   cla,
                                     style: TextStyle(
                                         color: Colors.white,
                                         fontFamily: "Montserrat Medium",
@@ -143,17 +343,6 @@ class _JobState extends State<Job> {
               );
             }));
   }
-}
-
-class PlaceInfo {
-  final String name;
-  final String category;
-  final String location;
-  final String cla;
-  final Color startColor = Color(0xff6DC8F3);
-  final Color endColor = Color(0xff73A1F9);
-
-  PlaceInfo(this.name, this.cla, this.location, this.category);
 }
 
 class CustomCardShapePainter extends CustomPainter {
