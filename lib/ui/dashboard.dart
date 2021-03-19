@@ -181,7 +181,20 @@ class _DashboardState extends State<Dashboard> {
                     ),
                     Card(
                       child: FlatButton(
+<<<<<<< Updated upstream
                         onPressed: () {
+=======
+                        onPressed: () async {
+                          DocumentSnapshot variable = await FirebaseFirestore
+                              .instance
+                              .collection('users')
+                              .doc('1fyyIIbwKiRhBm84JMYXZla7mmA3')
+                              .get().then((data) async {
+                     var dataReceive = data['name'];
+                     print(dataReceive['name']);
+                              });
+                          
+>>>>>>> Stashed changes
                           Navigator.push(
                               context,
                               new MaterialPageRoute(
