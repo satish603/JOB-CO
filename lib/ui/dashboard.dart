@@ -1,3 +1,4 @@
+import 'package:dsc/ui/appli_status.dart';
 import 'package:dsc/ui/contactus.dart';
 
 import 'package:dsc/ui/jobdetails.dart';
@@ -181,9 +182,6 @@ class _DashboardState extends State<Dashboard> {
                     ),
                     Card(
                       child: FlatButton(
-<<<<<<< Updated upstream
-                        onPressed: () {
-=======
                         onPressed: () async {
                           DocumentSnapshot variable = await FirebaseFirestore
                               .instance
@@ -194,7 +192,6 @@ class _DashboardState extends State<Dashboard> {
                      print(dataReceive['name']);
                               });
                           
->>>>>>> Stashed changes
                           Navigator.push(
                               context,
                               new MaterialPageRoute(
@@ -273,7 +270,7 @@ class _DashboardState extends State<Dashboard> {
                           Navigator.push(
                               context,
                               new MaterialPageRoute(
-                                  builder: (context) => SignUpScreen()));
+                                  builder: (context) => Status()));
                         },
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8)),
@@ -285,7 +282,7 @@ class _DashboardState extends State<Dashboard> {
                               height: 128,
                             ),
                             Text(
-                              'Random',
+                              'Application Status',
                               style: cardTextStyle,
                             )
                           ],
