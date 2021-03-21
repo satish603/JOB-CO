@@ -1,42 +1,44 @@
-import 'package:dsc/ui/applynow.dart';
-import 'package:dsc/ui/contactus.dart';
-
-import 'package:dsc/ui/job.dart';
-import 'package:dsc/ui/jobdetails.dart';
-import 'package:dsc/ui/shops.dart';
-import 'package:dsc/ui/signin.dart';
-import 'package:dsc/ui/signup.dart';
-import 'package:dsc/ui/profile.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dsc/ui/dashboard.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_database/firebase_database.dart';
+import 'package:dsc/ui/widgets/custom_shape.dart';
+import 'package:dsc/ui/widgets/customappbar.dart';
+import 'package:dsc/ui/widgets/responsive_ui.dart';
+import 'package:edge_alert/edge_alert.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+import 'package:dsc/ui/widgets/textformfield.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:path/path.dart' as Path;
+import 'dart:io' as io;
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:provider/provider.dart';
 
-
-
 class Shop1 extends StatefulWidget {
-   
   @override
   _Shop1 createState() => _Shop1();
 }
 
 class _Shop1 extends State<Shop1> {
-  
- bool value1 = false;
- bool value2 = false;
- bool value3 = false;
- bool value4 = false;
- bool value5 = false;
- bool value6 = false;
- bool value7 = false;
- bool value8 = false;
- bool value9 = false;
- bool value10 = false;
- bool value11 = false;
- bool value12 = false;
+  bool value1 = false;
+  bool value2 = false;
+  bool value3 = false;
+  bool value4 = false;
+  bool value5 = false;
+  bool value6 = false;
+  bool value7 = false;
+  bool value8 = false;
+  bool value9 = false;
+  bool value10 = false;
+  bool value11 = false;
+  bool value12 = false;
+  String status,status2, status3, status4, status5, status6;
 
   @override
   Widget build(BuildContext context) {
@@ -44,11 +46,160 @@ class _Shop1 extends State<Shop1> {
 
     //var size = MediaQuery.maybeOf(context).size;
     // style
+   Widget stat() {
+      return /*TextField(
+      keyboardType: TextInputType.text,
+      decoration: InputDecoration(hintText: 'First Name'),
+      onChanged: (value) {
+        setState(() {
+          name = value.trim();
+        });
+      },
+    );*/
+          CustomTextField(
+        keyboardType: TextInputType.text,
+        icon: Icons.person,
+        hint: "Approve/Reject",
+        userTyped: (val) {
+          status = val;
+        },
+        // controller: name,
+      );
+    }Widget stat2() {
+      return /*TextField(
+      keyboardType: TextInputType.text,
+      decoration: InputDecoration(hintText: 'First Name'),
+      onChanged: (value) {
+        setState(() {
+          name = value.trim();
+        });
+      },
+    );*/
+          CustomTextField(
+        keyboardType: TextInputType.text,
+        icon: Icons.person,
+        hint: "Approve/Reject",
+        userTyped: (val) {
+          status2 = val;
+        },
+        // controller: name,
+      );
+    }Widget stat3() {
+      return /*TextField(
+      keyboardType: TextInputType.text,
+      decoration: InputDecoration(hintText: 'First Name'),
+      onChanged: (value) {
+        setState(() {
+          name = value.trim();
+        });
+      },
+    );*/
+          CustomTextField(
+        keyboardType: TextInputType.text,
+        icon: Icons.person,
+        hint: "Approve/Reject",
+        userTyped: (val) {
+          status3 = val;
+        },
+        // controller: name,
+      );
+    }Widget stat4() {
+      return /*TextField(
+      keyboardType: TextInputType.text,
+      decoration: InputDecoration(hintText: 'First Name'),
+      onChanged: (value) {
+        setState(() {
+          name = value.trim();
+        });
+      },
+    );*/
+          CustomTextField(
+        keyboardType: TextInputType.text,
+        icon: Icons.person,
+        hint: "Approve/Reject",
+        userTyped: (val) {
+          status4 = val;
+        },
+        // controller: name,
+      );
+    }Widget stat5() {
+      return /*TextField(
+      keyboardType: TextInputType.text,
+      decoration: InputDecoration(hintText: 'First Name'),
+      onChanged: (value) {
+        setState(() {
+          name = value.trim();
+        });
+      },
+    );*/
+          CustomTextField(
+        keyboardType: TextInputType.text,
+        icon: Icons.person,
+        hint: "Approve/Reject",
+        userTyped: (val) {
+          status5 = val;
+        },
+        // controller: name,
+      );
+    }
+Widget stat6() {
+      return /*TextField(
+      keyboardType: TextInputType.text,
+      decoration: InputDecoration(hintText: 'First Name'),
+      onChanged: (value) {
+        setState(() {
+          name = value.trim();
+        });
+      },
+    );*/
+          CustomTextField(
+        keyboardType: TextInputType.text,
+        icon: Icons.person,
+        hint: "Approve/Reject",
+        userTyped: (val) {
+          status6 = val;
+        },
+        // controller: name,
+      );
+    }
+
+    Widget button() {
+      return RaisedButton(
+          elevation: 0,
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
+          onPressed: () {
+            Navigator.push(context,
+                new MaterialPageRoute(builder: (context) => Dashboard()));
+            // }
+          },
+          textColor: Colors.white,
+          padding: EdgeInsets.all(0.0),
+          child: Container(
+            alignment: Alignment.center,
+//        height: _height / 20,
+
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.all(Radius.circular(10.0)),
+              gradient: LinearGradient(
+                colors: <Color>[Colors.blue[900], Colors.blueAccent[100]],
+              ),
+            ),
+            padding: const EdgeInsets.all(7.0),
+            child: Text(
+              'UPDATE',textAlign: TextAlign.center,
+              style: TextStyle(
+                fontWeight: FontWeight.w900,
+                fontSize: 10,
+              ),
+            ),
+          ));
+    }
+
     var cardTextStyle = TextStyle(
         fontFamily: "Montserrat Regular",
         fontSize: 14,
         color: Color.fromRGBO(63, 63, 63, 1));
-
     return Scaffold(
       // body: Stack(
       // children: <Widget>[
@@ -68,11 +219,9 @@ class _Shop1 extends State<Shop1> {
           padding: EdgeInsets.all(16.0),
           child: Column(
             children: <Widget>[
-              
-                       Text('Applicants', style: TextStyle(fontSize: 30,color:Colors.white)),
-                    
-                    
-                 
+              Text('Applicants',
+                  style: TextStyle(fontSize: 30, color: Colors.white)),
+
               /*Container(
                 height: 64,
                 margin: EdgeInsets.only(bottom: 20),
@@ -131,256 +280,127 @@ class _Shop1 extends State<Shop1> {
                   children: <Widget>[
                     Card(
                       elevation: 20,
-                      
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8)),
-                        child: Column(
-                          // mainAxisAlignment: MainAxisAlignment.start,
-                          // crossAxisAlignment: CrossAxisAlignment.start,
-                         
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            // alignment: Alignment.topRight,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8)),
+                      child: Column(
+                        // mainAxisAlignment: MainAxisAlignment.start,
+                        // crossAxisAlignment: CrossAxisAlignment.start,
 
-                            Image.asset('assets/images/download.jpg', height: 28),
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          // alignment: Alignment.topRight,
 
-                            Text(
-                              'ApplicantName_1',
-                              style: cardTextStyle,
-                            ),Checkbox( 
-                                      activeColor: Colors.greenAccent,
-                                      checkColor: Colors.redAccent,
-                                      value: this.value11,
-                                      onChanged: (bool value_10) {
-                                        setState(() {
-                                          this.value11=value_10;
-                                        });
-                                      },
-                                      
-                                    ),
-                                    Checkbox(
-                                      activeColor: Colors.redAccent,
-                                      checkColor: Colors.greenAccent,
-                                      value: this.value12,
-                                      onChanged: (bool value_11) {
-                                        setState(() {
-                                          this.value12=value_11;
-                                        });
-                                      },
-                                      
-                                    ),
-                          ],
-                        ),
-                      
+                          Image.asset('assets/images/download.jpg', height: 28),
+
+                          Text(
+                            'ApplicantName_1',
+                            style: cardTextStyle,
+                          ),
+                          stat(),
+                          SizedBox(height: 15.0),button()
+                        ],
+                      ),
                     ),
                     Card(
-                     elevation: 20,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8)),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            Image.asset(
-                              'assets/images/download.jpg',
-                              height: 28,
-                            ),
-                            Text(
-                              'ApplicantName_2',
-                              style: cardTextStyle,
-                            ),Checkbox(
-                                      activeColor: Colors.greenAccent,
-                                      checkColor: Colors.redAccent,
-                                      value: this.value9,
-                                      onChanged: (bool value_8) {
-                                        setState(() {
-                                          this.value9=value_8;
-                                        });
-                                      },
-                                      
-                                    ),
-                                    Checkbox(
-                                      activeColor: Colors.redAccent,
-                                      checkColor: Colors.greenAccent,
-                                      value: this.value10,
-                                      onChanged: (bool value_9) {
-                                        setState(() {
-                                          this.value10=value_9;
-                                        });
-                                      },
-                                      
-                                    ),
-                          ],
-                        ),
+                      elevation: 20,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8)),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Image.asset(
+                            'assets/images/download.jpg',
+                            height: 28,
+                          ),
+                          Text(
+                            'ApplicantName_2',
+                            style: cardTextStyle,
+                          ),
+                          stat2(),
+                          SizedBox(height: 15.0),button()
+                        ],
                       ),
-                    
-                    Card(
-                     elevation: 20,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8)),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            Image.asset(
-                              'assets/images/download.jpg',
-                              height: 28,
-                            ),
-                            Text(
-                              'ApplicantName_3',
-                              style: cardTextStyle,
-                            ),
-                            Checkbox(
-                                      activeColor: Colors.greenAccent,
-                                      checkColor: Colors.redAccent,
-                                      value: this.value7,
-                                      onChanged: (bool value_6) {
-                                        setState(() {
-                                          this.value7=value_6;
-                                        });
-                                      },
-                                      
-                                    ),
-                                    Checkbox(
-                                      activeColor: Colors.redAccent,
-                                      checkColor: Colors.greenAccent,
-                                      value: this.value8,
-                                      onChanged: (bool value_7) {
-                                        setState(() {
-                                          this.value8=value_7;
-                                        });
-                                      },
-                                      
-                                    ),
-                          ],
-                        ),
-                      ),
-                    
-                    Card(
-                     elevation: 20,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8)),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            Image.asset(
-                              'assets/images/download.jpg',
-                              height: 28,
-                            ),
-                            Text(
-                              'ApplicantName_4',
-                              style: cardTextStyle,
-                            ),
-                            Checkbox(
-                                      activeColor: Colors.greenAccent,
-                                      checkColor: Colors.redAccent,
-                                      value: this.value5,
-                                      onChanged: (bool value_4) {
-                                        setState(() {
-                                          this.value5=value_4;
-                                        });
-                                      },
-                                      
-                                    ),
-                                    Checkbox(
-                                      activeColor: Colors.redAccent,
-                                      checkColor: Colors.greenAccent,
-                                      value: this.value6,
-                                      onChanged: (bool value_5) {
-                                        setState(() {
-                                          this.value6=value_5;
-                                        });
-                                      },
-                                      
-                                    ),
-                          ],
-                        ),
-                      ),
-                    
+                    ),
                     Card(
                       elevation: 20,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8)),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            Image.asset(
-                              'assets/images/download.jpg',
-                              height: 28,
-                            ),
-                            Text(
-                              'ApplicantName_5',
-                              style: cardTextStyle,
-                            ),
-                            
-                                                           Checkbox(
-                                      activeColor: Colors.greenAccent,
-                                      checkColor: Colors.redAccent,
-                                      value: this.value3,
-                                      onChanged: (bool value_2) {
-                                        setState(() {
-                                          this.value3=value_2;
-                                        });
-                                      },
-                                      
-                                    ),
-                                    Checkbox(
-                                      activeColor: Colors.redAccent,
-                                      checkColor: Colors.greenAccent,
-                                      value: this.value4,
-                                      onChanged: (bool value_3) {
-                                        setState(() {
-                                          this.value4=value_3;
-                                        });
-                                      },
-                                      
-                                    ),
-                            
-                          ],
-                        ),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8)),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Image.asset(
+                            'assets/images/download.jpg',
+                            height: 28,
+                          ),
+                          Text(
+                            'ApplicantName_3',
+                            style: cardTextStyle,
+                          ),
+                          stat3(),
+                          SizedBox(height: 15.0),button()
+                        ],
                       ),
-                    
+                    ),
                     Card(
-                     elevation: 20,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8)),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            Image.asset(
-                              'assets/images/download.jpg',
-                              height: 28,
-                            ),
-                            Text(
-                              'ApplicantName_6',
-                              style: cardTextStyle,
-                            ),
-                            
-                                                           Checkbox(
-                                      activeColor: Colors.greenAccent,
-                                      checkColor: Colors.redAccent,
-                                      value: this.value1,
-                                      onChanged: (bool value) {
-                                        setState(() {
-                                          this.value1=value;
-                                        });
-                                      },
-                                      
-                                    ),
-                                    Checkbox(
-                                      activeColor: Colors.redAccent,
-                                      checkColor: Colors.greenAccent,
-                                      value: this.value2,
-                                      onChanged: (bool value_1) {
-                                        setState(() {
-                                          this.value2=value_1;
-                                        });
-                                      },
-                                      
-                                    ),
-                            
-                          ],
-                        ),
+                      elevation: 20,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8)),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Image.asset(
+                            'assets/images/download.jpg',
+                            height: 28,
+                          ),
+                          Text(
+                            'ApplicantName_4',
+                            style: cardTextStyle,
+                          ),
+                          stat4(),
+                          SizedBox(height: 15.0),button()
+                        ],
                       ),
-                    
+                    ),
+                    Card(
+                      elevation: 20,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8)),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Image.asset(
+                            'assets/images/download.jpg',
+                            height: 28,
+                          ),
+                          Text(
+                            'ApplicantName_5',
+                            style: cardTextStyle,
+                          ),
+                          stat5(),
+                          SizedBox(height: 15.0),button()
+                        ],
+                      ),
+                    ),
+                    Card(
+                      elevation: 20,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8)),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Image.asset(
+                            'assets/images/download.jpg',
+                            height: 28,
+                          ),
+                          Text(
+                            'ApplicantName_6',
+                            style: cardTextStyle,
+                          ),
+                          stat6(),
+                          SizedBox(height: 15.0),button()
+                        ],
+                      ),
+                    ),
                   ],
                 ),
               ),
