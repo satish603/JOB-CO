@@ -16,6 +16,8 @@ import 'package:path/path.dart' as Path;
 import 'dart:io' as io;
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 
+final firestore = FirebaseFirestore.instance;
+
 class Profile extends StatefulWidget {
   Profile({Key key}) : super(key: key);
 
@@ -24,6 +26,7 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
+  final messagetextcontroller = TextEditingController();
   List<firebase_storage.UploadTask> _uploadTasks = [];
   bool checkBoxValue = false;
   double _height;
@@ -34,9 +37,9 @@ class _ProfileState extends State<Profile> {
   bool signingup = false;
   // var name, email, photoUrl, uid, emailVerified, phnum;
   String _email, name, phnum;
-
+  Widget dataname, datacontact, dataemail;
   final auth = FirebaseAuth.instance;
-  final firestore = FirebaseFirestore.instance;
+
   Future<firebase_storage.UploadTask> uploadFile(PickedFile file) async {
     if (file == null) {
       EdgeAlert.show(context,
@@ -56,8 +59,11 @@ class _ProfileState extends State<Profile> {
     // Create a Reference to the file
     firebase_storage.Reference ref = firebase_storage.FirebaseStorage.instance
         .ref()
-        .child('User image')
+        .child('User_image')
         .child('/$uid.jpg');
+
+    var url = await ref.getDownloadURL();
+    print(url);
 
     final metadata = firebase_storage.SettableMetadata(
         contentType: 'image/jpeg',
@@ -77,7 +83,95 @@ class _ProfileState extends State<Profile> {
       _uploadTasks = _uploadTasks..removeAt(index);
     });
   }
-  
+
+  // StreamBuilder(
+  //     stream: FirebaseFirestore.instance.collection('users').snapshots(),
+  //     // stream:  FirebaseFirestore.instance.collection('test').snapshots(),
+  //     builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+  //       if (!snapshot.hasData){ return new Text('Loading...');}
+  //      return ListView(
+
+  //         children: snapshot.data.docs.map((document) {
+
+  //           return Container(
+
+  //             child: Center(child: Text(document['name'])),
+
+  //           );
+
+  //         }).toList(),
+  //      );
+  //       );
+  //       // if (snapshot.hasData) {
+  //       //   return dataname = (snapshot.data.docs[0]['name']);
+  //       // }
+  //       // if (snapshot.hasData) {
+  //       //   return datacontact = snapshot.data.docs[2]['contact'];
+  //       // }
+  //       // if (snapshot.hasData) {
+  //       //   return dataemail = snapshot.data.docs[1]['email'];
+  //       // }
+  Widget firedata() {
+    //BuildContext context
+    var firebaseUser = FirebaseAuth.instance.currentUser;
+    return new StreamBuilder(
+        stream: FirebaseFirestore.instance
+            .collection('users')
+            .doc(firebaseUser.uid)
+            .snapshots(),
+        builder: (context, snapshot) {
+          if (!snapshot.hasData) {
+            return new Text("Loading");
+          }
+          var userDocument = snapshot.data;
+          return new Text(
+            userDocument["name"],
+           style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+          );
+        });
+  }
+
+  Widget firedata1() {
+    //BuildContext context
+    var firebaseUser = FirebaseAuth.instance.currentUser;
+    return new StreamBuilder(
+        stream: FirebaseFirestore.instance
+            .collection('users')
+            .doc(firebaseUser.uid)
+            .snapshots(),
+        builder: (context, snapshot) {
+          if (!snapshot.hasData) {
+            return new Text("Loading");
+          }
+          var userDocument = snapshot.data;
+          
+          return new Text(
+            userDocument["email"],
+            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+          );
+        });
+  }
+
+  Widget firedata2() {
+    //BuildContext context
+    var firebaseUser = FirebaseAuth.instance.currentUser;
+    return new StreamBuilder(
+        stream: FirebaseFirestore.instance
+            .collection('users')
+            .doc(firebaseUser.uid)
+            .snapshots(),
+        builder: (context, snapshot) {
+          if (!snapshot.hasData) {
+            return new Text("Loading");
+          }
+          var userDocument = snapshot.data;
+          
+          return new Text(
+            userDocument["contact"],
+            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+          );
+        });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -90,11 +184,6 @@ class _ProfileState extends State<Profile> {
     return Material(
       child: Scaffold(
         body: Container(
-          decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [Colors.blue[300], Colors.yellowAccent],
-                ),
-              ),
           height: _height,
           width: _width,
           margin: EdgeInsets.only(bottom: 5),
@@ -103,7 +192,10 @@ class _ProfileState extends State<Profile> {
               children: <Widget>[
                 Opacity(opacity: 0.88, child: CustomAppBar()),
                 clipShape(),
-                form(),
+                // form(),
+                firedata(),
+                firedata1(),
+                firedata2(),
                 SizedBox(
                   height: _height / 35,
                 ),
@@ -129,7 +221,7 @@ class _ProfileState extends State<Profile> {
                   : (_medium ? _height / 7 : _height / 6.5),
               decoration: BoxDecoration(
                 gradient: LinearGradient(
-                  colors: [Colors.blue[300], Colors.yellowAccent],
+                  colors: [Colors.blue[200], Colors.yellowAccent],
                 ),
               ),
             ),
@@ -145,7 +237,7 @@ class _ProfileState extends State<Profile> {
                   : (_medium ? _height / 11 : _height / 10),
               decoration: BoxDecoration(
                 gradient: LinearGradient(
-                  colors: [Colors.blue[300], Colors.yellowAccent],
+                  colors: [Colors.blue[200], Colors.yellowAccent],
                 ),
               ),
             ),
@@ -189,26 +281,25 @@ class _ProfileState extends State<Profile> {
 
   Widget form() {
     return Container(
-    
       margin: EdgeInsets.only(
           left: _width / 12.0, right: _width / 12.0, top: _height / 20.0),
-          
       child: Form(
-        child: Column(
-          children: <Widget>[
-            Text('Name', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-            SizedBox(height: _height / 80.0),
-            Text('email', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-            SizedBox(height: _height / 80.0),
-            Text('Contact', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-            SizedBox(height: _height / 80.0),
-          ],
-        ),
+        child: Column(children: <Widget>[
+          Text('Name:',
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+          SizedBox(height: _height / 80.0),
+          // snapshot.data.docs[0]['name'],
+          Text('E-mail:',
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+          SizedBox(height: _height / 80.0),
+          // snapshot.data.docs[0]['email']
+          Text('Contact:',
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+          SizedBox(height: _height / 80.0),
+        ]),
       ),
     );
   }
-
-  
 
   Widget acceptTermsTextRow() {
     return Container(
@@ -217,7 +308,7 @@ class _ProfileState extends State<Profile> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Checkbox(
-              activeColor: Colors.blue[300],
+              activeColor: Colors.blue[400],
               value: checkBoxValue,
               onChanged: (bool newValue) {
                 setState(() {
@@ -281,10 +372,11 @@ class _ProfileState extends State<Profile> {
                 print(uid);
               });*/
             firestore.collection("users").doc('$uid').set({
-              "name": name,
-              // "email": _email,
+              "name": name.toString(),
+              "email": _email,
               "contact": phnum,
-              "uid": uid
+              "uid": uid,
+              "photo": "gs://dscsolution-80cbc.appspot.com/User_image/$uid.jpg"
             }, SetOptions(merge: true));
             // .doc("collection")
             // .set(data);
@@ -344,4 +436,4 @@ class _ProfileState extends State<Profile> {
       ),
     );
   }
-} //end of signup
+}

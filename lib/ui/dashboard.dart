@@ -182,20 +182,22 @@ class _DashboardState extends State<Dashboard> {
                     ),
                     Card(
                       child: FlatButton(
-                        onPressed: () async {
-                          DocumentSnapshot variable = await FirebaseFirestore
-                              .instance
-                              .collection('users')
-                              .doc('1fyyIIbwKiRhBm84JMYXZla7mmA3')
-                              .get().then((data) async {
-                     var dataReceive = data['name'];
-                     print(dataReceive['name']);
-                              });
-                          
+                        onPressed: ()async {
+ var firebaseUser =  FirebaseAuth.instance.currentUser;
+  // ignore: unused_local_variable
+  DocumentSnapshot value = await FirebaseFirestore.instance.collection("users").doc(firebaseUser.uid).get().then((value){
+      // return value.data();
+       print(value.data());
+      //  Text:value.data();
+       
+    });
+
+                
+
                           Navigator.push(
                               context,
                               new MaterialPageRoute(
-                                  builder: (context) => Profile()));
+                                  builder: (BuildContext context) => Profile()));
                         },
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8)),

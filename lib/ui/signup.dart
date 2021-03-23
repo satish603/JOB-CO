@@ -1,4 +1,5 @@
 //import 'dart:html';
+// import 'dart:html';
 import 'dart:io' as io;
 import 'package:dsc/ui/dashboard.dart';
 import 'package:flutter/foundation.dart';
@@ -110,6 +111,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
         .child('User image')
         .child('/user.jpg');
 
+        var url = await ref.getDownloadURL();
+    print(url);
+    // document.querySelector('img').src = test;
+  
+
     final metadata = firebase_storage.SettableMetadata(
         contentType: 'image/jpeg',
         customMetadata: {'picked-file-path': file.path});
@@ -122,6 +128,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
     return Future.value(uploadTask);
   }
+ 
 
   /// Handles the user pressing the PopupMenuItem item.
   /* Future<void> handleUploadType(UploadType type) async {
