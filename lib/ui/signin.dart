@@ -59,8 +59,8 @@ class _SignInScreenState extends State<SignInScreen> {
               form(),
               forgetPassTextRow(),
               SizedBox(height: _height / 12),
-              button2(),button(),
-              signUpTextRow(),signUpTextRow1(),
+              button2(),
+              signUpTextRow(),
             ],
           ),
         ),
@@ -305,7 +305,7 @@ class _SignInScreenState extends State<SignInScreen> {
           ),
           padding: const EdgeInsets.all(12.0),
           child: Text(
-            'LOGIN Customer',
+            'LOGIN ',
             style: TextStyle(
                 fontWeight: FontWeight.w900,
                 fontSize: _large ? 14 : (_medium ? 14 : 10)),
@@ -346,7 +346,7 @@ class _SignInScreenState extends State<SignInScreen> {
     );
   }
 
-  Widget button() {
+  /*Widget button() {
     return RaisedButton(
         elevation: 0,
         shape:
@@ -425,5 +425,5 @@ class _SignInScreenState extends State<SignInScreen> {
         ],
       ),
     );
-  }
+  }*/
 }
