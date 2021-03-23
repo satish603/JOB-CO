@@ -105,7 +105,37 @@ class _RandomState extends State<Random> {
                             Image.asset('assets/images/jobs.jpg', height: 90),
 
                             Text(
-                              'Jobs Vacancy',
+                              'Appli_sta',
+                              style: cardTextStyle,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                     Card(
+                      elevation: 20,
+                      child: FlatButton(
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              new MaterialPageRoute(
+                                  builder: (context) => JobDetials()));
+                        },
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8)),
+                        child: Column(
+                          // mainAxisAlignment: MainAxisAlignment.start,
+                          // crossAxisAlignment: CrossAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          mainAxisSize: MainAxisSize.min,
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: <Widget>[
+                            // alignment: Alignment.topRight,
+
+                            Image.asset('assets/images/jobs.jpg', height: 90),
+
+                            Text(
+                              'Jobdetials',
                               style: cardTextStyle,
                             ),
                           ],
@@ -130,7 +160,7 @@ class _RandomState extends State<Random> {
                               height: 128,
                             ),
                             Text(
-                              'Shops',
+                              'Applynow',
                               style: cardTextStyle,
                             )
                           ],
@@ -159,7 +189,7 @@ class _RandomState extends State<Random> {
                               height: 128,
                             ),
                             Text(
-                              'Profile',
+                              'Busiines',
                               style: cardTextStyle,
                             ),
                           ],
@@ -184,7 +214,7 @@ class _RandomState extends State<Random> {
                               height: 128,
                             ),
                             Text(
-                              'JOB Details',
+                              'Contact',
                               style: cardTextStyle,
                             )
                           ],
@@ -209,7 +239,7 @@ class _RandomState extends State<Random> {
                               height: 128,
                             ),
                             Text(
-                              'JOB Details',
+                              'Customerdash',
                               style: cardTextStyle,
                             )
                           ],
@@ -234,7 +264,7 @@ class _RandomState extends State<Random> {
                               height: 128,
                             ),
                             Text(
-                              'JOB Details',
+                              'Dashboard',
                               style: cardTextStyle,
                             )
                           ],
@@ -259,7 +289,7 @@ class _RandomState extends State<Random> {
                               height: 128,
                             ),
                             Text(
-                              'JOB Details',
+                              'JOB',
                               style: cardTextStyle,
                             )
                           ],
@@ -309,7 +339,7 @@ class _RandomState extends State<Random> {
                               height: 128,
                             ),
                             Text(
-                              'Contact',
+                              'addjob',
                               style: cardTextStyle,
                             )
                           ],
@@ -333,7 +363,7 @@ class _RandomState extends State<Random> {
                               height: 128,
                             ),
                             Text(
-                              'Contact',
+                              'jobitem',
                               style: cardTextStyle,
                             )
                           ],
@@ -357,7 +387,7 @@ class _RandomState extends State<Random> {
                               height: 128,
                             ),
                             Text(
-                              'Contact',
+                              'Job main',
                               style: cardTextStyle,
                             )
                           ],
@@ -382,7 +412,7 @@ class _RandomState extends State<Random> {
                               height: 128,
                             ),
                             Text(
-                              'Contact',
+                              'profile',
                               style: cardTextStyle,
                             )
                           ],
@@ -407,7 +437,7 @@ class _RandomState extends State<Random> {
                               height: 128,
                             ),
                             Text(
-                              'Contact',
+                              'shop',
                               style: cardTextStyle,
                             )
                           ],
@@ -432,7 +462,7 @@ class _RandomState extends State<Random> {
                               height: 128,
                             ),
                             Text(
-                              'Application Status',
+                              'Update profile',
                               style: cardTextStyle,
                             )
                           ],

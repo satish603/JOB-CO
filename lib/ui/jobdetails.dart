@@ -17,10 +17,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class JobDetials extends StatefulWidget {
   @override
-  _SignUpScreenState createState() => _SignUpScreenState();
+  _JobdetailsState createState() => _JobdetailsState();
 }
 
-class _SignUpScreenState extends State<JobDetials> {
+class _JobdetailsState extends State<JobDetials> {
   bool checkBoxValue = false;
   double _height;
   double _width;
