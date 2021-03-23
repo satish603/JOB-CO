@@ -1,6 +1,7 @@
 //import 'dart:html';
 // import 'dart:html';
 import 'dart:io' as io;
+import 'package:dsc/ui/customerdash.dart';
 import 'package:dsc/ui/dashboard.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -174,6 +175,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 ),
                 button(),
                 infoTextRow(),
+                button1(),
                 socialIconsRow(),
                 //signInTextRow(),
               ],
@@ -585,7 +587,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               //await newUser.user.updateProfile(info);
 
               Navigator.push(context,
-                  new MaterialPageRoute(builder: (context) => Dashboard()));
+                  new MaterialPageRoute(builder: (context) => CDashboard()));
             }
           } catch (e) {
             setState(() {
@@ -629,5 +631,102 @@ class _SignUpScreenState extends State<SignUpScreen> {
         ),
       ),
     );
+    
+  }
+   Widget button1() {
+    return RaisedButton(
+      elevation: 0,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
+      onPressed: () async {
+        if (name != null &&
+            _password != null &&
+            _email != null &&
+            checkBoxValue == true) {
+          setState(() {
+            signingup = true;
+          });
+          try {
+            final newUser = await auth.createUserWithEmailAndPassword(
+                email: _email, password: _password);
+            // Map <String,dynamic> data= {"name":name.text,"email":email.text,"contact":phnum.text};
+            //   FirebaseFirestore.instance.collection("users").doc("collection").set(data);
+
+            if (newUser != null) {
+              final User user = auth.currentUser;
+              final uid = user.uid;
+              /* firestore.collection("users").add({
+                "name": name,
+                "email": _email,
+                "contact": phnum,
+                "uid": uid
+              }).then((value) {
+                print(value.id);
+                print(uid);
+              });*/
+              firestore.collection("users").doc('$uid').set({
+                "name": name,
+                "email": _email,
+                "contact": phnum,
+                "uid": uid
+              });
+              // .doc("collection")
+              // .set(data);
+              // .collection("users")
+              // .doc("collection")
+              // .set(data);
+              // User updateUser = FirebaseAuth.instance.currentUser;
+              // updateUser.updateProfile(displayName: name);
+              // updateUser.updateProfile(photoURL: url);
+              // updateUser.uid;
+              // updateUser.displayName;
+              // updateUser.phoneNumber;
+              //await newUser.user.updateProfile(info);
+
+              Navigator.push(context,
+                  new MaterialPageRoute(builder: (context) => CDashboard()));
+            }
+          } catch (e) {
+            setState(() {
+              signingup = false;
+            });
+            EdgeAlert.show(context,
+                title: 'Signup Failed',
+                description: e.toString(),
+                gravity: EdgeAlert.BOTTOM,
+                icon: Icons.error,
+                backgroundColor: Colors.blue[400]);
+          }
+        } else {
+          EdgeAlert.show(context,
+              title: 'Signup Failed',
+              description:
+                  'All fields are required. Accept all terms and conditions',
+              gravity: EdgeAlert.BOTTOM,
+              icon: Icons.error,
+              backgroundColor: Colors.blue[400]);
+        }
+      },
+      textColor: Colors.white,
+      padding: EdgeInsets.all(0.0),
+      child: Container(
+        alignment: Alignment.center,
+//        height: _height / 20,
+        width: _large ? _width / 4 : (_medium ? _width / 2.75 : _width / 3.5),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(20.0)),
+          gradient: LinearGradient(
+            colors: <Color>[Colors.blue[900], Colors.blueAccent[100]],
+          ),
+        ),
+        padding: const EdgeInsets.all(12.0),
+        child: Text(
+          'SIGN UP Bussiness',
+          style: TextStyle(
+              fontWeight: FontWeight.w900,
+              fontSize: _large ? 14 : (_medium ? 12 : 10)),
+        ),
+      ),
+    );
+    
   }
 } //end of signup
