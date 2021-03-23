@@ -1,5 +1,3 @@
-import 'package:dsc/ui/business.dart';
-import 'package:dsc/ui/customerdash.dart';
 import 'package:edge_alert/edge_alert.dart';
 import 'package:flutter/material.dart';
 import 'package:dsc/constants/constants.dart';
@@ -55,12 +53,11 @@ class _SignInScreenState extends State<SignInScreen> {
               clipShape(),
               welcomeTextRow(),
               signInTextRow(),
-              
               form(),
               forgetPassTextRow(),
               SizedBox(height: _height / 12),
-              button2(),button(),
-              signUpTextRow(),signUpTextRow1(),
+              button(),
+              signUpTextRow(),
             ],
           ),
         ),
@@ -265,7 +262,7 @@ class _SignInScreenState extends State<SignInScreen> {
     );
   }
 
-  Widget button2() {
+  Widget button() {
     return RaisedButton(
         elevation: 0,
         shape:
@@ -276,7 +273,7 @@ class _SignInScreenState extends State<SignInScreen> {
                 .signInWithEmailAndPassword(email: _email, password: _password)
                 .then((_) {
               Navigator.push(context,
-                  new MaterialPageRoute(builder: (context) => CDashboard()));
+                  new MaterialPageRoute(builder: (context) => Dashboard()));
             });
 
             //  Navigator.of(context).pushNamed(LOGIN); //new line
@@ -305,7 +302,7 @@ class _SignInScreenState extends State<SignInScreen> {
           ),
           padding: const EdgeInsets.all(12.0),
           child: Text(
-            'LOGIN Customer',
+            'LOGIN',
             style: TextStyle(
                 fontWeight: FontWeight.w900,
                 fontSize: _large ? 14 : (_medium ? 14 : 10)),
@@ -335,87 +332,6 @@ class _SignInScreenState extends State<SignInScreen> {
             },
             child: Text(
               "Sign up",
-              style: TextStyle(
-                  fontWeight: FontWeight.w900,
-                  color: Colors.blue[900],
-                  fontSize: _large ? 19 : (_medium ? 17 : 15)),
-            ),
-          )
-        ],
-      ),
-    );
-  }
-
-  Widget button() {
-    return RaisedButton(
-        elevation: 0,
-        shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
-        onPressed: () async {
-          if (_password != null && _email != null) {
-            await auth
-                .signInWithEmailAndPassword(email: _email, password: _password)
-                .then((_) {
-              Navigator.push(context,
-                  new MaterialPageRoute(builder: (context) => BDashboard()));
-            });
-
-            //  Navigator.of(context).pushNamed(LOGIN); //new line
-            print("Routing to your account");
-            Scaffold.of(context)
-                .showSnackBar(SnackBar(content: Text('Wrong ID OR Password')));
-          } else {
-            EdgeAlert.show(context,
-                title: 'Login Failed',
-                description: 'All fields are required.',
-                gravity: EdgeAlert.BOTTOM,
-                icon: Icons.error,
-                backgroundColor: Colors.blue[400]);
-          }
-        },
-        textColor: Colors.white,
-        padding: EdgeInsets.all(0.0),
-        child: Container(
-          alignment: Alignment.center,
-          width: _large ? _width / 5 : (_medium ? _width / 2.75 : _width / 1.5),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.all(Radius.circular(20.0)),
-            gradient: LinearGradient(
-              colors: <Color>[Colors.blue[900], Colors.blueAccent[100]],
-            ),
-          ),
-          padding: const EdgeInsets.all(12.0),
-          child: Text(
-            'LOGIN bussiness',
-            style: TextStyle(
-                fontWeight: FontWeight.w900,
-                fontSize: _large ? 14 : (_medium ? 14 : 10)),
-          ),
-        ));
-  }
-
-  Widget signUpTextRow1() {
-    return Container(
-      margin: EdgeInsets.only(top: _height / 120.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Text(
-            "Don't have an account business?",
-            style: TextStyle(
-                fontWeight: FontWeight.w600,
-                fontSize: _large ? 14 : (_medium ? 12 : 10)),
-          ),
-          SizedBox(
-            width: 5,
-          ),
-          GestureDetector(
-            onTap: () {
-              Navigator.of(context).pushNamed(SIGN_UP);
-              print("Routing to Sign up screen");
-            },
-            child: Text(
-              "Sign up Bussiness",
               style: TextStyle(
                   fontWeight: FontWeight.w900,
                   color: Colors.blue[900],
