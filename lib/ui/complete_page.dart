@@ -1,9 +1,15 @@
+import 'package:dsc/ui/Update_Profile.dart';
+import 'package:dsc/ui/addjob.dart';
 import 'package:dsc/ui/appli_status.dart';
-import 'package:dsc/ui/complete_page.dart';
+import 'package:dsc/ui/applynow.dart';
+import 'package:dsc/ui/business.dart';
 import 'package:dsc/ui/contactus.dart';
+import 'package:dsc/ui/customerdash.dart';
+import 'package:dsc/ui/dashboard.dart';
 import 'package:dsc/ui/job.dart';
 
 import 'package:dsc/ui/jobdetails.dart';
+import 'package:dsc/ui/jobitem.dart';
 import 'package:dsc/ui/jobmain.dart';
 import 'package:dsc/ui/shops.dart';
 import 'package:dsc/ui/signin.dart';
@@ -29,12 +35,12 @@ class AuthenticationProvider {
   }
 }
 
-class Dashboard extends StatefulWidget {
+class Random extends StatefulWidget {
   @override
-  _DashboardState createState() => _DashboardState();
+  _RandomState createState() => _RandomState();
 }
 
-class _DashboardState extends State<Dashboard> {
+class _RandomState extends State<Random> {
   var user = FirebaseAuth.instance.currentUser;
 
   @override
@@ -67,59 +73,8 @@ class _DashboardState extends State<Dashboard> {
           padding: EdgeInsets.all(16.0),
           child: Column(
             children: <Widget>[
-              Container(
-                height: 64,
-                margin: EdgeInsets.only(bottom: 20),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    CircleAvatar(
-                      radius: 32,
-                      backgroundImage: AssetImage('assets/images/download.jpg'),
-                    ),
-                    SizedBox(
-                      width: 16,
-                    ),
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Text(
-                          '${user.displayName}',
-                          style: TextStyle(
-                              fontFamily: "Montserrat Medium",
-                              color: Colors.white,
-                              fontSize: 20),
-                        ),
-                        Text(
-                          '${user.email}',
-                          style: TextStyle(
-                              fontSize: 14,
-                              color: Colors.white,
-                              fontFamily: "Montserrat Regular"),
-                        )
-                      ],
-                    )
-                  ],
-                ),
-              ),
-              Align(
-                  alignment: Alignment.bottomRight,
-                  // ignore: deprecated_member_use
-                  child: RaisedButton(
-                    onPressed: () async {
-                      await FirebaseAuth.instance.signOut();
-                      Navigator.of(context).pushAndRemoveUntil(
-                          MaterialPageRoute(
-                              builder: (BuildContext context) => SignInPage()),
-                          (Route<dynamic> route) => false);
-                    },
-                    child:
-                        const Text('Signout', style: TextStyle(fontSize: 20)),
-                    color: Colors.blueAccent,
-                    textColor: Colors.white,
-                    elevation: 5,
-                  )),
+            
+              
               Expanded(
                 child: GridView.count(
                   mainAxisSpacing: 10,
@@ -134,7 +89,7 @@ class _DashboardState extends State<Dashboard> {
                           Navigator.push(
                               context,
                               new MaterialPageRoute(
-                                  builder: (context) => Jobmain()));
+                                  builder: (context) => Status()));
                         },
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8)),
@@ -163,7 +118,7 @@ class _DashboardState extends State<Dashboard> {
                           Navigator.push(
                               context,
                               new MaterialPageRoute(
-                                  builder: (context) => Shop1()));
+                                  builder: (context) => Apply()));
                         },
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8)),
@@ -184,22 +139,15 @@ class _DashboardState extends State<Dashboard> {
                     ),
                     Card(
                       child: FlatButton(
-                        onPressed: ()async {
- var firebaseUser =  FirebaseAuth.instance.currentUser;
-  // ignore: unused_local_variable
-  DocumentSnapshot value = await FirebaseFirestore.instance.collection("users").doc(firebaseUser.uid).get().then((value){
-      // return value.data();
-       print(value.data());
-      //  Text:value.data();
-       
-    });
+                        onPressed: () {
+
 
                 
 
                           Navigator.push(
                               context,
                               new MaterialPageRoute(
-                                  builder: (BuildContext context) => Profile()));
+                                  builder: (BuildContext context) => BDashboard()));
                         },
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8)),
@@ -224,7 +172,82 @@ class _DashboardState extends State<Dashboard> {
                           Navigator.push(
                               context,
                               new MaterialPageRoute(
-                                  builder: (context) => JobDetials()));
+                                  builder: (context) => Contact()));
+                        },
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8)),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Image.asset(
+                              'assets/images/download.jpg',
+                              height: 128,
+                            ),
+                            Text(
+                              'JOB Details',
+                              style: cardTextStyle,
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                     Card(
+                      child: FlatButton(
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              new MaterialPageRoute(
+                                  builder: (context) => CDashboard()));
+                        },
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8)),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Image.asset(
+                              'assets/images/download.jpg',
+                              height: 128,
+                            ),
+                            Text(
+                              'JOB Details',
+                              style: cardTextStyle,
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                     Card(
+                      child: FlatButton(
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              new MaterialPageRoute(
+                                  builder: (context) => Dashboard()));
+                        },
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8)),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Image.asset(
+                              'assets/images/download.jpg',
+                              height: 128,
+                            ),
+                            Text(
+                              'JOB Details',
+                              style: cardTextStyle,
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                     Card(
+                      child: FlatButton(
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              new MaterialPageRoute(
+                                  builder: (context) => Job()));
                         },
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8)),
@@ -274,7 +297,130 @@ class _DashboardState extends State<Dashboard> {
                           Navigator.push(
                               context,
                               new MaterialPageRoute(
-                                  builder: (context) => Job()));
+                                  builder: (context) => AddUser()));
+                        },
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8)),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Image.asset(
+                              'assets/images/download.jpg',
+                              height: 128,
+                            ),
+                            Text(
+                              'Contact',
+                              style: cardTextStyle,
+                            )
+                          ],
+                        ),
+                      ),
+                    ),Card(
+                      child: FlatButton(
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              new MaterialPageRoute(
+                                  builder: (context) => Job1()));
+                        },
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8)),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Image.asset(
+                              'assets/images/download.jpg',
+                              height: 128,
+                            ),
+                            Text(
+                              'Contact',
+                              style: cardTextStyle,
+                            )
+                          ],
+                        ),
+                      ),
+                    ),Card(
+                      child: FlatButton(
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              new MaterialPageRoute(
+                                  builder: (context) => Jobmain()));
+                        },
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8)),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Image.asset(
+                              'assets/images/download.jpg',
+                              height: 128,
+                            ),
+                            Text(
+                              'Contact',
+                              style: cardTextStyle,
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                    Card(
+                      child: FlatButton(
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              new MaterialPageRoute(
+                                  builder: (context) => Profile()));
+                        },
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8)),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Image.asset(
+                              'assets/images/download.jpg',
+                              height: 128,
+                            ),
+                            Text(
+                              'Contact',
+                              style: cardTextStyle,
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                    Card(
+                      child: FlatButton(
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              new MaterialPageRoute(
+                                  builder: (context) => Shop1()));
+                        },
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8)),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Image.asset(
+                              'assets/images/download.jpg',
+                              height: 128,
+                            ),
+                            Text(
+                              'Contact',
+                              style: cardTextStyle,
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                    Card(
+                      child: FlatButton(
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              new MaterialPageRoute(
+                                  builder: (context) => UProfile()));
                         },
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8)),
@@ -287,31 +433,6 @@ class _DashboardState extends State<Dashboard> {
                             ),
                             Text(
                               'Application Status',
-                              style: cardTextStyle,
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
-                     Card(
-                      child: FlatButton(
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              new MaterialPageRoute(
-                                  builder: (context) => Random()));
-                        },
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8)),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            Image.asset(
-                              'assets/images/download.jpg',
-                              height: 128,
-                            ),
-                            Text(
-                              'Random',
                               style: cardTextStyle,
                             )
                           ],

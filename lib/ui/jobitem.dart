@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dsc/ui/jobdata.dart';
 import 'package:flutter/material.dart';
 
-class Job extends StatefulWidget {
+class Job1 extends StatefulWidget {
   static const routeName = 'jobitem'; //new
   final String jobName;
   final String salary;
@@ -10,7 +10,7 @@ class Job extends StatefulWidget {
   final bool isFavourite;
   final String id;
   final DocumentSnapshot documentSnapshot;
-  Job({
+  Job1({
     @required this.imageUrl,
     @required this.documentSnapshot,
     @required this.id,
@@ -20,10 +20,10 @@ class Job extends StatefulWidget {
   });
 
   @override
-  _JobState createState() => _JobState();
+  _Job1State createState() => _Job1State();
 }
 
-class _JobState extends State<Job> {
+class _Job1State extends State<Job1> {
   @override
   Widget build(BuildContext context) {
     return Padding(

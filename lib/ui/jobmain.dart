@@ -105,7 +105,7 @@ class _JobmainState extends State<Jobmain> {
                   itemCount: snapshot.data.docs.length,
                   itemBuilder: (context, index) {
                     DocumentSnapshot data = snapshot.data.docs[index];
-                    return Job(
+                    return Job1(
                       documentSnapshot: data,
                       id: data.id,
                       isFavourite: data['isFavourite'],
