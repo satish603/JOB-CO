@@ -54,10 +54,10 @@ class _JobState extends State<Job> {
                 itemBuilder: (context, index) {
                   DocumentSnapshot data = snapshot.data.docs[index];
                   return PlaceInfo(
-                    name: data['jobName'],
-                    cla: data['salary'],
-                    location: data['xx'],
-                    category: data['gg'],
+                    name: data['Job'],
+                    cla: data['Salary'],
+                    location: data['Location'],
+                    category: data['Vacancy'],
                     startColor:Color(0xff6DC8F3),
                     endColor: Color(0xff73A1F9),
                   );
@@ -225,10 +225,10 @@ class PlaceInfo extends StatelessWidget {
                 itemBuilder: (context, index) {
                   DocumentSnapshot data = snapshot.data.docs[index];
                   return PlaceInfo(
-                    name: data['name'],
-                    cla: data['salary'],
-                    location: data['xx'],
-                    category: data['gg'],
+                    name: data['Job'],
+                    cla: data['Salary'],
+                    location: data['Location'],
+                    category: data['Vacancy'],
                   );
                 },
               );

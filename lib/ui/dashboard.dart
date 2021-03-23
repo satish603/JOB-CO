@@ -1,5 +1,6 @@
 import 'package:dsc/ui/appli_status.dart';
 import 'package:dsc/ui/contactus.dart';
+import 'package:dsc/ui/job.dart';
 
 import 'package:dsc/ui/jobdetails.dart';
 import 'package:dsc/ui/jobmain.dart';
@@ -272,7 +273,7 @@ class _DashboardState extends State<Dashboard> {
                           Navigator.push(
                               context,
                               new MaterialPageRoute(
-                                  builder: (context) => Status()));
+                                  builder: (context) => Job()));
                         },
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8)),
