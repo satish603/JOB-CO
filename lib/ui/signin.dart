@@ -31,6 +31,7 @@ class _SignInScreenState extends State<SignInScreen> {
   bool _medium;
   String _email;
   String _password;
+  String dropdownValue = 'Customer';
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   GlobalKey<FormState> _key = GlobalKey();
@@ -57,6 +58,7 @@ class _SignInScreenState extends State<SignInScreen> {
               signInTextRow(),
               
               form(),
+               
               forgetPassTextRow(),
               SizedBox(height: _height / 12),
               button2(),
@@ -164,7 +166,8 @@ class _SignInScreenState extends State<SignInScreen> {
           children: <Widget>[
             emailTextFormField(),
             SizedBox(height: _height / 40.0),
-            passwordTextFormField(),
+            passwordTextFormField(), SizedBox(height: _height / 40.0),
+            user_busi(), SizedBox(height: _height / 40.0),
           ],
         ),
       ),
@@ -213,7 +216,25 @@ class _SignInScreenState extends State<SignInScreen> {
               _password = val;
             });
   }
-
+Widget user_busi() {
+    return DropdownButton<String>(
+      value: dropdownValue,
+      icon: const Icon(Icons.arrow_downward),
+      
+      onChanged: (String newValue) {
+        setState(() {
+          dropdownValue = newValue;
+        });
+      },
+      items: <String>['Customer', 'Bussiness']
+          .map<DropdownMenuItem<String>>((String value) {
+        return DropdownMenuItem<String>(
+          value: value,
+          child: Text(value),
+        );
+      }).toList(),
+    );
+  }
   Widget forgetPassTextRow() {
     return Container(
       margin: EdgeInsets.only(top: _height / 40.0),

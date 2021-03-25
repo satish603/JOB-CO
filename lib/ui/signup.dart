@@ -93,6 +93,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
   String _email, _password, name, phnum;
   final auth = FirebaseAuth.instance;
   final firestore = FirebaseFirestore.instance;
+ 
+  
   // TextEditingController name1 = new TextEditingController();
   // //TextEditingController email = new TextEditingController();
   // TextEditingController phnum1 = new TextEditingController();
@@ -112,10 +114,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
         .child('User image')
         .child('/user.jpg');
 
-        var url = await ref.getDownloadURL();
+    var url = await ref.getDownloadURL();
     print(url);
     // document.querySelector('img').src = test;
-  
 
     final metadata = firebase_storage.SettableMetadata(
         contentType: 'image/jpeg',
@@ -129,7 +130,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
     return Future.value(uploadTask);
   }
- 
 
   /// Handles the user pressing the PopupMenuItem item.
   /* Future<void> handleUploadType(UploadType type) async {
@@ -169,6 +169,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 Opacity(opacity: 0.88, child: CustomAppBar()),
                 clipShape(),
                 form(),
+               
                 acceptTermsTextRow(),
                 SizedBox(
                   height: _height / 35,
@@ -378,6 +379,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
       // controller: phnum,
     );
   }
+
+
+  
+  
 
   Widget passwordTextFormField() {
     return /*TextField(
@@ -631,9 +636,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
         ),
       ),
     );
-    
   }
-   Widget button1() {
+
+  Widget button1() {
     return RaisedButton(
       elevation: 0,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
@@ -727,6 +732,5 @@ class _SignUpScreenState extends State<SignUpScreen> {
         ),
       ),
     );
-    
   }
 } //end of signup
