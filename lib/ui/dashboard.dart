@@ -1,10 +1,7 @@
 import 'package:dsc/ui/appli_status.dart';
 import 'package:dsc/ui/complete_page.dart';
 import 'package:dsc/ui/contactus.dart';
-import 'package:dsc/ui/job.dart';
 
-import 'package:dsc/ui/jobdetails.dart';
-import 'package:dsc/ui/jobmain.dart';
 import 'package:dsc/ui/shops.dart';
 import 'package:dsc/ui/signin.dart';
 import 'package:dsc/ui/signup.dart';
@@ -128,36 +125,6 @@ class _DashboardState extends State<Dashboard> {
                   crossAxisCount: 2,
                   children: <Widget>[
                     Card(
-                      elevation: 20,
-                      child: FlatButton(
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              new MaterialPageRoute(
-                                  builder: (context) => Jobmain()));
-                        },
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8)),
-                        child: Column(
-                          // mainAxisAlignment: MainAxisAlignment.start,
-                          // crossAxisAlignment: CrossAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          mainAxisSize: MainAxisSize.min,
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: <Widget>[
-                            // alignment: Alignment.topRight,
-
-                            Image.asset('assets/images/jobs.jpg', height: 90),
-
-                            Text(
-                              'Jobs Vacancy',
-                              style: cardTextStyle,
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    Card(
                       child: FlatButton(
                         onPressed: () {
                           Navigator.push(
@@ -184,22 +151,25 @@ class _DashboardState extends State<Dashboard> {
                     ),
                     Card(
                       child: FlatButton(
-                        onPressed: ()async {
- var firebaseUser =  FirebaseAuth.instance.currentUser;
-  // ignore: unused_local_variable
-  DocumentSnapshot value = await FirebaseFirestore.instance.collection("users").doc(firebaseUser.uid).get().then((value){
-      // return value.data();
-       print(value.data());
-      //  Text:value.data();
-       
-    });
-
-                
+                        onPressed: () async {
+                          var firebaseUser = FirebaseAuth.instance.currentUser;
+                          // ignore: unused_local_variable
+                          DocumentSnapshot value = await FirebaseFirestore
+                              .instance
+                              .collection("users")
+                              .doc(firebaseUser.uid)
+                              .get()
+                              .then((value) {
+                            // return value.data();
+                            print(value.data());
+                            //  Text:value.data();
+                          });
 
                           Navigator.push(
                               context,
                               new MaterialPageRoute(
-                                  builder: (BuildContext context) => Profile()));
+                                  builder: (BuildContext context) =>
+                                      Profile()));
                         },
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8)),
@@ -214,31 +184,6 @@ class _DashboardState extends State<Dashboard> {
                               'Profile',
                               style: cardTextStyle,
                             ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    Card(
-                      child: FlatButton(
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              new MaterialPageRoute(
-                                  builder: (context) => JobDetials()));
-                        },
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8)),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            Image.asset(
-                              'assets/images/download.jpg',
-                              height: 128,
-                            ),
-                            Text(
-                              'JOB Details',
-                              style: cardTextStyle,
-                            )
                           ],
                         ),
                       ),
@@ -269,31 +214,6 @@ class _DashboardState extends State<Dashboard> {
                       ),
                     ),
                     Card(
-                      child: FlatButton(
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              new MaterialPageRoute(
-                                  builder: (context) => Job()));
-                        },
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8)),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            Image.asset(
-                              'assets/images/download.jpg',
-                              height: 128,
-                            ),
-                            Text(
-                              'Application Status',
-                              style: cardTextStyle,
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
-                     Card(
                       child: FlatButton(
                         onPressed: () {
                           Navigator.push(

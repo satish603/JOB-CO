@@ -1,8 +1,6 @@
 import 'package:dsc/ui/appli_status.dart';
 import 'package:dsc/ui/contactus.dart';
 
-import 'package:dsc/ui/jobdetails.dart';
-import 'package:dsc/ui/jobmain.dart';
 import 'package:dsc/ui/shops.dart';
 import 'package:dsc/ui/signin.dart';
 import 'package:dsc/ui/signup.dart';
@@ -126,48 +124,18 @@ class _CDashboardState extends State<CDashboard> {
                   crossAxisCount: 2,
                   children: <Widget>[
                     Card(
-                      elevation: 20,
-                      child: FlatButton(
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              new MaterialPageRoute(
-                                  builder: (context) => Jobmain()));
-                        },
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8)),
-                        child: Column(
-                          // mainAxisAlignment: MainAxisAlignment.start,
-                          // crossAxisAlignment: CrossAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          mainAxisSize: MainAxisSize.min,
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: <Widget>[
-                            // alignment: Alignment.topRight,
-
-                            Image.asset('assets/images/jobs.jpg', height: 90),
-
-                            Text(
-                              'Jobs Vacancy',
-                              style: cardTextStyle,
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                   
-                    Card(
                       child: FlatButton(
                         onPressed: () async {
                           DocumentSnapshot variable = await FirebaseFirestore
                               .instance
                               .collection('users')
                               .doc('1fyyIIbwKiRhBm84JMYXZla7mmA3')
-                              .get().then((data) async {
-                     var dataReceive = data['name'];
-                     print(dataReceive['name']);
-                              });
-                          
+                              .get()
+                              .then((data) async {
+                            var dataReceive = data['name'];
+                            print(dataReceive['name']);
+                          });
+
                           Navigator.push(
                               context,
                               new MaterialPageRoute(
@@ -190,7 +158,6 @@ class _CDashboardState extends State<CDashboard> {
                         ),
                       ),
                     ),
-                    
                     Card(
                       child: FlatButton(
                         onPressed: () {

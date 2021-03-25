@@ -1,20 +1,17 @@
 import 'package:dsc/ui/Update_Profile.dart';
-import 'package:dsc/ui/addjob.dart';
+
 import 'package:dsc/ui/appli_status.dart';
 import 'package:dsc/ui/applynow.dart';
 import 'package:dsc/ui/business.dart';
 import 'package:dsc/ui/contactus.dart';
 import 'package:dsc/ui/customerdash.dart';
 import 'package:dsc/ui/dashboard.dart';
-import 'package:dsc/ui/job.dart';
 
-import 'package:dsc/ui/jobdetails.dart';
-import 'package:dsc/ui/jobitem.dart';
-import 'package:dsc/ui/jobmain.dart';
 import 'package:dsc/ui/shops.dart';
 import 'package:dsc/ui/signin.dart';
 import 'package:dsc/ui/signup.dart';
 import 'package:dsc/ui/profile.dart';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
@@ -73,8 +70,6 @@ class _RandomState extends State<Random> {
           padding: EdgeInsets.all(16.0),
           child: Column(
             children: <Widget>[
-            
-              
               Expanded(
                 child: GridView.count(
                   mainAxisSpacing: 10,
@@ -112,36 +107,6 @@ class _RandomState extends State<Random> {
                         ),
                       ),
                     ),
-                     Card(
-                      elevation: 20,
-                      child: FlatButton(
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              new MaterialPageRoute(
-                                  builder: (context) => JobDetials()));
-                        },
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8)),
-                        child: Column(
-                          // mainAxisAlignment: MainAxisAlignment.start,
-                          // crossAxisAlignment: CrossAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          mainAxisSize: MainAxisSize.min,
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: <Widget>[
-                            // alignment: Alignment.topRight,
-
-                            Image.asset('assets/images/jobs.jpg', height: 90),
-
-                            Text(
-                              'Jobdetials',
-                              style: cardTextStyle,
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
                     Card(
                       child: FlatButton(
                         onPressed: () {
@@ -170,14 +135,11 @@ class _RandomState extends State<Random> {
                     Card(
                       child: FlatButton(
                         onPressed: () {
-
-
-                
-
                           Navigator.push(
                               context,
                               new MaterialPageRoute(
-                                  builder: (BuildContext context) => BDashboard()));
+                                  builder: (BuildContext context) =>
+                                      BDashboard()));
                         },
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8)),
@@ -221,7 +183,7 @@ class _RandomState extends State<Random> {
                         ),
                       ),
                     ),
-                     Card(
+                    Card(
                       child: FlatButton(
                         onPressed: () {
                           Navigator.push(
@@ -246,7 +208,7 @@ class _RandomState extends State<Random> {
                         ),
                       ),
                     ),
-                     Card(
+                    Card(
                       child: FlatButton(
                         onPressed: () {
                           Navigator.push(
@@ -265,31 +227,6 @@ class _RandomState extends State<Random> {
                             ),
                             Text(
                               'Dashboard',
-                              style: cardTextStyle,
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
-                     Card(
-                      child: FlatButton(
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              new MaterialPageRoute(
-                                  builder: (context) => Job()));
-                        },
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8)),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            Image.asset(
-                              'assets/images/download.jpg',
-                              height: 128,
-                            ),
-                            Text(
-                              'JOB',
                               style: cardTextStyle,
                             )
                           ],
@@ -315,79 +252,6 @@ class _RandomState extends State<Random> {
                             ),
                             Text(
                               'Contact',
-                              style: cardTextStyle,
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
-                    Card(
-                      child: FlatButton(
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              new MaterialPageRoute(
-                                  builder: (context) => AddUser()));
-                        },
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8)),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            Image.asset(
-                              'assets/images/download.jpg',
-                              height: 128,
-                            ),
-                            Text(
-                              'addjob',
-                              style: cardTextStyle,
-                            )
-                          ],
-                        ),
-                      ),
-                    ),Card(
-                      child: FlatButton(
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              new MaterialPageRoute(
-                                  builder: (context) => Job1()));
-                        },
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8)),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            Image.asset(
-                              'assets/images/download.jpg',
-                              height: 128,
-                            ),
-                            Text(
-                              'jobitem',
-                              style: cardTextStyle,
-                            )
-                          ],
-                        ),
-                      ),
-                    ),Card(
-                      child: FlatButton(
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              new MaterialPageRoute(
-                                  builder: (context) => Jobmain()));
-                        },
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8)),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            Image.asset(
-                              'assets/images/download.jpg',
-                              height: 128,
-                            ),
-                            Text(
-                              'Job main',
                               style: cardTextStyle,
                             )
                           ],

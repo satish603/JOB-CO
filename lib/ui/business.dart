@@ -1,7 +1,5 @@
 import 'package:dsc/ui/contactus.dart';
 
-import 'package:dsc/ui/jobdetails.dart';
-import 'package:dsc/ui/jobmain.dart';
 import 'package:dsc/ui/shops.dart';
 import 'package:dsc/ui/signin.dart';
 import 'package:dsc/ui/signup.dart';
@@ -124,7 +122,6 @@ class _BDashboardState extends State<BDashboard> {
                   primary: false,
                   crossAxisCount: 2,
                   children: <Widget>[
-                   
                     Card(
                       child: FlatButton(
                         onPressed: () {
@@ -156,12 +153,14 @@ class _BDashboardState extends State<BDashboard> {
                           DocumentSnapshot variable = await FirebaseFirestore
                               .instance
                               .collection('users')
-                              .doc('1fyyIIbwKiRhBm84JMYXZla7mmA3')
-                              .get().then((data) async {
-                     var dataReceive = data['name'];
-                     print(dataReceive['name']);
-                              });
-                          
+                              .doc(
+                                  '1fyyIIbwKiRhBm84JMYXZla7mmA3') //change to dynamic
+                              .get()
+                              .then((data) async {
+                            var dataReceive = data['name'];
+                            print(dataReceive['name']);
+                          });
+
                           Navigator.push(
                               context,
                               new MaterialPageRoute(
@@ -180,31 +179,6 @@ class _BDashboardState extends State<BDashboard> {
                               'Profile',
                               style: cardTextStyle,
                             ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    Card(
-                      child: FlatButton(
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              new MaterialPageRoute(
-                                  builder: (context) => JobDetials()));
-                        },
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8)),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            Image.asset(
-                              'assets/images/download.jpg',
-                              height: 128,
-                            ),
-                            Text(
-                              'JOB Details',
-                              style: cardTextStyle,
-                            )
                           ],
                         ),
                       ),
