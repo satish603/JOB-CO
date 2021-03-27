@@ -1,5 +1,6 @@
 import 'package:dsc/ui/contactus.dart';
 import 'package:dsc/ui/dashboard.dart';
+import 'package:dsc/ui/jobhome.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -35,6 +36,7 @@ class MyApp extends StatelessWidget {
         SIGN_UP: (BuildContext context) => SignUpScreen(),
         DASHBOARD: (BuildContext context) => Dashboard(),
         CONTACTUS: (BuildContext context) => Contact(),
+        JOBHOME: (BuildContext context) => HomePage(),
       },
       initialRoute: SPLASH_SCREEN,
     );

@@ -1,18 +1,14 @@
-import 'package:dsc/ui/appli_status.dart';
+import 'package:dsc/constants/constants.dart';
 import 'package:dsc/ui/complete_page.dart';
 import 'package:dsc/ui/contactus.dart';
-
+import 'package:dsc/ui/jobhome.dart';
 import 'package:dsc/ui/shops.dart';
 import 'package:dsc/ui/signin.dart';
-import 'package:dsc/ui/signup.dart';
 import 'package:dsc/ui/profile.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:provider/provider.dart';
 
 class AuthenticationProvider {
   final FirebaseAuth firebaseAuth;
@@ -207,6 +203,31 @@ class _DashboardState extends State<Dashboard> {
                             ),
                             Text(
                               'Contact',
+                              style: cardTextStyle,
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                    Card(
+                      child: FlatButton(
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              new MaterialPageRoute(
+                                  builder: (context) => HomePage()));
+                        },
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8)),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Image.asset(
+                              'assets/images/download.jpg',
+                              height: 128,
+                            ),
+                            Text(
+                              'Job',
                               style: cardTextStyle,
                             )
                           ],

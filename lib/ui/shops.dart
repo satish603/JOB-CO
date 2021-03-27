@@ -1,24 +1,7 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dsc/ui/dashboard.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:dsc/ui/widgets/custom_shape.dart';
-import 'package:dsc/ui/widgets/customappbar.dart';
-import 'package:dsc/ui/widgets/responsive_ui.dart';
-import 'package:edge_alert/edge_alert.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:dsc/ui/widgets/textformfield.dart';
-import 'package:firebase_storage/firebase_storage.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:path/path.dart' as Path;
-import 'dart:io' as io;
-import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:provider/provider.dart';
 
 class Shop1 extends StatefulWidget {
   @override
@@ -38,7 +21,7 @@ class _Shop1 extends State<Shop1> {
   bool value10 = false;
   bool value11 = false;
   bool value12 = false;
-  String status,status2, status3, status4, status5, status6;
+  String status, status2, status3, status4, status5, status6;
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +29,7 @@ class _Shop1 extends State<Shop1> {
 
     //var size = MediaQuery.maybeOf(context).size;
     // style
-   Widget stat() {
+    Widget stat() {
       return /*TextField(
       keyboardType: TextInputType.text,
       decoration: InputDecoration(hintText: 'First Name'),
@@ -65,7 +48,9 @@ class _Shop1 extends State<Shop1> {
         },
         // controller: name,
       );
-    }Widget stat2() {
+    }
+
+    Widget stat2() {
       return /*TextField(
       keyboardType: TextInputType.text,
       decoration: InputDecoration(hintText: 'First Name'),
@@ -84,7 +69,9 @@ class _Shop1 extends State<Shop1> {
         },
         // controller: name,
       );
-    }Widget stat3() {
+    }
+
+    Widget stat3() {
       return /*TextField(
       keyboardType: TextInputType.text,
       decoration: InputDecoration(hintText: 'First Name'),
@@ -103,7 +90,9 @@ class _Shop1 extends State<Shop1> {
         },
         // controller: name,
       );
-    }Widget stat4() {
+    }
+
+    Widget stat4() {
       return /*TextField(
       keyboardType: TextInputType.text,
       decoration: InputDecoration(hintText: 'First Name'),
@@ -122,7 +111,9 @@ class _Shop1 extends State<Shop1> {
         },
         // controller: name,
       );
-    }Widget stat5() {
+    }
+
+    Widget stat5() {
       return /*TextField(
       keyboardType: TextInputType.text,
       decoration: InputDecoration(hintText: 'First Name'),
@@ -142,7 +133,8 @@ class _Shop1 extends State<Shop1> {
         // controller: name,
       );
     }
-Widget stat6() {
+
+    Widget stat6() {
       return /*TextField(
       keyboardType: TextInputType.text,
       decoration: InputDecoration(hintText: 'First Name'),
@@ -187,7 +179,8 @@ Widget stat6() {
             ),
             padding: const EdgeInsets.all(7.0),
             child: Text(
-              'UPDATE',textAlign: TextAlign.center,
+              'UPDATE',
+              textAlign: TextAlign.center,
               style: TextStyle(
                 fontWeight: FontWeight.w900,
                 fontSize: 10,
@@ -297,7 +290,7 @@ Widget stat6() {
                             style: cardTextStyle,
                           ),
                           stat(),
-                          SizedBox(height: 15.0),button()
+                          SizedBox(height: 15.0), button()
                         ],
                       ),
                     ),
@@ -317,7 +310,8 @@ Widget stat6() {
                             style: cardTextStyle,
                           ),
                           stat2(),
-                          SizedBox(height: 15.0),button()
+                          SizedBox(height: 15.0),
+                          button()
                         ],
                       ),
                     ),
@@ -337,7 +331,8 @@ Widget stat6() {
                             style: cardTextStyle,
                           ),
                           stat3(),
-                          SizedBox(height: 15.0),button()
+                          SizedBox(height: 15.0),
+                          button()
                         ],
                       ),
                     ),
@@ -357,7 +352,8 @@ Widget stat6() {
                             style: cardTextStyle,
                           ),
                           stat4(),
-                          SizedBox(height: 15.0),button()
+                          SizedBox(height: 15.0),
+                          button()
                         ],
                       ),
                     ),
@@ -377,7 +373,8 @@ Widget stat6() {
                             style: cardTextStyle,
                           ),
                           stat5(),
-                          SizedBox(height: 15.0),button()
+                          SizedBox(height: 15.0),
+                          button()
                         ],
                       ),
                     ),
@@ -397,7 +394,8 @@ Widget stat6() {
                             style: cardTextStyle,
                           ),
                           stat6(),
-                          SizedBox(height: 15.0),button()
+                          SizedBox(height: 15.0),
+                          button()
                         ],
                       ),
                     ),
