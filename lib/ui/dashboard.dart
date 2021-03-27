@@ -1,6 +1,7 @@
 import 'package:dsc/constants/constants.dart';
 import 'package:dsc/ui/complete_page.dart';
 import 'package:dsc/ui/contactus.dart';
+import 'package:dsc/ui/jobdetails.dart';
 import 'package:dsc/ui/jobhome.dart';
 import 'package:dsc/ui/shops.dart';
 import 'package:dsc/ui/signin.dart';
@@ -234,13 +235,15 @@ class _DashboardState extends State<Dashboard> {
                         ),
                       ),
                     ),
+
                     Card(
                       child: FlatButton(
-                        onPressed: () {
+                        onPressed: () {                     
+                         padding: EdgeInsets.all(100.0);
                           Navigator.push(
                               context,
                               new MaterialPageRoute(
-                                  builder: (context) => Random()));
+                                  builder: (context) => JobDetials()));
                         },
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8)),
@@ -252,7 +255,7 @@ class _DashboardState extends State<Dashboard> {
                               height: 128,
                             ),
                             Text(
-                              'Random',
+                              'Job Details',
                               style: cardTextStyle,
                             )
                           ],

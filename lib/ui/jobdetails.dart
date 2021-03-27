@@ -3,7 +3,7 @@
 import 'dart:core';
 
 import 'package:dsc/ui/dashboard.dart';
-import 'package:dsc/ui/job.dart';
+import 'package:dsc/utils/operations.dart';
 import 'package:flutter/material.dart';
 import 'package:dsc/constants/constants.dart';
 import 'package:dsc/ui/widgets/custom_shape.dart';
@@ -22,13 +22,15 @@ class JobDetials extends StatefulWidget {
 
 class _JobdetailsState extends State<JobDetials> {
   bool checkBoxValue = false;
+  String id;
   double _height;
   double _width;
   double _pixelRatio;
   bool _large;
   bool _medium;
   bool signingup = false;
-  String jobname, location, vacancy, salary;
+  bool isApproved;
+  String jobName, location, vacancy, salary,imageurl;
   final firestore = FirebaseFirestore.instance;
 
   @override
@@ -144,7 +146,7 @@ class _JobdetailsState extends State<JobDetials> {
             SizedBox(height: _height / 30.0),
             emailTextFormField(),
             SizedBox(height: _height / 30.0),
-            phoneTextFormField(),
+            acceptTermsTextRow(),
             SizedBox(height: _height / 20.0),
             // SizedBox(height: _height / 60.0),
             // passwordTextFormField(),
@@ -169,7 +171,7 @@ class _JobdetailsState extends State<JobDetials> {
       icon: Icons.business_center_rounded,
       hint: "Job Name",
       userTyped: (val) {
-        jobname = val;
+        jobName = val;
       },
       // controller: name,
     );
@@ -197,24 +199,7 @@ class _JobdetailsState extends State<JobDetials> {
     );
   }
 
-  /* Widget lastNameTextFormField() {
-    return /*TextField(
-      keyboardType: TextInputType.text,
-      decoration: InputDecoration(hintText: 'Last Name'),
-      onChanged: (value) {
-        setState(() {
-          _lname = value.trim();
-        });
-      },
-    );*/
-        CustomTextField(
-            keyboardType: TextInputType.text,
-            icon: Icons.person,
-            hint: "Last Name",
-            userTyped: (val) {
-              name = val;
-            });
-  }*/
+
 
   Widget emailTextFormField() {
     return /*TextField(
@@ -229,203 +214,52 @@ class _JobdetailsState extends State<JobDetials> {
         CustomTextField(
             keyboardType: TextInputType.text,
             icon: Icons.location_on,
-            hint: "Location",
+            hint: "imageurl",
             userTyped: (val) {
-              location = val;
+              imageurl = val;
             }
             //controller: email,
             );
   }
 
-  Widget phoneTextFormField() {
-    return /*TextField(
-      keyboardType: TextInputType.number,
-      decoration: InputDecoration(hintText: 'Phone Number'),
-      onChanged: (value) {
-        setState(() {
-          phnum = value.trim();
-        });
-      },
-    );*/
-        CustomTextField(
-      keyboardType: TextInputType.number,
-      icon: Icons.person,
-      hint: "Vacancy",
-      userTyped: (val) {
-        vacancy = val;
-      },
-      // controller: phnum,
+  
+
+ Widget acceptTermsTextRow() {
+    return Container(
+      margin: EdgeInsets.only(top: _height / 100.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Checkbox(
+              activeColor: Colors.blue[400],
+              value: checkBoxValue,
+              onChanged: (bool newValue) {
+                setState(() {
+                  checkBoxValue = newValue;
+              
+              isApproved = newValue;
+            
+                });
+              }),
+          Text(
+            "Is Approved",
+            style: TextStyle(
+                fontWeight: FontWeight.w600,
+                fontSize: _large ? 12 : (_medium ? 13 : 10)),
+          ),
+        ],
+      ),
     );
   }
 
-  // Widget passwordTextFormField() {
-  //   return /*TextField(
-  //     obscureText: true,
-  //     decoration: InputDecoration(hintText: 'Password'),
-  //     onChanged: (value) {
-  //       setState(() {
-  //         _password = value.trim();
-  //       });
-  //     },
-  //   );*/
-  //       CustomTextField(
-  //           keyboardType: TextInputType.text,
-  //           obscureText: true,
-  //           icon: Icons.lock,
-  //           hint: "Password",
-  //           userTyped: (val) {
-  //             _password = val;
-  //           });
-  // }
-
-  // Widget acceptTermsTextRow() {
-  //   return Container(
-  //     margin: EdgeInsets.only(top: _height / 100.0),
-  //     child: Row(
-  //       mainAxisAlignment: MainAxisAlignment.center,
-  //       children: <Widget>[
-  //         Checkbox(
-  //             activeColor: Colors.blue[400],
-  //             value: checkBoxValue,
-  //             onChanged: (bool newValue) {
-  //               setState(() {
-  //                 checkBoxValue = newValue;
-  //               });
-  //             }),
-  //         Text(
-  //           "I accept all terms and conditions",
-  //           style: TextStyle(
-  //               fontWeight: FontWeight.w600,
-  //               fontSize: _large ? 12 : (_medium ? 13 : 10)),
-  //         ),
-  //       ],
-  //     ),
-  //   );
-  // }
-
-  // Widget infoTextRow() {
-  //   return Container(
-  //     margin: EdgeInsets.only(top: _height / 40.0),
-  //     child: Row(
-  //       mainAxisAlignment: MainAxisAlignment.center,
-  //       children: <Widget>[
-  //         Text(
-  //           "Or create using social media",
-  //           style: TextStyle(
-  //               fontWeight: FontWeight.w500,
-  //               fontSize: _large ? 12 : (_medium ? 11 : 10)),
-  //         ),
-  //       ],
-  //     ),
-  //   );
-  // }
-
-  // Widget socialIconsRow() {
-  //   return Container(
-  //     margin: EdgeInsets.only(top: _height / 80.0),
-  //     child: Row(
-  //       mainAxisSize: MainAxisSize.min,
-  //       children: <Widget>[
-  //         GestureDetector(
-  //           onTap: () async {
-  //             EdgeAlert.show(context,
-  //                 title: 'Signup Failed',
-  //                 description: 'WE ADDING THIS FEATURE SOON',
-  //                 gravity: EdgeAlert.BOTTOM,
-  //                 icon: Icons.error,
-  //                 backgroundColor: Colors.blue[400]);
-  //             //  Navigator.of(context).pop(SIGN_IN);
-  //             //  print("Routing to Sign up screen");
-  //           },
-  //           child: CircleAvatar(
-  //             radius: 15,
-  //             backgroundImage: AssetImage("assets/images/googlelogo.png"),
-  //           ),
-  //         ),
-  //         SizedBox(
-  //           width: 20,
-  //         ),
-  //         GestureDetector(
-  //           onTap: () async {
-  //             EdgeAlert.show(context,
-  //                 title: 'Signup Failed',
-  //                 description: 'WE ADDING THIS FEATURE SOON',
-  //                 gravity: EdgeAlert.BOTTOM,
-  //                 icon: Icons.error,
-  //                 backgroundColor: Colors.blue[400]);
-  //             //  Navigator.of(context).pop(SIGN_IN);
-  //             //  print("Routing to Sign up screen");
-  //           },
-  //           child: CircleAvatar(
-  //             radius: 15,
-  //             backgroundImage: AssetImage("assets/images/fblogo.jpg"),
-  //           ),
-  //         ),
-  //         SizedBox(
-  //           width: 20,
-  //         ),
-  //         GestureDetector(
-  //           onTap: () async {
-  //             EdgeAlert.show(context,
-  //                 title: 'Signup Failed',
-  //                 description: 'WE ADDING THIS FEATURE SOON',
-  //                 gravity: EdgeAlert.BOTTOM,
-  //                 icon: Icons.error,
-  //                 backgroundColor: Colors.blue[400]);
-  //             // Navigator.of(context).pop(SIGN_IN);
-  //             //  print("Routing to Sign up screen");
-  //           },
-  //           child: CircleAvatar(
-  //             radius: 15,
-  //             backgroundImage: AssetImage("assets/images/twitterlogo.jpg"),
-  //           ),
-  //         ),
-  //       ],
-  //     ),
-  //   );
-  // }
-
-  // Widget signInTextRow() {
-  //   return Container(
-  //     margin: EdgeInsets.only(top: _height / 20.0),
-  //     child: Row(
-  //       mainAxisAlignment: MainAxisAlignment.center,
-  //       children: <Widget>[
-  //         Text(
-  //           "Already have an account?",
-  //           style: TextStyle(fontWeight: FontWeight.w400),
-  //         ),
-  //         SizedBox(
-  //           width: 5,
-  //         ),
-  //         GestureDetector(
-  //           onTap: () {
-  //             Navigator.of(context).pop(SIGN_IN);
-  //             print("Routing to Sign up screen");
-  //           },
-  //           child: Text(
-  //             "Sign in",
-  //             style: TextStyle(
-  //                 fontWeight: FontWeight.w800,
-  //                 color: Colors.blue[900],
-  //                 fontSize: 19),
-  //           ),
-  //         )
-  //       ],
-  //     ),
-  //   );
-  // }
+  
 
   Widget button() {
     return RaisedButton(
       elevation: 0,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
       onPressed: () async {
-        if (jobname != null &&
-            // _password != null &&
-            location != null)
-        //  &&
-        // checkBoxValue == true)
+        if (jobName != null )
         {
           setState(() {
             signingup = true;
@@ -435,24 +269,15 @@ class _JobdetailsState extends State<JobDetials> {
             //   FirebaseFirestore.instance.collection("users").doc("collection").set(data);
 
             // if (newUser != null) {
-            firestore.collection("Job Details").add({
-              "Job": jobname,
-              "Salary": salary,
-              "Location": location,
-              "Vacancy": vacancy
+            firestore.collection("jobs").add({
+              "jobName": jobName,
+              "salary": salary,
+              "isApproved": isApproved,
+              "imageUrl": imageurl,
             }).then((value) {
               print(value.id);
             });
-            // .collection("users")
-            // .doc("collection")
-            // .set(data);
-            // User updateUser = FirebaseAuth.instance.currentUser;
-            // updateUser.updateProfile(displayName: name);
-            // updateUser.updateProfile(photoURL: url);
-            // updateUser.uid;
-            // updateUser.displayName;
-            // updateUser.phoneNumber;
-            //await newUser.user.updateProfile(info);
+           
 
             Navigator.of(context).pushReplacement(
                 MaterialPageRoute(builder: (context) => Dashboard()));
@@ -471,8 +296,8 @@ class _JobdetailsState extends State<JobDetials> {
         } else {
           EdgeAlert.show(context,
               title: 'Signup Failed',
-              // description:
-              //     'All fields are required. Accept all terms and conditions',
+              description:
+                  'All fields are required. Accept all terms and conditions',
               gravity: EdgeAlert.BOTTOM,
               icon: Icons.error,
               backgroundColor: Colors.blue[400]);

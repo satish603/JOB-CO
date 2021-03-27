@@ -126,10 +126,11 @@ class _ProfileState extends State<Profile> {
           var userDocument = snapshot.data;
           return new Text(
             userDocument["name"],
-           style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+           style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
           );
         });
   }
+  
 
   Widget firedata1() {
     //BuildContext context
@@ -147,7 +148,7 @@ class _ProfileState extends State<Profile> {
           
           return new Text(
             userDocument["email"],
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
           );
         });
   }
@@ -168,7 +169,8 @@ class _ProfileState extends State<Profile> {
           
           return new Text(
             userDocument["contact"],
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
           );
         });
   }
