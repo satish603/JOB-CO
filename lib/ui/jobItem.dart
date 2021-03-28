@@ -77,11 +77,11 @@ class _ProductItemState extends State<ProductItem> {
                         icon: widget.isApproved
                             ? Icon(
                                 Icons.check_circle_rounded, //after click
-                                color: Colors.greenAccent,
+                                color: Colors.lightBlueAccent,
                               )
                             : Icon(
                                 Icons.pending_actions_rounded,
-                                color: Colors.greenAccent,
+                                color: Colors.lightBlueAccent,
                               ),
                       ),
                       IconButton(
@@ -90,7 +90,7 @@ class _ProductItemState extends State<ProductItem> {
                         },
                         icon: Icon(
                           Icons.close,
-                          color: Colors.redAccent,
+                          color: Colors.white,
                         ),
                       ),
                     ],
@@ -101,11 +101,12 @@ class _ProductItemState extends State<ProductItem> {
           ],
         ),
         padding: EdgeInsets.all(10),
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(24),
-            color: Color.alphaBlend(Colors.orangeAccent,
-                Colors.yellow) //Colors.blueGrey, //change card color
-            ),
+        
+        decoration:BoxDecoration(borderRadius: BorderRadius.circular(200),
+                gradient: LinearGradient(
+                  colors: [Colors.black, Colors.black12],
+                ),
+              ),
       ),
     );
   }
