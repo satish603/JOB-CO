@@ -61,8 +61,8 @@ class _SignInScreenState extends State<SignInScreen> {
                
               forgetPassTextRow(),
               SizedBox(height: _height / 12),
-              button2(),
-              signUpTextRow(),
+              button2(),button(),
+              signUpTextRow(),  signUpTextRow1(),
             ],
           ),
         ),
@@ -367,7 +367,7 @@ Widget user_busi() {
     );
   }
 
-  /*Widget button() {
+ Widget button() {
     return RaisedButton(
         elevation: 0,
         shape:
@@ -378,7 +378,7 @@ Widget user_busi() {
                 .signInWithEmailAndPassword(email: _email, password: _password)
                 .then((_) {
               Navigator.push(context,
-                  new MaterialPageRoute(builder: (context) => BDashboard()));
+                  new MaterialPageRoute(builder: (context) => Dashboard()));
             });
 
             //  Navigator.of(context).pushNamed(LOGIN); //new line
@@ -446,5 +446,5 @@ Widget user_busi() {
         ],
       ),
     );
-  }*/
+  }
 }
