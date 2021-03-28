@@ -10,6 +10,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 
 class AuthenticationProvider {
   final FirebaseAuth firebaseAuth;
@@ -30,6 +31,15 @@ class Dashboard extends StatefulWidget {
 
 class _DashboardState extends State<Dashboard> {
   var user = FirebaseAuth.instance.currentUser;
+  Future<void> photolink() async {
+    String downloadURL = await firebase_storage.FirebaseStorage.instance
+        .ref('User_image/EtFMTsMQISXtMa9zOzgGB5DGguT2.jpg')
+        .getDownloadURL();
+    return downloadURL.toString();
+
+    // Within your widgets:
+    // Image.network(downloadURL);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,6 +47,7 @@ class _DashboardState extends State<Dashboard> {
 
     //var size = MediaQuery.maybeOf(context).size;
     // style
+    var link = photolink().toString();
     var cardTextStyle = TextStyle(
         fontFamily: "Montserrat Regular",
         fontSize: 14,
@@ -70,7 +81,8 @@ class _DashboardState extends State<Dashboard> {
                   children: <Widget>[
                     CircleAvatar(
                       radius: 32,
-                     child:Image.network('https://firebasestorage.googleapis.com/v0/b/dscsolution-80cbc.appspot.com/o/User_image%2FEtFMTsMQISXtMa9zOzgGB5DGguT2.jpg?alt=media&token=7b5c4569-7690-4a4f-9c0e-97a5dc564ea9'),
+                      child: Image.network(link),
+                      // 'https://firebasestorage.googleapis.com/v0/b/dscsolution-80cbc.appspot.com/o/User_image%2FEtFMTsMQISXtMa9zOzgGB5DGguT2.jpg?alt=media&token=7b5c4569-7690-4a4f-9c0e-97a5dc564ea9'),
                     ),
                     SizedBox(
                       width: 16,
@@ -254,13 +266,13 @@ class _DashboardState extends State<Dashboard> {
                         ),
                       ),
                     ),
-
                     Card(
                       elevation: 15,
     margin: EdgeInsets.all(20),
                       child: FlatButton(
-                        onPressed: () {                     
-                         padding: EdgeInsets.all(100.0);
+                        onPressed: () {
+                          padding:
+                          EdgeInsets.all(100.0);
                           Navigator.push(
                               context,
                               new MaterialPageRoute(
