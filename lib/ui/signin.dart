@@ -60,8 +60,8 @@ class _SignInScreenState extends State<SignInScreen> {
               form(),
                
               forgetPassTextRow(),
-              SizedBox(height: _height / 12),
-              button2(),button(),
+           
+              button2(),button3(),button(),
               signUpTextRow(),  signUpTextRow1(),
             ],
           ),
@@ -378,7 +378,7 @@ Widget user_busi() {
                 .signInWithEmailAndPassword(email: _email, password: _password)
                 .then((_) {
               Navigator.push(context,
-                  new MaterialPageRoute(builder: (context) => Dashboard()));
+                  new MaterialPageRoute(builder: (context) => BDashboard()));
             });
 
             //  Navigator.of(context).pushNamed(LOGIN); //new line
@@ -408,6 +408,53 @@ Widget user_busi() {
           padding: const EdgeInsets.all(12.0),
           child: Text(
             'LOGIN bussiness',
+            style: TextStyle(
+                fontWeight: FontWeight.w900,
+                fontSize: _large ? 14 : (_medium ? 14 : 10)),
+          ),
+        ));
+  }
+Widget button3() {
+    return RaisedButton(
+        elevation: 0,
+        shape:
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
+        onPressed: () async {
+          if (_password != null && _email != null) {
+            await auth
+                .signInWithEmailAndPassword(email: _email, password: _password)
+                .then((_) {
+              Navigator.push(context,
+                  new MaterialPageRoute(builder: (context) => Dashboard()));
+            });
+
+            //  Navigator.of(context).pushNamed(LOGIN); //new line
+            print("Routing to your account");
+            Scaffold.of(context)
+                .showSnackBar(SnackBar(content: Text('Wrong ID OR Password')));
+          } else {
+            EdgeAlert.show(context,
+                title: 'Login Failed',
+                description: 'All fields are required.',
+                gravity: EdgeAlert.BOTTOM,
+                icon: Icons.error,
+                backgroundColor: Colors.blue[400]);
+          }
+        },
+        textColor: Colors.white,
+        padding: EdgeInsets.all(0.0),
+        child: Container(
+          alignment: Alignment.center,
+          width: _large ? _width / 5 : (_medium ? _width / 2.75 : _width / 1.5),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.all(Radius.circular(20.0)),
+            gradient: LinearGradient(
+              colors: <Color>[Colors.blue[900], Colors.blueAccent[100]],
+            ),
+          ),
+          padding: const EdgeInsets.all(12.0),
+          child: Text(
+            'LOGIN main dsh',
             style: TextStyle(
                 fontWeight: FontWeight.w900,
                 fontSize: _large ? 14 : (_medium ? 14 : 10)),
