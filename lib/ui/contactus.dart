@@ -16,13 +16,16 @@ class _ContactusState extends State<Contact> {
       //   backgroundColor: Colors.teal.shade300,
       //   email: 'adoshi26.ad@gmail.com',
       // ),
-      backgroundColor: Colors.indigo[900],
+      backgroundColor: Colors.indigo[300],
 
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
+              Container(
+                margin: EdgeInsets.only(left: 20, top:35, right: 20, bottom:0),
+              ),
               Text(
                 "About Us",
                 style: TextStyle(
@@ -37,18 +40,18 @@ class _ContactusState extends State<Contact> {
                 margin: EdgeInsets.symmetric(vertical: 15.0, horizontal: 30.0),
                 child: ContactUs(
                   // borderRadius: BorderRadius.circular(8),
-                  cardColor: Colors.teal[100],
-                  textColor: Colors.teal.shade900,
+                  cardColor: Colors.grey[300],
+                  textColor: Colors.black,
                   logo: AssetImage('assets/images/logo.jpeg'),
                   email: 'dscflutter@gmail.com',
                   companyName: 'Satish Chauhan',
-                  companyColor: Colors.teal[300],
+                  companyColor: Colors.black54,
                   phoneNumber: '+917818XXXXX',
                   // website: 'https://abhishekdoshi.godaddysites.com',
                   // githubUserName: 'AbhishekDoshi26',
                   linkedinURL: 'https://www.linkedin.com/in/satish603/',
                   tagLine: 'Flutter Developer',
-                  taglineColor: Colors.teal.shade100,
+                  taglineColor: Colors.black38,
                   // twitterHandle: 'AbhishekDoshi26',
                   instagram: 'satish_603',
                   // facebookHandle: '_abhishek_doshi'
@@ -58,19 +61,19 @@ class _ContactusState extends State<Contact> {
                 color: Colors.white,
                 margin: EdgeInsets.symmetric(vertical: 50.0, horizontal: 25.0),
                 child: ContactUs(
-                  cardColor: Colors.teal[100],
-                  textColor: Colors.teal.shade900,
+                  cardColor: Colors.grey[300],
+                  textColor: Colors.black,
                   logo: AssetImage('assets/images/logo.jpeg'),
                   email: 'dscflutter@gmail.com',
                   companyName: 'Tejashri Mitbavkar',
-                  companyColor: Colors.teal[300],
+                  companyColor: Colors.black54,
                   phoneNumber: '+917818XXXXX',
                   // website: 'https://abhishekdoshi.godaddysites.com',
                   // githubUserName: 'AbhishekDoshi26',
                   linkedinURL:
                       'https://www.linkedin.com/in/tejashri-mitbavkar-bb3871192',
                   tagLine: 'Flutter Developer',
-                  taglineColor: Colors.teal.shade100,
+                  taglineColor: Colors.black38,
                   // twitterHandle: 'AbhishekDoshi26',
                   instagram: 'teju.s.m',
                   // facebookHandle: '_abhishek_doshi'
@@ -80,19 +83,19 @@ class _ContactusState extends State<Contact> {
                 color: Colors.white,
                 margin: EdgeInsets.symmetric(vertical: 50.0, horizontal: 25.0),
                 child: ContactUs(
-                  cardColor: Colors.teal[100],
-                  textColor: Colors.teal.shade900,
+                  cardColor: Colors.grey[300],
+                  textColor: Colors.black,
                   logo: AssetImage('assets/images/logo.jpeg'),
                   email: 'dscflutter@gmail.com',
                   companyName: 'Arijit Bera',
-                  companyColor: Colors.teal[300],
+                  companyColor: Colors.black54,
                   phoneNumber: '+917818XXXXX',
                   // website: 'https://abhishekdoshi.godaddysites.com',
                   // githubUserName: 'AbhishekDoshi26',
                   linkedinURL:
                       'https://www.linkedin.com/in/arijit-bera-792006157',
                   tagLine: 'Flutter Developer',
-                  taglineColor: Colors.teal.shade100,
+                  taglineColor: Colors.black38,
                   // twitterHandle: 'AbhishekDoshi26',
                   instagram: 'bera_213_',
                   // facebookHandle: '_abhishek_doshi'
