@@ -16,7 +16,7 @@ class _ContactusState extends State<Contact> {
       //   backgroundColor: Colors.teal.shade300,
       //   email: 'adoshi26.ad@gmail.com',
       // ),
-      backgroundColor: Colors.indigo[300],
+      backgroundColor: Colors.teal[100],
 
       body: SafeArea(
         child: SingleChildScrollView(
@@ -31,7 +31,7 @@ class _ContactusState extends State<Contact> {
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 50,
-                  color: Colors.white,
+                  color: Colors.grey[600],
                   // fontSize: _large ? 60 : (_medium ? 50 : 40),
                 ),
               ),
