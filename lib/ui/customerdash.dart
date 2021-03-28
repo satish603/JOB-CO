@@ -71,8 +71,8 @@ class _CDashboardState extends State<CDashboard> {
                   children: <Widget>[
                     CircleAvatar(
                       radius: 32,
-                      backgroundImage:NetworkImage('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWOnlTR6M8ru8eup4smkyRvcS63JIGl6tIgm6mzQcHDlD4loJ61p2fHphe1GLqpaPkJ14&usqp=CAU'),
-                  
+                      child:Image.network('https://firebasestorage.googleapis.com/v0/b/dscsolution-80cbc.appspot.com/o/User_image%2FEtFMTsMQISXtMa9zOzgGB5DGguT2.jpg?alt=media&token=7b5c4569-7690-4a4f-9c0e-97a5dc564ea9'),
+                    
                     ),
                     SizedBox(
                       width: 16,
