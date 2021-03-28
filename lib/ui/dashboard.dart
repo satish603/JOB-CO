@@ -69,7 +69,7 @@ class _DashboardState extends State<Dashboard> {
                   children: <Widget>[
                     CircleAvatar(
                       radius: 32,
-                      backgroundImage: AssetImage('assets/images/download.jpg'),
+                      backgroundImage:NetworkImage('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWOnlTR6M8ru8eup4smkyRvcS63JIGl6tIgm6mzQcHDlD4loJ61p2fHphe1GLqpaPkJ14&usqp=CAU'),
                     ),
                     SizedBox(
                       width: 16,
