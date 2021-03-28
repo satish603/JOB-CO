@@ -70,7 +70,8 @@ class _BDashboardState extends State<BDashboard> {
                   children: <Widget>[
                     CircleAvatar(
                       radius: 32,
-                      backgroundImage: AssetImage('assets/images/download.jpg'),
+                      child:Image.network('https://firebasestorage.googleapis.com/v0/b/dscsolution-80cbc.appspot.com/o/User_image%2FEtFMTsMQISXtMa9zOzgGB5DGguT2.jpg?alt=media&token=7b5c4569-7690-4a4f-9c0e-97a5dc564ea9'),
+                    
                     ),
                     SizedBox(
                       width: 16,
