@@ -74,12 +74,15 @@ flutter:
     - assets/images/login.png
     - assets/images/logo.png
     - assets/images/job.png
+    - assets/images/jobb.jpg
     - assets/images/jobs.jpg
-    - assets/images/application.png
+    - assets/images/application.jpg
     - assets/images/powered_by.png
     - assets/images/top_header.jpg
     - assets/images/logo.jpeg
     - assets/images/download.jpg
+    - assets/images/profo.jpg
+    - assets/images/contact.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
