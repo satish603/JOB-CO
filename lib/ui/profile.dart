@@ -35,10 +35,12 @@ class _ProfileState extends State<Profile> {
   bool _large;
   bool _medium;
   bool signingup = false;
+  GlobalKey<FormState> _key = GlobalKey();
   // var name, email, photoUrl, uid, emailVerified, phnum;
   String _email, name, phnum;
   Widget dataname, datacontact, dataemail;
   final auth = FirebaseAuth.instance;
+  
 
   Future<firebase_storage.UploadTask> uploadFile(PickedFile file) async {
     if (file == null) {
@@ -185,7 +187,8 @@ class _ProfileState extends State<Profile> {
 
     return Material(
       child: Scaffold(
-        body: Container(
+        body: Container( 
+          
           height: _height,
           width: _width,
           margin: EdgeInsets.only(bottom: 5),
@@ -195,12 +198,12 @@ class _ProfileState extends State<Profile> {
                 Opacity(opacity: 0.88, child: CustomAppBar()),
                 clipShape(),
                 // form(),
-                firedata(),
-                firedata1(),
-                firedata2(),
                 SizedBox(
                   height: _height / 35,
                 ),
+                form(),
+              
+                
                 button(),
               ],
             ),
@@ -281,24 +284,20 @@ class _ProfileState extends State<Profile> {
     );
   }
 
-  Widget form() {
+   Widget form() {
     return Container(
       margin: EdgeInsets.only(
-          left: _width / 12.0, right: _width / 12.0, top: _height / 20.0),
+          left: _width / 12.0, right: _width / 12.0, top: _height / 15.0),
       child: Form(
-        child: Column(children: <Widget>[
-          Text('Name:',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-          SizedBox(height: _height / 80.0),
-          // snapshot.data.docs[0]['name'],
-          Text('E-mail:',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-          SizedBox(height: _height / 80.0),
-          // snapshot.data.docs[0]['email']
-          Text('Contact:',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-          SizedBox(height: _height / 80.0),
-        ]),
+        key: _key,
+        child: Column(
+          children: <Widget>[
+            firedata(),
+            SizedBox(height: _height / 40.0),
+            firedata1(), SizedBox(height: _height / 40.0),
+            firedata2(), SizedBox(height: _height / 40.0),
+          ],
+        ),
       ),
     );
   }
