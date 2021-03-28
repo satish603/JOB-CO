@@ -46,6 +46,7 @@ class _DashboardState extends State<Dashboard> {
       // body: Stack(
       // children: <Widget>[
       backgroundColor: Colors.indigo[900],
+      
       // Container(
 
       //   decoration: BoxDecoration(
@@ -63,7 +64,7 @@ class _DashboardState extends State<Dashboard> {
             children: <Widget>[
               Container(
                 height: 64,
-                margin: EdgeInsets.only(bottom: 20),
+                margin: EdgeInsets.only(left: 20, top:35, right: 20, bottom:0),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
@@ -98,6 +99,7 @@ class _DashboardState extends State<Dashboard> {
                 ),
               ),
               Align(
+                
                   alignment: Alignment.bottomRight,
                   // ignore: deprecated_member_use
                   child: RaisedButton(
@@ -122,6 +124,8 @@ class _DashboardState extends State<Dashboard> {
                   crossAxisCount: 2,
                   children: <Widget>[
                     Card(
+                      elevation: 15,
+    margin: EdgeInsets.all(20),
                       child: FlatButton(
                         onPressed: () {
                           Navigator.push(
@@ -135,18 +139,22 @@ class _DashboardState extends State<Dashboard> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
                             Image.asset(
-                              'assets/images/application.png',
-                              height: 128,
+                              'assets/images/application.jpg',
+                              height: 60,
                             ),
-                            Text(
-                              'Shops',
-                              style: cardTextStyle,
-                            )
+                           Text(
+            'SHOPS',
+            style: TextStyle(
+                fontWeight: FontWeight.w900,
+                fontSize: 12,
+          )),
                           ],
                         ),
                       ),
                     ),
                     Card(
+                      elevation: 15,
+    margin: EdgeInsets.all(20),
                       child: FlatButton(
                         onPressed: () async {
                           var firebaseUser = FirebaseAuth.instance.currentUser;
@@ -174,18 +182,22 @@ class _DashboardState extends State<Dashboard> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
                             Image.asset(
-                              'assets/images/download.jpg',
-                              height: 128,
+                              'assets/images/profo.jpg',
+                              height: 60,
                             ),
                             Text(
-                              'Profile',
-                              style: cardTextStyle,
-                            ),
+            'PROFILE',
+            style: TextStyle(
+                fontWeight: FontWeight.w900,
+                fontSize: 12,
+          )),
                           ],
                         ),
                       ),
                     ),
                     Card(
+                      elevation: 15,
+    margin: EdgeInsets.all(20),
                       child: FlatButton(
                         onPressed: () {
                           Navigator.push(
@@ -199,19 +211,24 @@ class _DashboardState extends State<Dashboard> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
                             Image.asset(
-                              'assets/images/download.jpg',
-                              height: 128,
+                              'assets/images/contact.png',
+                              height: 60,
                             ),
-                            Text(
-                              'Contact',
-                              style: cardTextStyle,
-                            )
+                           Text(
+            'CONTACT US',
+            style: TextStyle(
+                fontWeight: FontWeight.w900,
+                fontSize: 12,
+          )),
                           ],
                         ),
                       ),
                     ),
                     Card(
+                      elevation: 15,
+    margin: EdgeInsets.all(20),
                       child: FlatButton(
+                        
                         onPressed: () {
                           Navigator.push(
                               context,
@@ -224,19 +241,23 @@ class _DashboardState extends State<Dashboard> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
                             Image.asset(
-                              'assets/images/download.jpg',
-                              height: 128,
+                              'assets/images/jobb.jpg',
+                              height: 60,
                             ),
-                            Text(
-                              'Job',
-                              style: cardTextStyle,
-                            )
+                           Text(
+            'JOBS',
+            style: TextStyle(
+                fontWeight: FontWeight.w900,
+                fontSize: 12,
+          )),
                           ],
                         ),
                       ),
                     ),
 
                     Card(
+                      elevation: 15,
+    margin: EdgeInsets.all(20),
                       child: FlatButton(
                         onPressed: () {                     
                          padding: EdgeInsets.all(100.0);
@@ -252,12 +273,44 @@ class _DashboardState extends State<Dashboard> {
                           children: <Widget>[
                             Image.asset(
                               'assets/images/download.jpg',
-                              height: 128,
+                              height: 60,
                             ),
                             Text(
-                              'Job Details',
-                              style: cardTextStyle,
-                            )
+            'JOBS DETAILS',
+            style: TextStyle(
+                fontWeight: FontWeight.w900,
+                fontSize: 12,
+          )),
+                          ],
+                        ),
+                      ),
+                    ),
+                    Card(
+                      elevation: 15,
+    margin: EdgeInsets.all(20),
+                      child: FlatButton(
+                        onPressed: () {                     
+                         padding: EdgeInsets.all(100.0);
+                          Navigator.push(
+                              context,
+                              new MaterialPageRoute(
+                                  builder: (context) => JobDetials()));
+                        },
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8)),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Image.asset(
+                              'assets/images/download.jpg',
+                              height: 60,
+                            ),
+                           Text(
+            'RANDOM',
+            style: TextStyle(
+                fontWeight: FontWeight.w900,
+                fontSize: 12,
+          )),
                           ],
                         ),
                       ),
