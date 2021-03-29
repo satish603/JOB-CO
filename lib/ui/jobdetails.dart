@@ -80,7 +80,8 @@ class _JobdetailsState extends State<JobDetials> {
                   children: <Widget>[
                     CircleAvatar(
                       radius: 42,
-                      child: Image.asset( 'assets/images/download.jpg',
+                      
+                      child: Image.asset( 'assets/images/shops.jpeg',
                   fit: BoxFit.cover,
                 ),
                       // 'https://firebasestorage.googleapis.com/v0/b/dscsolution-80cbc.appspot.com/o/User_image%2FEtFMTsMQISXtMa9zOzgGB5DGguT2.jpg?alt=media&token=7b5c4569-7690-4a4f-9c0e-97a5dc564ea9'),
