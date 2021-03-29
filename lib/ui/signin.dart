@@ -61,8 +61,8 @@ class _SignInScreenState extends State<SignInScreen> {
                
               forgetPassTextRow(),
            
-              button2(),button3(),button(),
-              signUpTextRow(),  signUpTextRow1(),
+              button2(),//button3(),button(),
+              signUpTextRow(), // signUpTextRow1(),
             ],
           ),
         ),
@@ -167,7 +167,7 @@ class _SignInScreenState extends State<SignInScreen> {
             emailTextFormField(),
             SizedBox(height: _height / 40.0),
             passwordTextFormField(), SizedBox(height: _height / 40.0),
-            user_busi(), SizedBox(height: _height / 40.0),
+            // user_busi(), SizedBox(height: _height / 40.0),
           ],
         ),
       ),
@@ -216,25 +216,25 @@ class _SignInScreenState extends State<SignInScreen> {
               _password = val;
             });
   }
-Widget user_busi() {
-    return DropdownButton<String>(
-      value: dropdownValue,
-      icon: const Icon(Icons.arrow_downward),
+// Widget user_busi() {
+//     return DropdownButton<String>(
+//       value: dropdownValue,
+//       icon: const Icon(Icons.arrow_downward),
       
-      onChanged: (String newValue) {
-        setState(() {
-          dropdownValue = newValue;
-        });
-      },
-      items: <String>['Customer', 'Bussiness']
-          .map<DropdownMenuItem<String>>((String value) {
-        return DropdownMenuItem<String>(
-          value: value,
-          child: Text(value),
-        );
-      }).toList(),
-    );
-  }
+//       onChanged: (String newValue) {
+//         setState(() {
+//           dropdownValue = newValue;
+//         });
+//       },
+//       items: <String>['Customer', 'Bussiness']
+//           .map<DropdownMenuItem<String>>((String value) {
+//         return DropdownMenuItem<String>(
+//           value: value,
+//           child: Text(value),
+//         );
+//       }).toList(),
+//     );
+//   }
   Widget forgetPassTextRow() {
     return Container(
       margin: EdgeInsets.only(top: _height / 40.0),
