@@ -47,11 +47,33 @@ class _DashboardState extends State<Dashboard> {
 
     //var size = MediaQuery.maybeOf(context).size;
     // style
-    var link = photolink().toString();
+    
     var cardTextStyle = TextStyle(
         fontFamily: "Montserrat Regular",
         fontSize: 14,
         color: Color.fromRGBO(63, 63, 63, 1));
+
+        Widget firedata() {
+    //BuildContext context
+    var firebaseUser = FirebaseAuth.instance.currentUser;
+    return new StreamBuilder(
+        stream: FirebaseFirestore.instance
+            .collection('users')
+            .doc(firebaseUser.uid)
+            .snapshots(),
+        builder: (context, snapshot) {
+          if (!snapshot.hasData) {
+            return new Text("Loading");
+          }
+          var userDocument = snapshot.data;
+          return new Text(
+            userDocument["photo"],
+           style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          );
+        });
+  }
+  var link = firedata().toString();
+  
 
     return Scaffold(
       // body: Stack(

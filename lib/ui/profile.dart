@@ -88,33 +88,6 @@ class _ProfileState extends State<Profile> {
     });
   }
 
-  // StreamBuilder(
-  //     stream: FirebaseFirestore.instance.collection('users').snapshots(),
-  //     // stream:  FirebaseFirestore.instance.collection('test').snapshots(),
-  //     builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-  //       if (!snapshot.hasData){ return new Text('Loading...');}
-  //      return ListView(
-
-  //         children: snapshot.data.docs.map((document) {
-
-  //           return Container(
-
-  //             child: Center(child: Text(document['name'])),
-
-  //           );
-
-  //         }).toList(),
-  //      );
-  //       );
-  //       // if (snapshot.hasData) {
-  //       //   return dataname = (snapshot.data.docs[0]['name']);
-  //       // }
-  //       // if (snapshot.hasData) {
-  //       //   return datacontact = snapshot.data.docs[2]['contact'];
-  //       // }
-  //       // if (snapshot.hasData) {
-  //       //   return dataemail = snapshot.data.docs[1]['email'];
-  //       // }
   Widget firedata() {
     //BuildContext context
     var firebaseUser = FirebaseAuth.instance.currentUser;
@@ -361,7 +334,7 @@ class _ProfileState extends State<Profile> {
         .child('/$uid.jpg');
             
             var url = await ref.getDownloadURL();
-                        firestore.collection("users").doc('$uid').set({
+                        firestore.collection("users").doc('$uid').update({
                           // "name": name.toString(),
                           // "email": _email,
                           // "contact": phnum,
