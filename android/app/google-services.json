@@ -1,34 +1,34 @@
 {
   "project_info": {
-    "project_number": "174873325683",
-    "firebase_url": "https://dscsolution-80cbc-default-rtdb.firebaseio.com",
-    "project_id": "dscsolution-80cbc",
-    "storage_bucket": "dscsolution-80cbc.appspot.com"
+    "project_number": "123399946037",
+    "firebase_url": "https://job-co-default-rtdb.firebaseio.com",
+    "project_id": "job-co",
+    "storage_bucket": "job-co.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:174873325683:android:6c338b19eb2a1681a87a06",
+        "mobilesdk_app_id": "1:123399946037:android:ecbf24a04fc9626a16167c",
         "android_client_info": {
           "package_name": "com.dsc.dsc"
         }
       },
       "oauth_client": [
         {
-          "client_id": "174873325683-o0ab6qfg3m65a9q3u2k4b7ule8qnfmja.apps.googleusercontent.com",
+          "client_id": "123399946037-ok2p53l36q7bmr2ng2fva84e1fjje278.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBkFKV7k-8VxpHzFc56EfPZW2P73LqxiHA"
+          "current_key": "AIzaSyDr4KZ9PAe0H2QyEI4dl4qpDP577V8R7lw"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "174873325683-o0ab6qfg3m65a9q3u2k4b7ule8qnfmja.apps.googleusercontent.com",
+              "client_id": "123399946037-ok2p53l36q7bmr2ng2fva84e1fjje278.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
