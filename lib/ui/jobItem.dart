@@ -33,9 +33,9 @@ class _ProductItemState extends State<ProductItem> {
           children: <Widget>[
             Container(
               height: 100,
-              width: 150,
+              width: 100,
               child: ClipRRect(
-                borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.circular(60),
                 child: Image.network(
                   widget.imageUrl,
                   fit: BoxFit.cover,
