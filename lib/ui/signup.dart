@@ -93,8 +93,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   String _email, _password, name, phnum;
   final auth = FirebaseAuth.instance;
   final firestore = FirebaseFirestore.instance;
- 
-  
+
   // TextEditingController name1 = new TextEditingController();
   // //TextEditingController email = new TextEditingController();
   // TextEditingController phnum1 = new TextEditingController();
@@ -169,7 +168,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 Opacity(opacity: 0.88, child: CustomAppBar()),
                 clipShape(),
                 form(),
-               
+
                 acceptTermsTextRow(),
                 SizedBox(
                   height: _height / 35,
@@ -380,10 +379,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
     );
   }
 
-
-  
-  
-
   Widget passwordTextFormField() {
     return /*TextField(
       obscureText: true,
@@ -583,8 +578,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
               // .collection("users")
               // .doc("collection")
               // .set(data);
-              // User updateUser = FirebaseAuth.instance.currentUser;
-              // updateUser.updateProfile(displayName: name);
+              User updateUser = FirebaseAuth.instance.currentUser;
+              updateUser.updateProfile(displayName: name);
               // updateUser.updateProfile(photoURL: url);
               // updateUser.uid;
               // updateUser.displayName;
