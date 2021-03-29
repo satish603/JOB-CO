@@ -104,7 +104,7 @@ class _ProductItemState extends State<ProductItem> {
         
         decoration:BoxDecoration(borderRadius: BorderRadius.circular(200),
                 gradient: LinearGradient(
-                  colors:  [Colors.blue[200], Colors.yellowAccent],
+                  colors:  [Colors.blue[200], Colors.indigo[900]],
                 ),
               ),
       ),

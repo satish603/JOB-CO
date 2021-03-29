@@ -241,7 +241,7 @@ class _DashboardState extends State<Dashboard> {
                           children: <Widget>[
                             Image.asset(
                               'assets/images/contact.png',
-                              height: 60,
+                              height: 50,
                             ),
                            Text(
             'CONTACT US',

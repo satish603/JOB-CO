@@ -17,7 +17,7 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         title: Text("Job List"),
         backgroundColor: 
-                   Colors.amber[600],
+                   Colors.white,
       ),
       body: StreamBuilder<QuerySnapshot>(
         stream: FirebaseFirestore.instance.collection("jobs").snapshots(),
