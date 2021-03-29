@@ -51,7 +51,7 @@ class _JobdetailsState extends State<JobDetials> {
             child: Column(
               children: <Widget>[
                 Opacity(opacity: 0.88, child: CustomAppBar()),
-                clipShape(),
+               clipShape(),
                 form(),
                 // acceptTermsTextRow(),
                 // SizedBox(
@@ -83,6 +83,7 @@ class _JobdetailsState extends State<JobDetials> {
               decoration: BoxDecoration(
                 gradient: LinearGradient(
                   colors: [Colors.blue[200], Colors.yellowAccent],
+                  
                 ),
               ),
             ),
@@ -96,6 +97,7 @@ class _JobdetailsState extends State<JobDetials> {
               height: _large
                   ? _height / 12
                   : (_medium ? _height / 11 : _height / 10),
+                  
               decoration: BoxDecoration(
                 gradient: LinearGradient(
                   colors: [Colors.blue[200], Colors.yellowAccent],
