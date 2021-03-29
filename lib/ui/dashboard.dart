@@ -155,107 +155,6 @@ class _DashboardState extends State<Dashboard> {
                       elevation: 15,
     margin: EdgeInsets.all(20),
                       child: FlatButton(
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              new MaterialPageRoute(
-                                  builder: (context) => Shop1()));
-                        },
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8)),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            Image.asset(
-                              'assets/images/application.jpg',
-                              height: 60,
-                            ),
-                           Text(
-            'SHOPS',
-            style: TextStyle(
-                fontWeight: FontWeight.w900,
-                fontSize: 12,
-          )),
-                          ],
-                        ),
-                      ),
-                    ),
-                    Card(
-                      elevation: 15,
-    margin: EdgeInsets.all(20),
-                      child: FlatButton(
-                        onPressed: () async {
-                          var firebaseUser = FirebaseAuth.instance.currentUser;
-                          // ignore: unused_local_variable
-                          DocumentSnapshot value = await FirebaseFirestore
-                              .instance
-                              .collection("users")
-                              .doc(firebaseUser.uid)
-                              .get()
-                              .then((value) {
-                            // return value.data();
-                            print(value.data());
-                            //  Text:value.data();
-                          });
-
-                          Navigator.push(
-                              context,
-                              new MaterialPageRoute(
-                                  builder: (BuildContext context) =>
-                                      Profile()));
-                        },
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8)),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            Image.asset(
-                              'assets/images/profo.jpg',
-                              height: 60,
-                            ),
-                            Text(
-            'PROFILE',
-            style: TextStyle(
-                fontWeight: FontWeight.w900,
-                fontSize: 12,
-          )),
-                          ],
-                        ),
-                      ),
-                    ),
-                    Card(
-                      elevation: 15,
-    margin: EdgeInsets.all(20),
-                      child: FlatButton(
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              new MaterialPageRoute(
-                                  builder: (context) => Contact()));
-                        },
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8)),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            Image.asset(
-                              'assets/images/contact.png',
-                              height: 50,
-                            ),
-                           Text(
-            'CONTACT US',
-            style: TextStyle(
-                fontWeight: FontWeight.w900,
-                fontSize: 12,
-          )),
-                          ],
-                        ),
-                      ),
-                    ),
-                    Card(
-                      elevation: 15,
-    margin: EdgeInsets.all(20),
-                      child: FlatButton(
                         
                         onPressed: () {
                           Navigator.push(
@@ -313,16 +212,29 @@ class _DashboardState extends State<Dashboard> {
                         ),
                       ),
                     ),
-                    Card(
+                     Card(
                       elevation: 15,
     margin: EdgeInsets.all(20),
                       child: FlatButton(
-                        onPressed: () {                     
-                         padding: EdgeInsets.all(100.0);
+                        onPressed: () async {
+                          var firebaseUser = FirebaseAuth.instance.currentUser;
+                          // ignore: unused_local_variable
+                          DocumentSnapshot value = await FirebaseFirestore
+                              .instance
+                              .collection("users")
+                              .doc(firebaseUser.uid)
+                              .get()
+                              .then((value) {
+                            // return value.data();
+                            print(value.data());
+                            //  Text:value.data();
+                          });
+
                           Navigator.push(
                               context,
                               new MaterialPageRoute(
-                                  builder: (context) => JobDetials()));
+                                  builder: (BuildContext context) =>
+                                      Profile()));
                         },
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8)),
@@ -330,11 +242,11 @@ class _DashboardState extends State<Dashboard> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
                             Image.asset(
-                              'assets/images/download.jpg',
+                              'assets/images/profo.jpg',
                               height: 60,
                             ),
-                           Text(
-            'RANDOM',
+                            Text(
+            'PROFILE',
             style: TextStyle(
                 fontWeight: FontWeight.w900,
                 fontSize: 12,
@@ -343,6 +255,97 @@ class _DashboardState extends State<Dashboard> {
                         ),
                       ),
                     ),
+                    Card(
+                      elevation: 15,
+    margin: EdgeInsets.all(20),
+                      child: FlatButton(
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              new MaterialPageRoute(
+                                  builder: (context) => Shop1()));
+                        },
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8)),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Image.asset(
+                              'assets/images/application.jpg',
+                              height: 60,
+                            ),
+                           Text(
+            'SHOPS',
+            style: TextStyle(
+                fontWeight: FontWeight.w900,
+                fontSize: 12,
+          )),
+                          ],
+                        ),
+                      ),
+                    ),
+                   
+                    Card(
+                      elevation: 15,
+    margin: EdgeInsets.all(20),
+                      child: FlatButton(
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              new MaterialPageRoute(
+                                  builder: (context) => Contact()));
+                        },
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8)),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Image.asset(
+                              'assets/images/contact.png',
+                              height: 50,
+                            ),
+                           Text(
+            'CONTACT US',
+            style: TextStyle(
+                fontWeight: FontWeight.w900,
+                fontSize: 12,
+          )),
+                          ],
+                        ),
+                      ),
+                    ),
+                    
+                    
+    //                 Card(
+    //                   elevation: 15,
+    // margin: EdgeInsets.all(20),
+    //                   child: FlatButton(
+    //                     onPressed: () {                     
+    //                      padding: EdgeInsets.all(100.0);
+    //                       Navigator.push(
+    //                           context,
+    //                           new MaterialPageRoute(
+    //                               builder: (context) => JobDetials()));
+    //                     },
+    //                     shape: RoundedRectangleBorder(
+    //                         borderRadius: BorderRadius.circular(8)),
+    //                     child: Column(
+    //                       mainAxisAlignment: MainAxisAlignment.center,
+    //                       children: <Widget>[
+    //                         Image.asset(
+    //                           'assets/images/download.jpg',
+    //                           height: 60,
+    //                         ),
+    //                        Text(
+    //         'RANDOM',
+    //         style: TextStyle(
+    //             fontWeight: FontWeight.w900,
+    //             fontSize: 12,
+    //       )),
+    //                       ],
+    //                     ),
+    //                   ),
+    //                 ),
                   ],
                 ),
               ),

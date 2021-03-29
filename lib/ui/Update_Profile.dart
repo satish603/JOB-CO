@@ -33,7 +33,7 @@ class _UProfileState extends State<UProfile> {
   bool _medium;
   bool signingup = false;
   // var name, email, photoUrl, uid, emailVerified, phnum;
- String _email, _password, name, phnum;
+  String _email, _password, name, phnum;
   final auth = FirebaseAuth.instance;
   final firestore = FirebaseFirestore.instance;
   Future<firebase_storage.UploadTask> uploadFile(PickedFile file) async {
@@ -182,10 +182,8 @@ class _UProfileState extends State<UProfile> {
 
   Widget form() {
     return Container(
-    
       margin: EdgeInsets.only(
           left: _width / 12.0, right: _width / 12.0, top: _height / 20.0),
-          
       child: Form(
         child: Column(
           children: <Widget>[
@@ -306,48 +304,47 @@ class _UProfileState extends State<UProfile> {
             });
   }
 
+  // Widget acceptTermsTextRow() {
+  //   return Container(
+  //     margin: EdgeInsets.only(top: _height / 100.0),
+  //     child: Row(
+  //       mainAxisAlignment: MainAxisAlignment.center,
+  //       children: <Widget>[
+  //         Checkbox(
+  //             activeColor: Colors.blue[400],
+  //             value: checkBoxValue,
+  //             onChanged: (bool newValue) {
+  //               setState(() {
+  //                 checkBoxValue = newValue;
+  //               });
+  //             }),
+  //         Text(
+  //           "I accept all terms and conditions",
+  //           style: TextStyle(
+  //               fontWeight: FontWeight.w600,
+  //               fontSize: _large ? 12 : (_medium ? 13 : 10)),
+  //         ),
+  //       ],
+  //     ),
+  //   );
+  // }
 
-  Widget acceptTermsTextRow() {
-    return Container(
-      margin: EdgeInsets.only(top: _height / 100.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Checkbox(
-              activeColor: Colors.blue[400],
-              value: checkBoxValue,
-              onChanged: (bool newValue) {
-                setState(() {
-                  checkBoxValue = newValue;
-                });
-              }),
-          Text(
-            "I accept all terms and conditions",
-            style: TextStyle(
-                fontWeight: FontWeight.w600,
-                fontSize: _large ? 12 : (_medium ? 13 : 10)),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget infoTextRow() {
-    return Container(
-      margin: EdgeInsets.only(top: _height / 40.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Text(
-            "Or create using social media",
-            style: TextStyle(
-                fontWeight: FontWeight.w500,
-                fontSize: _large ? 12 : (_medium ? 11 : 10)),
-          ),
-        ],
-      ),
-    );
-  }
+  // Widget infoTextRow() {
+  //   return Container(
+  //     margin: EdgeInsets.only(top: _height / 40.0),
+  //     child: Row(
+  //       mainAxisAlignment: MainAxisAlignment.center,
+  //       children: <Widget>[
+  //         Text(
+  //           "Or create using social media",
+  //           style: TextStyle(
+  //               fontWeight: FontWeight.w500,
+  //               fontSize: _large ? 12 : (_medium ? 11 : 10)),
+  //         ),
+  //       ],
+  //     ),
+  //   );
+  // }
 
   Widget button() {
     return RaisedButton(
@@ -401,23 +398,13 @@ class _UProfileState extends State<UProfile> {
                 new MaterialPageRoute(builder: (context) => Dashboard()));
             // }
           } catch (e) {
-            setState(() {
-              signingup = false;
-            });
             EdgeAlert.show(context,
-                title: 'Signup Failed',
-                description: e.toString(),
+                title: 'Update Failed',
+                description: 'All fields are required. ',
                 gravity: EdgeAlert.BOTTOM,
                 icon: Icons.error,
                 backgroundColor: Colors.blue[400]);
           }
-        } else {
-          EdgeAlert.show(context,
-              title: 'Update Failed',
-              description: 'All fields are required. ',
-              gravity: EdgeAlert.BOTTOM,
-              icon: Icons.error,
-              backgroundColor: Colors.blue[400]);
         }
       },
       textColor: Colors.white,

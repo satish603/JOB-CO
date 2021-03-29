@@ -71,65 +71,28 @@ class _JobdetailsState extends State<JobDetials> {
 
   Widget clipShape() {
     return Stack(
-      children: <Widget>[
-        Opacity(
-          opacity: 0.75,
-          child: ClipPath(
-            clipper: CustomShapeClipper(),
-            child: Container(
-              height: _large
-                  ? _height / 8
-                  : (_medium ? _height / 7 : _height / 6.5),
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [Colors.blue[200], Colors.yellowAccent],
-                  
+      children: <Widget>[ Container(
+                height: 64,
+                margin: EdgeInsets.only(left: 20, top:35, right: 20, bottom:0),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    CircleAvatar(
+                      radius: 42,
+                      child: Image.asset( 'assets/images/download.jpg',
+                  fit: BoxFit.cover,
+                ),
+                      // 'https://firebasestorage.googleapis.com/v0/b/dscsolution-80cbc.appspot.com/o/User_image%2FEtFMTsMQISXtMa9zOzgGB5DGguT2.jpg?alt=media&token=7b5c4569-7690-4a4f-9c0e-97a5dc564ea9'),
+                    ),
+                    SizedBox(
+                      width: 16,
+                    ),
+                    
+                  ],
                 ),
               ),
-            ),
-          ),
-        ),
-        Opacity(
-          opacity: 0.5,
-          child: ClipPath(
-            clipper: CustomShapeClipper2(),
-            child: Container(
-              height: _large
-                  ? _height / 12
-                  : (_medium ? _height / 11 : _height / 10),
-                  
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [Colors.blue[200], Colors.yellowAccent],
-                ),
-              ),
-            ),
-          ),
-        ),
-        Container(
-          height: _height / 5.5,
-          alignment: Alignment.center,
-          decoration: BoxDecoration(
-            boxShadow: [
-              BoxShadow(
-                  spreadRadius: 0.0,
-                  color: Colors.black26,
-                  offset: Offset(1.0, 10.0),
-                  blurRadius: 20.0),
-            ],
-            color: Colors.white,
-            shape: BoxShape.circle,
-          ),
-          child: GestureDetector(
-              onTap: () {
-                print('Adding photo');
-              },
-              child: Icon(
-                Icons.add_a_photo,
-                size: _large ? 40 : (_medium ? 33 : 31),
-                color: Colors.blue[900],
-              )),
-        ),
+       
       ],
     );
   }
