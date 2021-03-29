@@ -68,11 +68,12 @@ class _DashboardState extends State<Dashboard> {
           var userDocument = snapshot.data;
           return new Text(
             userDocument["photo"],
-           style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          //  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
           );
         });
   }
-  var link = firedata().toString();
+  String link = firedata().toString();
+  print(link);
   
 
     return Scaffold(
@@ -80,16 +81,7 @@ class _DashboardState extends State<Dashboard> {
       // children: <Widget>[
       backgroundColor: Colors.indigo[900],
       
-      // Container(
-
-      //   decoration: BoxDecoration(
-      //     image: DecorationImage(
-
-      //         image: AssetImage('assets/images/top_header.jpg'),
-      //         fit: BoxFit.fill),
-
-      //   ),
-      // ),
+      
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.all(16.0),
@@ -103,7 +95,10 @@ class _DashboardState extends State<Dashboard> {
                   children: <Widget>[
                     CircleAvatar(
                       radius: 32,
-                      child: Image.network(link),
+                      child: Image.network(
+                  link,
+                  fit: BoxFit.cover,
+                ),
                       // 'https://firebasestorage.googleapis.com/v0/b/dscsolution-80cbc.appspot.com/o/User_image%2FEtFMTsMQISXtMa9zOzgGB5DGguT2.jpg?alt=media&token=7b5c4569-7690-4a4f-9c0e-97a5dc564ea9'),
                     ),
                     SizedBox(
