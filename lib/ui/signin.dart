@@ -296,8 +296,9 @@ class _SignInScreenState extends State<SignInScreen> {
             await auth
                 .signInWithEmailAndPassword(email: _email, password: _password)
                 .then((_) {
-              Navigator.push(context,
-                  new MaterialPageRoute(builder: (context) => Dashboard()));
+               Navigator.of(context).pushAndRemoveUntil(
+                   MaterialPageRoute(builder: (BuildContext context) => Dashboard()),(Route<dynamic> route) => false);
+                          
             });
 
             //  Navigator.of(context).pushNamed(LOGIN); //new line

@@ -586,9 +586,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
               // updateUser.phoneNumber;
               //await newUser.user.updateProfile(info);
 
-              Navigator.push(context,
-                  new MaterialPageRoute(builder: (context) => Dashboard()));
+             Navigator.of(context).pushAndRemoveUntil(
+                   MaterialPageRoute(builder: (BuildContext context) => Dashboard()),(Route<dynamic> route) => false);
+                          
             }
+
           } catch (e) {
             setState(() {
               signingup = false;
