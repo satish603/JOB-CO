@@ -56,12 +56,12 @@ class _SignInScreenState extends State<SignInScreen> {
               clipShape(),
               welcomeTextRow(),
               signInTextRow(),
-              
+
               form(),
-               
+
               forgetPassTextRow(),
-           
-              button2(),//button3(),button(),
+
+              button2(), //button3(),button(),
               signUpTextRow(), // signUpTextRow1(),
             ],
           ),
@@ -220,7 +220,7 @@ class _SignInScreenState extends State<SignInScreen> {
 //     return DropdownButton<String>(
 //       value: dropdownValue,
 //       icon: const Icon(Icons.arrow_downward),
-      
+
 //       onChanged: (String newValue) {
 //         setState(() {
 //           dropdownValue = newValue;
@@ -367,7 +367,7 @@ class _SignInScreenState extends State<SignInScreen> {
     );
   }
 
- Widget button() {
+  Widget button() {
     return RaisedButton(
         elevation: 0,
         shape:
@@ -414,7 +414,8 @@ class _SignInScreenState extends State<SignInScreen> {
           ),
         ));
   }
-Widget button3() {
+
+  Widget button3() {
     return RaisedButton(
         elevation: 0,
         shape:
